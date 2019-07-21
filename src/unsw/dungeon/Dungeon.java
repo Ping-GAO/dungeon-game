@@ -3,6 +3,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
  * A dungeon in the interactive dungeon player.
  *
@@ -16,7 +17,8 @@ public class Dungeon {
 
 	private int width, height;
 	private List<Entity> entities;
-
+	
+	
 	private Player player;
 
 	public Dungeon(int width, int height) {
@@ -24,6 +26,7 @@ public class Dungeon {
 		this.height = height;
 		this.entities = new ArrayList<>();
 		this.player = null;
+		
 	}
 
 	public int getWidth() {

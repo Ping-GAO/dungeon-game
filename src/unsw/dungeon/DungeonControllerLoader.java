@@ -124,6 +124,8 @@ public class DungeonControllerLoader extends DungeonLoader {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				GridPane.setColumnIndex(node, newValue.intValue());
+				
+				
 			}
 		});
 		entity.y().addListener(new ChangeListener<Number>() {
