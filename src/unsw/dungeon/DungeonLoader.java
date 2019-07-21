@@ -98,9 +98,17 @@ public abstract class DungeonLoader {
 			onLoad(enemy);
 			entity = enemy;
 			break;
-
+		case "exit":
+			Exit exit = new Exit(dungeon, x, y);
+			onLoad(exit);
+			entity = exit;
+			break;
+		case "door":
+			Door door = new Door(dungeon, x, y);
+			onLoad(door);
+			entity = door;
+			break;
 		}
-
 		dungeon.addEntity(entity);
 	}
 
@@ -121,5 +129,6 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Sword sword);
 
 	public abstract void onLoad(Enemy enemy);
-
+	public abstract void onLoad(Exit exit);
+	public abstract void onLoad(Door door);
 }
