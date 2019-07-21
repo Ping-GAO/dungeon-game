@@ -15,7 +15,8 @@ public class Entity {
 	// externally observed.
 	protected IntegerProperty x, y;
 	protected BooleanProperty alive;
-	protected MoveTowardsBehavior moveTowardsBehavior;
+	protected playerMoveTowardsBehavior moveTowardsBehavior;
+	protected boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior;
 	protected PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
 
@@ -58,19 +59,28 @@ public class Entity {
 		return dungeon;
 	}
 
-	public void PerformBeMovedTowards() {
+	public void PerformBeMovedTowardsbyPlayer() {
 		moveTowardsBehavior.moveTowards();
+	}
+	public void PerformBeMovedTowardsbyBoulder(Boulder b) {
+		boulderMoveTowadsBeheavior.setBoulder(b);
+		boulderMoveTowadsBeheavior.moveTowards();
 	}
 
 	public void PerformBePickedUp() {
 		pickUpBehavior.pickUp();
 	}
 
-	public void setMoveTowardsBehavior(MoveTowardsBehavior moveTowardsBehavior) {
+	public void setMoveTowardsBehavior(playerMoveTowardsBehavior moveTowardsBehavior) {
 		this.moveTowardsBehavior = moveTowardsBehavior;
 	}
 
 	public void setPickUpBehavior(PickUpBehavior pickUpBehavior) {
 		this.pickUpBehavior = pickUpBehavior;
+	}
+
+	public void setBoulderMoveTowadsBeheavior(boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior) {
+		this.boulderMoveTowadsBeheavior = boulderMoveTowadsBeheavior;
+		
 	}
 }

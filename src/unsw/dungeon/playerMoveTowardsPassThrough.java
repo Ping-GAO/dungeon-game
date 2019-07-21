@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
-public class MoveTowardsPassThrough implements MoveTowardsBehavior{
+public class playerMoveTowardsPassThrough implements playerMoveTowardsBehavior{
 	private Player player;
 	private Entity entity;
 	
-	public MoveTowardsPassThrough(Entity enity) {
+	public playerMoveTowardsPassThrough(Entity enity) {
 		
 		this.entity = enity;
 		this.player = entity.getDungeon().getPlayer();
@@ -15,5 +15,7 @@ public class MoveTowardsPassThrough implements MoveTowardsBehavior{
 		player.y().set(entity.getY());
 		
 	}
+	
+	
 
 }

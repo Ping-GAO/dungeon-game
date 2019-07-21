@@ -1,5 +1,5 @@
 package unsw.dungeon;
 
-public interface MoveTowardsBehavior {
+public interface playerMoveTowardsBehavior {
 	public void moveTowards();
 }

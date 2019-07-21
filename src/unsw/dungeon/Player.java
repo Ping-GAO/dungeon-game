@@ -30,7 +30,7 @@ public class Player extends Entity {
 		if (getY() > 0) {
 			Entity next = findEntityAt(getX(), getY() - 1);
 			next.PerformBePickedUp();
-			next.PerformBeMovedTowards();
+			next.PerformBeMovedTowardsbyPlayer();
 		}
 
 	}
@@ -39,7 +39,7 @@ public class Player extends Entity {
 		if (getY() < dungeon.getHeight() - 1) {
 			Entity next = findEntityAt(getX(), getY() + 1);
 			next.PerformBePickedUp();
-			next.PerformBeMovedTowards();
+			next.PerformBeMovedTowardsbyPlayer();
 		}
 
 	}
@@ -48,7 +48,7 @@ public class Player extends Entity {
 		if (this.getX() > 0) {
 			Entity next = findEntityAt(getX() - 1, getY());
 			next.PerformBePickedUp();
-			next.PerformBeMovedTowards();
+			next.PerformBeMovedTowardsbyPlayer();
 		}
 
 	}
@@ -57,7 +57,7 @@ public class Player extends Entity {
 		if (getX() < dungeon.getWidth() - 1) {
 			Entity next = findEntityAt(getX() + 1, getY());
 			next.PerformBePickedUp();
-			next.PerformBeMovedTowards();
+			next.PerformBeMovedTowardsbyPlayer();
 		}
 
 	}

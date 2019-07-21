@@ -1,6 +1,6 @@
 package unsw.dungeon;
 
-public class MoveTowardsNoWay implements MoveTowardsBehavior {
+public class playerMoveTowardsNoWay implements playerMoveTowardsBehavior {
 	// can't move to the coordinate at all
 
 	@Override
