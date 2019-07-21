@@ -1,9 +1,13 @@
 package unsw.dungeon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -25,11 +29,14 @@ public class DungeonController {
 	private Player player;
 
 	private Dungeon dungeon;
+	private HashMap<ImageView, Entity> imageViewToEntity;
 
-	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities) {
+	public DungeonController(Dungeon dungeon, List<ImageView> initialEntities,
+			HashMap<ImageView, Entity> imageViewToEntity) {
 		this.dungeon = dungeon;
 		this.player = dungeon.getPlayer();
 		this.initialEntities = new ArrayList<>(initialEntities);
+		this.imageViewToEntity = imageViewToEntity;
 	}
 
 	@FXML
@@ -43,8 +50,21 @@ public class DungeonController {
 			}
 		}
 
-		for (ImageView entity : initialEntities)
+		for (ImageView entity : initialEntities) {
 			squares.getChildren().add(entity);
+			trackExistence(entity);
+		}
+	}
+
+	private void trackExistence(Node node) {
+
+		imageViewToEntity.get(node).alive().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				squares.getChildren().remove(node);
+
+			}
+		});
 
 	}
 

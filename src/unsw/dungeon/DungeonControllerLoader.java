@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -21,7 +22,7 @@ import javafx.scene.layout.GridPane;
 public class DungeonControllerLoader extends DungeonLoader {
 
 	private List<ImageView> entities;
-
+	private HashMap<ImageView, Entity> imageViewToEntity;
 	// Images
 	private Image playerImage;
 	private Image wallImage;
@@ -45,6 +46,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		invincibilityImage = new Image("/brilliant_blue_new.png");
 		swordImage = new Image("/greatsword_1_new.png");
 		enemyImage = new Image("/deep_elf_master_archer.png");
+		imageViewToEntity = new HashMap<ImageView, Entity>();
 	}
 
 	@Override
@@ -103,6 +105,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
+		imageViewToEntity.put(view, entity);
 		entities.add(view);
 	}
 
@@ -124,8 +127,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 			@Override
 			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 				GridPane.setColumnIndex(node, newValue.intValue());
-				
-				
+
 			}
 		});
 		entity.y().addListener(new ChangeListener<Number>() {
@@ -144,7 +146,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	 * @throws FileNotFoundException
 	 */
 	public DungeonController loadController() throws FileNotFoundException {
-		return new DungeonController(load(), entities);
+		return new DungeonController(load(), entities, imageViewToEntity);
 	}
 
 }

@@ -1,8 +1,9 @@
 package unsw.dungeon;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-
 
 /**
  * @author pinggao
@@ -13,16 +14,10 @@ public class Entity {
 	// IntegerProperty is used so that changes to the entities position can be
 	// externally observed.
 	protected IntegerProperty x, y;
+	protected BooleanProperty alive;
 	protected MoveTowardsBehavior moveTowardsBehavior;
 	protected PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
-
-	public void setMoveTowardsBehavior(MoveTowardsBehavior moveTowardsBehavior) {
-		this.moveTowardsBehavior = moveTowardsBehavior;
-	}
-	public void setPickUpBehavior(PickUpBehavior pickUpBehavior) {
-		this.pickUpBehavior = pickUpBehavior;
-	}
 
 	/**
 	 * Create an entity positioned in square (x,y)
@@ -35,7 +30,12 @@ public class Entity {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
 		this.dungeon = dungeon;
+		this.alive = new SimpleBooleanProperty(true);
 
+	}
+
+	public BooleanProperty alive() {
+		return alive;
 	}
 
 	public IntegerProperty x() {
@@ -61,7 +61,16 @@ public class Entity {
 	public void PerformBeMovedTowards() {
 		moveTowardsBehavior.moveTowards();
 	}
+
 	public void PerformBePickedUp() {
 		pickUpBehavior.pickUp();
+	}
+
+	public void setMoveTowardsBehavior(MoveTowardsBehavior moveTowardsBehavior) {
+		this.moveTowardsBehavior = moveTowardsBehavior;
+	}
+
+	public void setPickUpBehavior(PickUpBehavior pickUpBehavior) {
+		this.pickUpBehavior = pickUpBehavior;
 	}
 }
