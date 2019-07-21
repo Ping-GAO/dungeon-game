@@ -15,10 +15,14 @@ public class Entity {
 	// externally observed.
 	protected IntegerProperty x, y;
 	protected MoveTowardsBehavior moveTowardsBehavior;
+	protected PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
 
 	public void setMoveTowardsBehavior(MoveTowardsBehavior moveTowardsBehavior) {
 		this.moveTowardsBehavior = moveTowardsBehavior;
+	}
+	public void setPickUpBehavior(PickUpBehavior pickUpBehavior) {
+		this.pickUpBehavior = pickUpBehavior;
 	}
 
 	/**
@@ -55,7 +59,10 @@ public class Entity {
 		return dungeon;
 	}
 
-	public void PerformMoveTowards() {
+	public void PerformBeMovedTowards() {
 		moveTowardsBehavior.moveTowards();
+	}
+	public void PerformBePickedUp() {
+		pickUpBehavior.pickUp();
 	}
 }

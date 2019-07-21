@@ -65,6 +65,8 @@ public class DungeonController {
         default:
             break;
         }
+        System.out.println("player has :" + player.getBagPack().getBagPack().size());
+        
     }
 
 }
