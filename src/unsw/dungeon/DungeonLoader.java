@@ -57,44 +57,44 @@ public abstract class DungeonLoader {
 			entity = player;
 			break;
 		case "wall":
-			Wall wall = new Wall(x, y);
+			Wall wall = new Wall(dungeon, x, y);
 			onLoad(wall);
 			entity = wall;
 			break;
 
 		case "switch":
-			FloorSwitch floorSwitch = new FloorSwitch(x, y);
+			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y);
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;
 		case "boulder":
-			Boulder boulder = new Boulder(x, y);
+			Boulder boulder = new Boulder(dungeon, x, y);
 			onLoad(boulder);
 			entity = boulder;
 			break;
 
 		case "bomb":
-			Bomb bomb = new Bomb(x, y);
+			Bomb bomb = new Bomb(dungeon, x, y);
 			onLoad(bomb);
 			entity = bomb;
 			break;
 		case "treasure":
-			Treasure treasure = new Treasure(x, y);
+			Treasure treasure = new Treasure(dungeon, x, y);
 			onLoad(treasure);
 			entity = treasure;
 			break;
 		case "invincibility":
-			Invincibility invincibility = new Invincibility(x, y);
+			Invincibility invincibility = new Invincibility(dungeon, x, y);
 			onLoad(invincibility);
 			entity = invincibility;
 			break;
 		case "sword":
-			Sword sword = new Sword(x, y);
+			Sword sword = new Sword(dungeon, x, y);
 			onLoad(sword);
 			entity = sword;
 			break;
 		case "enemy":
-			Enemy enemy = new Enemy(x, y);
+			Enemy enemy = new Enemy(dungeon, x, y);
 			onLoad(enemy);
 			entity = enemy;
 			break;
@@ -117,7 +117,9 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Treasure treasure);
 
 	public abstract void onLoad(Invincibility invincibility);
+
 	public abstract void onLoad(Sword sword);
+
 	public abstract void onLoad(Enemy enemy);
 
 }

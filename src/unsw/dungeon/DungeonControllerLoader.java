@@ -44,7 +44,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		treasureImage = new Image("/gold_pile.png");
 		invincibilityImage = new Image("/brilliant_blue_new.png");
 		swordImage = new Image("/greatsword_1_new.png");
-		enemyImage= new Image("/deep_elf_master_archer.png");
+		enemyImage = new Image("/deep_elf_master_archer.png");
 	}
 
 	@Override
@@ -94,11 +94,13 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(swordImage);
 		addEntity(sword, view);
 	}
+
 	@Override
-	public void onLoad(Enemy enemy ) {
-		ImageView view = new ImageView(		enemyImage);
+	public void onLoad(Enemy enemy) {
+		ImageView view = new ImageView(enemyImage);
 		addEntity(enemy, view);
 	}
+
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
 		entities.add(view);

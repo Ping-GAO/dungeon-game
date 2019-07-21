@@ -14,34 +14,39 @@ import java.util.List;
  */
 public class Dungeon {
 
-    private int width, height;
-    private List<Entity> entities;
-    private Player player;
+	private int width, height;
+	private List<Entity> entities;
 
-    public Dungeon(int width, int height) {
-        this.width = width;
-        this.height = height;
-        this.entities = new ArrayList<>();
-        this.player = null;
-    }
+	private Player player;
 
-    public int getWidth() {
-        return width;
-    }
+	public Dungeon(int width, int height) {
+		this.width = width;
+		this.height = height;
+		this.entities = new ArrayList<>();
+		this.player = null;
+	}
 
-    public int getHeight() {
-        return height;
-    }
+	public int getWidth() {
+		return width;
+	}
 
-    public Player getPlayer() {
-        return player;
-    }
+	public int getHeight() {
+		return height;
+	}
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+	public Player getPlayer() {
+		return player;
+	}
 
-    public void addEntity(Entity entity) {
-        entities.add(entity);
-    }
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+	public void addEntity(Entity entity) {
+		entities.add(entity);
+	}
+
+	public List<Entity> getEntities() {
+		return entities;
+	}
 }
