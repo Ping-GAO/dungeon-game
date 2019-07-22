@@ -20,8 +20,9 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 				next.PerformBeMovedTowardsbyBoulder(boulder);
 			} else {
 				// right
+				
 				Entity next = findEntityAt(boulder.getX() + 1, boulder.getY());
-
+				System.out.println("right  is " + next.getName());
 				next.PerformBeMovedTowardsbyBoulder(boulder);
 			}
 		} else {
@@ -48,6 +49,7 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 		for (Entity e : boulder.getDungeon().getEntities()) {
 			if (e.getX() == x && e.getY() == y) {
 				found = e;
+				
 				return found;
 			}
 		}

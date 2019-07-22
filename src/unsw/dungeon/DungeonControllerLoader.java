@@ -4,8 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

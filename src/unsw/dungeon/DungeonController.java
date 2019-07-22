@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import com.sun.javafx.geom.transform.BaseTransform.Degree;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -104,15 +106,17 @@ public class DungeonController {
 		PressuredPlate p = new PressuredPlate(dungeon, x, y, "pressuredPlate");
 		floorswitch.isActive().addListener(new ChangeListener<Boolean>() {
 			Node temp;
-
+			Entity tempEntity;
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
 				for (Iterator<Node> i = squares.getChildren().iterator(); i.hasNext();) {
 					temp = (Node) i.next();
-					if (imageViewToEntity.get(temp) != null) {
-						if (imageViewToEntity.get(temp).getX() == x && imageViewToEntity.get(temp).getY() == y
-								&& imageViewToEntity.get(temp).getName().equals("boulder")) {
+					tempEntity = imageViewToEntity.get(temp);
+					if ( tempEntity!= null) {
+						if (tempEntity.getX() == x && tempEntity.getY() == y
+								&& tempEntity.getName().equals("boulder")) {
+							System.out.println("fond the boudler " + tempEntity.getX() + tempEntity.getY() );
 							break;
 
 						}
@@ -123,31 +127,39 @@ public class DungeonController {
 				squares.getChildren().remove(temp);
 				squares.add(view, x, y);
 				dungeon.getEntities().set(index, p);
+				Entity toRemove = null;
+				for(Entity entity: dungeon.getEntities() ) {
+					if(entity!=null) {
+						if(entity.getX()==x && entity.getY()==y && entity.getName().equals("boulder")) {
+							toRemove = entity;
+						}
+					}
+				}
+				dungeon.getEntities().remove(toRemove);
 				floorswitch.acitivate();
 			}
 		});
-		
+
 		Image boudlerImage = new Image("/boulder.png");
 		ImageView boudlerImageView = new ImageView(boudlerImage);
 		// attach and action listener to the pressuredPlate
 		p.isActive().addListener(new ChangeListener<Boolean>() {
-			
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(view);
-				squares.add(boudlerImageView,x,y);
-				Boulder boulder = new Boulder(dungeon,x, y,"boulder");
-				dungeon.getEntities().set(index,boulder);
-				trackPosition(boulder,boudlerImageView);
+				squares.add(boudlerImageView, x, y);
+				Boulder boulder = new Boulder(dungeon, x, y, "boulder");
+				System.out.println("boudler corr in tigger is " + boulder.getX() + boulder.getY());
+				dungeon.getEntities().set(index, boulder);
+				trackPosition(boulder, boudlerImageView);
 				p.deactivate();
-				
-				
-				
+
 			}
 		});
-		
+
 	}
+
 	private void trackPosition(Entity entity, Node node) {
 		GridPane.setColumnIndex(node, entity.getX());
 		GridPane.setRowIndex(node, entity.getY());
@@ -165,7 +177,7 @@ public class DungeonController {
 			}
 		});
 	}
-	
+
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 		switch (event.getCode()) {
@@ -187,6 +199,14 @@ public class DungeonController {
 		if (player.getBagPack().getBagPack().size() != 0) {
 			System.out.println("player has : " + player.getBagPack().toString());
 		}
+//		for (Entity e : dungeon.getEntities()) {
+//			if (e != null) {
+//				if (e.getX() == 6 && e.getY() == 1) {
+//					System.out.println("(6,1) is "+ e.getName());
+//				}
+//			}
+//			
+//		}
 
 	}
 
