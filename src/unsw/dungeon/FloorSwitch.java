@@ -16,6 +16,14 @@ public class FloorSwitch extends Entity {
 		return isActive;
 	}
 	
-	
+	public void acitivate() {
+
+		int x_new = this.getX();
+		int y_new = this.getY();
+		
+		// or activate a closed door
+		dungeon.getPlayer().getBagPack().addToBagPack(new Key(dungeon, x_new, y_new, "key"));
+	    
+	}
 	
 }

@@ -86,6 +86,7 @@ public class DungeonController {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(node);
 				squares.add(view, x, y);
+
 			}
 		});
 
@@ -96,18 +97,22 @@ public class DungeonController {
 		Image pressuredPlate = new Image("/pressured_plate.png");
 		ImageView view = new ImageView(pressuredPlate);
 		FloorSwitch floorswitch = (FloorSwitch) imageViewToEntity.get(node);
+		int index = dungeon.getEntities().indexOf(floorswitch);
+
 		int x = floorswitch.getX();
 		int y = floorswitch.getY();
-		
+		PressuredPlate p = new PressuredPlate(dungeon, x, y, "pressuredPlate");
 		floorswitch.isActive().addListener(new ChangeListener<Boolean>() {
 			Node temp;
+
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				
+
 				for (Iterator<Node> i = squares.getChildren().iterator(); i.hasNext();) {
 					temp = (Node) i.next();
 					if (imageViewToEntity.get(temp) != null) {
-						if (imageViewToEntity.get(temp).getX() == x && imageViewToEntity.get(temp).getY() == y &&imageViewToEntity.get(temp).getName().equals("boulder") ) {
+						if (imageViewToEntity.get(temp).getX() == x && imageViewToEntity.get(temp).getY() == y
+								&& imageViewToEntity.get(temp).getName().equals("boulder")) {
 							break;
 
 						}
@@ -117,11 +122,50 @@ public class DungeonController {
 				squares.getChildren().remove(node);
 				squares.getChildren().remove(temp);
 				squares.add(view, x, y);
+				dungeon.getEntities().set(index, p);
+				floorswitch.acitivate();
 			}
 		});
+		
+		Image boudlerImage = new Image("/boulder.png");
+		ImageView boudlerImageView = new ImageView(boudlerImage);
+		// attach and action listener to the pressuredPlate
+		p.isActive().addListener(new ChangeListener<Boolean>() {
+			
 
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				squares.getChildren().remove(view);
+				squares.add(boudlerImageView,x,y);
+				Boulder boulder = new Boulder(dungeon,x, y,"boulder");
+				dungeon.getEntities().set(index,boulder);
+				trackPosition(boulder,boudlerImageView);
+				p.deactivate();
+				
+				
+				
+			}
+		});
+		
 	}
+	private void trackPosition(Entity entity, Node node) {
+		GridPane.setColumnIndex(node, entity.getX());
+		GridPane.setRowIndex(node, entity.getY());
+		entity.x().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				GridPane.setColumnIndex(node, newValue.intValue());
 
+			}
+		});
+		entity.y().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				GridPane.setRowIndex(node, newValue.intValue());
+			}
+		});
+	}
+	
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 		switch (event.getCode()) {

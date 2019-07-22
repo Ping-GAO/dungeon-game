@@ -225,18 +225,14 @@
     {
       "x": 3,
       "y": 5,
-      "type": "enemy"
+      "type": "floorSwitch"
     },
     {
       "x": 7,
       "y": 5,
       "type": "boulder"
     },
-    {
-      "x": 8,
-      "y": 5,
-      "type": "wall"
-    },
+   
     {
       "x": 17,
       "y": 5,
@@ -250,7 +246,7 @@
     {
       "x": 6,
       "y": 6,
-      "type": "wall"
+      "type": "floorSwitch"
     },
     {
       "x": 8,
@@ -310,7 +306,7 @@
     {
       "x": 4,
       "y": 8,
-      "type": "wall"
+      "type": "floorSwitch"
     },
     {
       "x": 5,
@@ -335,7 +331,7 @@
     {
       "x": 10,
       "y": 8,
-      "type": "wall"
+      "type": "floorSwitch"
     },
     {
       "x": 13,
@@ -345,7 +341,7 @@
     {
       "x": 17,
       "y": 8,
-      "type": "wall"
+      "type": "floorSwitch"
     },
     {
       "x": 0,
