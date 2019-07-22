@@ -123,7 +123,21 @@ public class DungeonController {
 					}
 
 				}
-				squares.getChildren().remove(node);
+				// squares.getChildren().remove(node);
+				squares.getChildren().remove(temp);
+				for (Iterator<Node> i = squares.getChildren().iterator(); i.hasNext();) {
+					temp = (Node) i.next();
+					tempEntity = imageViewToEntity.get(temp);
+					if ( tempEntity!= null) {
+						if (tempEntity.getX() == x && tempEntity.getY() == y
+								&& tempEntity.getName().equals("floorSwitch")) {
+							System.out.println("fond the boudler " + tempEntity.getX() + tempEntity.getY() );
+							break;
+
+						}
+					}
+
+				}
 				squares.getChildren().remove(temp);
 				squares.add(view, x, y);
 				dungeon.getEntities().set(index, p);
@@ -131,6 +145,14 @@ public class DungeonController {
 				for(Entity entity: dungeon.getEntities() ) {
 					if(entity!=null) {
 						if(entity.getX()==x && entity.getY()==y && entity.getName().equals("boulder")) {
+							toRemove = entity;
+						}
+					}
+				}
+				dungeon.getEntities().remove(toRemove);
+				for(Entity entity: dungeon.getEntities() ) {
+					if(entity!=null) {
+						if(entity.getX()==x && entity.getY()==y && entity.getName().equals("floorSwitch")) {
 							toRemove = entity;
 						}
 					}
@@ -144,13 +166,25 @@ public class DungeonController {
 		ImageView boudlerImageView = new ImageView(boudlerImage);
 		// attach and action listener to the pressuredPlate
 		p.isActive().addListener(new ChangeListener<Boolean>() {
-
+			
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(view);
+				System.out.println("pressure plate activced");
+				Entity toRemove = null;
+				for(Entity e: dungeon.getEntities()) {
+					if(e!=null) {
+						if(e.getX()==x &&e.getY()==y && e.getName().equals("pressuredPlate")) {
+							toRemove = e;
+						}
+					}
+				}
+						
+				dungeon.getEntities().remove(toRemove);
+				
 				squares.add(boudlerImageView, x, y);
 				Boulder boulder = new Boulder(dungeon, x, y, "boulder");
-				System.out.println("boudler corr in tigger is " + boulder.getX() + boulder.getY());
+				//System.out.println("boudler corr in tigger is " + boulder.getX() + boulder.getY());
 				dungeon.getEntities().set(index, boulder);
 				trackPosition(boulder, boudlerImageView);
 				p.deactivate();
@@ -196,17 +230,17 @@ public class DungeonController {
 		default:
 			break;
 		}
-		if (player.getBagPack().getBagPack().size() != 0) {
-			System.out.println("player has : " + player.getBagPack().toString());
-		}
-//		for (Entity e : dungeon.getEntities()) {
-//			if (e != null) {
-//				if (e.getX() == 6 && e.getY() == 1) {
-//					System.out.println("(6,1) is "+ e.getName());
-//				}
-//			}
-//			
+//		if (player.getBagPack().getBagPack().size() != 0) {
+//			System.out.println("player has : " + player.getBagPack().toString());
 //		}
+		for (Entity e : dungeon.getEntities()) {
+			if (e != null) {
+				if (e.getX() == 4 && e.getY() == 8) {
+					System.out.println("(4,8) is "+ e.getName());
+				}
+			}
+			
+		}
 
 	}
 

@@ -22,7 +22,7 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 				// right
 				
 				Entity next = findEntityAt(boulder.getX() + 1, boulder.getY());
-				System.out.println("right  is " + next.getName());
+				// System.out.println("right  is " + next.getName());
 				next.PerformBeMovedTowardsbyBoulder(boulder);
 			}
 		} else {

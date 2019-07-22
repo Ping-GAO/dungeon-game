@@ -22,6 +22,7 @@ public class FloorSwitch extends Entity {
 		int y_new = this.getY();
 		
 		// or activate a closed door
+		System.out.println("foor swotucb activaed");
 		//dungeon.getPlayer().getBagPack().addToBagPack(new Key(dungeon, x_new, y_new, "key"));
 	    
 	}
