@@ -31,6 +31,10 @@ public class FloorSwitch extends Entity {
 				}
 			}
 		}
+		
+		
+		
+		
 		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
 		this.setMoveTowardsBehavior(new playerMoveTowardsBoulder(boulder));
 	}
