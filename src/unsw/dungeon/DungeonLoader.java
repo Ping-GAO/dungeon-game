@@ -105,7 +105,13 @@ public abstract class DungeonLoader {
 			onLoad(key);
 			entity = key;
 			break;
+		case "pressuredplate":
+			PressuredPlate pressuredPlate = new PressuredPlate(dungeon, x, y, "key");
+			onLoad(pressuredPlate);
+			entity = pressuredPlate;
+			break;
 		}
+	
 		dungeon.addEntity(entity);
 	}
 
@@ -131,4 +137,6 @@ public abstract class DungeonLoader {
 
 	public abstract void onLoad(Door door);
 	public abstract void onLoad(Key key);
+	public abstract void onLoad(PressuredPlate pressuredPlate);
+	
 }

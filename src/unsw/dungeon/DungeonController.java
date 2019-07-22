@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import javafx.beans.value.ChangeListener;
@@ -53,10 +54,12 @@ public class DungeonController {
 		for (ImageView entity : initialEntities) {
 			squares.getChildren().add(entity);
 			trackExistence(entity);
-			if(imageViewToEntity.get(entity).getName().equals("door")) {
+			if (imageViewToEntity.get(entity).getName().equals("door")) {
 				trackDoorState(entity);
+			} else if (imageViewToEntity.get(entity).getName().equals("floorSwitch")) {
+				trackSwitchState(entity);
 			}
-			
+
 		}
 	}
 
@@ -71,17 +74,48 @@ public class DungeonController {
 		});
 
 	}
-	
+
 	private void trackDoorState(Node node) {
 
-		Image doorImageOpen =  new Image("/open_door.png");
+		Image doorImageOpen = new Image("/open_door.png");
 		ImageView view = new ImageView(doorImageOpen);
 		int x = imageViewToEntity.get(node).getX();
 		int y = imageViewToEntity.get(node).getY();
-		((Door)imageViewToEntity.get(node)).isOpen().addListener(new ChangeListener<Boolean>() {
+		((Door) imageViewToEntity.get(node)).isOpen().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(node);
+				squares.add(view, x, y);
+			}
+		});
+
+	}
+
+	private void trackSwitchState(Node node) {
+
+		Image pressuredPlate = new Image("/pressured_plate.png");
+		ImageView view = new ImageView(pressuredPlate);
+		FloorSwitch floorswitch = (FloorSwitch) imageViewToEntity.get(node);
+		int x = floorswitch.getX();
+		int y = floorswitch.getY();
+		
+		floorswitch.isActive().addListener(new ChangeListener<Boolean>() {
+			Node temp;
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				
+				for (Iterator<Node> i = squares.getChildren().iterator(); i.hasNext();) {
+					temp = (Node) i.next();
+					if (imageViewToEntity.get(temp) != null) {
+						if (imageViewToEntity.get(temp).getX() == x && imageViewToEntity.get(temp).getY() == y &&imageViewToEntity.get(temp).getName().equals("boulder") ) {
+							break;
+
+						}
+					}
+
+				}
+				squares.getChildren().remove(node);
+				squares.getChildren().remove(temp);
 				squares.add(view, x, y);
 			}
 		});
