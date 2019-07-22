@@ -1,19 +1,20 @@
 package unsw.dungeon;
 
-public class boulderMoveTowardsPassThrough implements boulderMoveTowadsBeheavior {
+public class boulderMoveTowardsPassThrough implements boulderMoveTowadsBeheavior{
+	Entity entity;
 	Boulder boulder;
-	Entity obstacle;
-	public boulderMoveTowardsPassThrough(Entity obstacle) {
-		
-		this.obstacle = obstacle;
+	public boulderMoveTowardsPassThrough(Entity entity) {
+		this.entity = entity;
 	}
+	@Override
 	public void setBoulder(Boulder boulder) {
 		this.boulder = boulder;
+		
 	}
 	@Override
 	public void moveTowards() {
-		boulder.x().set(obstacle.getX());
-		boulder.y().set(obstacle.getY());
+		boulder.x().set(entity.getX());
+		boulder.y().set(entity.getY());
 	}
-
+	
 }

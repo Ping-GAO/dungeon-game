@@ -23,7 +23,6 @@ public class playerMoveTowardsDoor implements playerMoveTowardsBehavior{
 		
 		if(found) {
 			door.isOpen().set(true);
-			
 			door.changeToOpenState();
 			bagpack.getBagPack().remove(key);
 		}

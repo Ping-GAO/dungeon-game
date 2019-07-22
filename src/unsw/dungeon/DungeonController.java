@@ -54,8 +54,9 @@ public class DungeonController {
 			squares.getChildren().add(entity);
 			trackExistence(entity);
 			if(imageViewToEntity.get(entity).getName().equals("door")) {
-				trackState(entity);
+				trackDoorState(entity);
 			}
+			
 		}
 	}
 
@@ -71,7 +72,7 @@ public class DungeonController {
 
 	}
 	
-	private void trackState(Node node) {
+	private void trackDoorState(Node node) {
 
 		Image doorImageOpen =  new Image("/open_door.png");
 		ImageView view = new ImageView(doorImageOpen);
