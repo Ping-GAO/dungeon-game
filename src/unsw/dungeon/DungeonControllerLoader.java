@@ -38,7 +38,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image doorImage;
 
 	private Image keyImage;
-	private Image pressuredPlateImage;
+	
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
 		entities = new ArrayList<>();
@@ -54,7 +54,6 @@ public class DungeonControllerLoader extends DungeonLoader {
 		exitImage  = new Image("/exit.png");
 		doorImage = new Image("/closed_door.png");
 		keyImage = new Image("/key.png");
-		pressuredPlateImage = new Image("/pressured_plate.png");
 		imageViewToEntity = new HashMap<ImageView, Entity>();
 		
 	}
@@ -127,11 +126,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(keyImage);
 		addEntity(key, view);
 	}
-	@Override
-	public void onLoad(PressuredPlate pressuredPlate) {
-		ImageView view = new ImageView(pressuredPlateImage);
-		addEntity(pressuredPlate, view);
-	}
+	
 	
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);

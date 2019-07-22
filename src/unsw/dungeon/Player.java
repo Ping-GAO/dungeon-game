@@ -1,11 +1,6 @@
 package unsw.dungeon;
 
-/**
- * The player entity
- * 
- * @author Robert Clifton-Everest
- *
- */
+
 public class Player extends Entity {
 
 	private BagPack bagPack;
@@ -76,3 +71,4 @@ public class Player extends Entity {
 	}
 
 }
+

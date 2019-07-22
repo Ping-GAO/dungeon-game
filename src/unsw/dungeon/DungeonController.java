@@ -2,10 +2,7 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
-
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,12 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
-/**
- * A JavaFX controller for the dungeon.
- * 
- * @author Robert Clifton-Everest
- *
- */
+
 public class DungeonController {
 
 	@FXML
@@ -95,121 +87,16 @@ public class DungeonController {
 	}
 
 	private void trackSwitchState(Node node) {
-
-		Image pressuredPlate = new Image("/pressured_plate.png");
-		ImageView view = new ImageView(pressuredPlate);
 		FloorSwitch floorswitch = (FloorSwitch) imageViewToEntity.get(node);
-		int index = dungeon.getEntities().indexOf(floorswitch);
-
-		int x = floorswitch.getX();
-		int y = floorswitch.getY();
-		PressuredPlate p = new PressuredPlate(dungeon, x, y, "pressuredPlate");
 		floorswitch.isActive().addListener(new ChangeListener<Boolean>() {
-			Node temp;
-			Entity tempEntity;
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-
-				for (Iterator<Node> i = squares.getChildren().iterator(); i.hasNext();) {
-					temp = (Node) i.next();
-					tempEntity = imageViewToEntity.get(temp);
-					if ( tempEntity!= null) {
-						if (tempEntity.getX() == x && tempEntity.getY() == y
-								&& tempEntity.getName().equals("boulder")) {
-							System.out.println("fond the boudler " + tempEntity.getX() + tempEntity.getY() );
-							break;
-
-						}
-					}
-
-				}
-				// squares.getChildren().remove(node);
-				squares.getChildren().remove(temp);
-				for (Iterator<Node> i = squares.getChildren().iterator(); i.hasNext();) {
-					temp = (Node) i.next();
-					tempEntity = imageViewToEntity.get(temp);
-					if ( tempEntity!= null) {
-						if (tempEntity.getX() == x && tempEntity.getY() == y
-								&& tempEntity.getName().equals("floorSwitch")) {
-							System.out.println("fond the boudler " + tempEntity.getX() + tempEntity.getY() );
-							break;
-
-						}
-					}
-
-				}
-				squares.getChildren().remove(temp);
-				squares.add(view, x, y);
-				dungeon.getEntities().set(index, p);
-				Entity toRemove = null;
-				for(Entity entity: dungeon.getEntities() ) {
-					if(entity!=null) {
-						if(entity.getX()==x && entity.getY()==y && entity.getName().equals("boulder")) {
-							toRemove = entity;
-						}
-					}
-				}
-				dungeon.getEntities().remove(toRemove);
-				for(Entity entity: dungeon.getEntities() ) {
-					if(entity!=null) {
-						if(entity.getX()==x && entity.getY()==y && entity.getName().equals("floorSwitch")) {
-							toRemove = entity;
-						}
-					}
-				}
-				dungeon.getEntities().remove(toRemove);
 				floorswitch.acitivate();
 			}
 		});
 
-		Image boudlerImage = new Image("/boulder.png");
-		ImageView boudlerImageView = new ImageView(boudlerImage);
-		// attach and action listener to the pressuredPlate
-		p.isActive().addListener(new ChangeListener<Boolean>() {
-			
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				squares.getChildren().remove(view);
-				System.out.println("pressure plate activced");
-				Entity toRemove = null;
-				for(Entity e: dungeon.getEntities()) {
-					if(e!=null) {
-						if(e.getX()==x &&e.getY()==y && e.getName().equals("pressuredPlate")) {
-							toRemove = e;
-						}
-					}
-				}
-						
-				dungeon.getEntities().remove(toRemove);
-				
-				squares.add(boudlerImageView, x, y);
-				Boulder boulder = new Boulder(dungeon, x, y, "boulder");
-				//System.out.println("boudler corr in tigger is " + boulder.getX() + boulder.getY());
-				dungeon.getEntities().set(index, boulder);
-				trackPosition(boulder, boudlerImageView);
-				p.deactivate();
+		
 
-			}
-		});
-
-	}
-
-	private void trackPosition(Entity entity, Node node) {
-		GridPane.setColumnIndex(node, entity.getX());
-		GridPane.setRowIndex(node, entity.getY());
-		entity.x().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				GridPane.setColumnIndex(node, newValue.intValue());
-
-			}
-		});
-		entity.y().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				GridPane.setRowIndex(node, newValue.intValue());
-			}
-		});
 	}
 
 	@FXML
@@ -233,14 +120,14 @@ public class DungeonController {
 //		if (player.getBagPack().getBagPack().size() != 0) {
 //			System.out.println("player has : " + player.getBagPack().toString());
 //		}
-//		for (Entity e : dungeon.getEntities()) {
-//			if (e != null) {
-//				if (e.getX() == 4 && e.getY() == 8) {
-//					System.out.println("(4,8) is "+ e.getName());
-//				}
-//			}
-//			
-//		}
+		for (Entity e : dungeon.getEntities()) {
+			if (e != null) {
+				if (e.getX() == 5 && e.getY() == 2) {
+					System.out.println("(5,2) is " + e.getName());
+				}
+			}
+
+		}
 
 	}
 
