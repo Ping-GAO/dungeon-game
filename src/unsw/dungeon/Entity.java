@@ -9,7 +9,7 @@ import javafx.beans.property.SimpleIntegerProperty;
  * @author pinggao
  *
  */
-public class Entity {
+public abstract class Entity {
 
 	// IntegerProperty is used so that changes to the entities position can be
 	// externally observed.
@@ -19,6 +19,7 @@ public class Entity {
 	protected boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior;
 	protected PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
+	protected String name;
 
 	/**
 	 * Create an entity positioned in square (x,y)
@@ -27,12 +28,17 @@ public class Entity {
 	 * @param y
 	 * @param dungeon
 	 */
-	public Entity(Dungeon dungeon, int x, int y) {
+	public Entity(Dungeon dungeon, int x, int y,String name) {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
 		this.dungeon = dungeon;
 		this.alive = new SimpleBooleanProperty(true);
+		this.name = name;
 
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	public BooleanProperty alive() {

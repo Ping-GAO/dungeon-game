@@ -7,15 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-/**
- * Loads a dungeon from a .json file.
- *
- * By extending this class, a subclass can hook into entity creation. This is
- * useful for creating UI elements with corresponding entities.
- *
- * @author Robert Clifton-Everest
- *
- */
+
 public abstract class DungeonLoader {
 
 	private JSONObject json;
@@ -51,62 +43,67 @@ public abstract class DungeonLoader {
 		Entity entity = null;
 		switch (type) {
 		case "player":
-			Player player = new Player(dungeon, x, y);
+			Player player = new Player(dungeon, x, y, "player");
 			dungeon.setPlayer(player);
 			onLoad(player);
 			entity = player;
 			break;
 		case "wall":
-			Wall wall = new Wall(dungeon, x, y);
+			Wall wall = new Wall(dungeon, x, y, "wall");
 			onLoad(wall);
 			entity = wall;
 			break;
 
 		case "floorSwitch":
-			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y);
+			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y, "floorSwitch");
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;
 		case "boulder":
-			Boulder boulder = new Boulder(dungeon, x, y);
+			Boulder boulder = new Boulder(dungeon, x, y, "boulder");
 			onLoad(boulder);
 			entity = boulder;
 			break;
 
 		case "bomb":
-			Bomb bomb = new Bomb(dungeon, x, y);
+			Bomb bomb = new Bomb(dungeon, x, y, "bomb");
 			onLoad(bomb);
 			entity = bomb;
 			break;
 		case "treasure":
-			Treasure treasure = new Treasure(dungeon, x, y);
+			Treasure treasure = new Treasure(dungeon, x, y, "treasure");
 			onLoad(treasure);
 			entity = treasure;
 			break;
 		case "invincibility":
-			Invincibility invincibility = new Invincibility(dungeon, x, y);
+			Invincibility invincibility = new Invincibility(dungeon, x, y, "invincibility");
 			onLoad(invincibility);
 			entity = invincibility;
 			break;
 		case "sword":
-			Sword sword = new Sword(dungeon, x, y);
+			Sword sword = new Sword(dungeon, x, y, "sword");
 			onLoad(sword);
 			entity = sword;
 			break;
 		case "enemy":
-			Enemy enemy = new Enemy(dungeon, x, y);
+			Enemy enemy = new Enemy(dungeon, x, y, "enemy");
 			onLoad(enemy);
 			entity = enemy;
 			break;
 		case "exit":
-			Exit exit = new Exit(dungeon, x, y);
+			Exit exit = new Exit(dungeon, x, y, "exit");
 			onLoad(exit);
 			entity = exit;
 			break;
 		case "door":
-			Door door = new Door(dungeon, x, y);
+			Door door = new Door(dungeon, x, y, "door");
 			onLoad(door);
 			entity = door;
+			break;
+		case "key":
+			Key key = new Key(dungeon, x, y, "key");
+			onLoad(key);
+			entity = key;
 			break;
 		}
 		dungeon.addEntity(entity);
@@ -129,6 +126,9 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Sword sword);
 
 	public abstract void onLoad(Enemy enemy);
+
 	public abstract void onLoad(Exit exit);
+
 	public abstract void onLoad(Door door);
+	public abstract void onLoad(Key key);
 }

@@ -51,7 +51,7 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 				return found;
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y);
+		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y,"emptySpace");
 		boulder.getDungeon().addEntity(emptySpace);
 		return emptySpace;
 	}

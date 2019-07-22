@@ -19,7 +19,7 @@ public class PickUpIntoBag implements PickUpBehavior {
 		int index =  entity.getDungeon().getEntities().indexOf(entity);
 		int x_new = entity.getX();
 		int y_new = entity.getY();
-		entity.getDungeon().getEntities().set(index, new EmptySpace(entity.getDungeon(), x_new, y_new));
+		entity.getDungeon().getEntities().set(index, new EmptySpace(entity.getDungeon(), x_new, y_new, "emptySpace"));
 		
 		
 	}

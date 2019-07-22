@@ -53,6 +53,9 @@ public class DungeonController {
 		for (ImageView entity : initialEntities) {
 			squares.getChildren().add(entity);
 			trackExistence(entity);
+			if(imageViewToEntity.get(entity).getName().equals("door")) {
+				trackState(entity);
+			}
 		}
 	}
 
@@ -63,6 +66,22 @@ public class DungeonController {
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(node);
 
+			}
+		});
+
+	}
+	
+	private void trackState(Node node) {
+
+		Image doorImageOpen =  new Image("/open_door.png");
+		ImageView view = new ImageView(doorImageOpen);
+		int x = imageViewToEntity.get(node).getX();
+		int y = imageViewToEntity.get(node).getY();
+		((Door)imageViewToEntity.get(node)).isOpen().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+				squares.getChildren().remove(node);
+				squares.add(view, x, y);
 			}
 		});
 

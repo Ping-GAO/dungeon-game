@@ -21,12 +21,10 @@ public class BagPack {
 	@Override
 	public String toString() {
 		String result = "";
-		String stringToSplit;
+		
 		
 		for(int i=0;i<bagPack.size();i++) {
-			stringToSplit = bagPack.get(i).getClass().toString();
-			stringToSplit =stringToSplit.split(" ")[1];
-			result += stringToSplit.split("\\.")[2];
+			result += bagPack.get(i).getName();
 			if(i!=bagPack.size()-1) {
 				result += " ";
 			}

@@ -16,8 +16,8 @@ public class Player extends Entity {
 	 * @param x
 	 * @param y
 	 */
-	public Player(Dungeon dungeon, int x, int y) {
-		super(dungeon, x, y);
+	public Player(Dungeon dungeon, int x, int y,String name) {
+		super(dungeon, x, y,name);
 		this.bagPack = new BagPack();
 
 	}
@@ -70,7 +70,7 @@ public class Player extends Entity {
 				return found;
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(dungeon, x, y);
+		EmptySpace emptySpace = new EmptySpace(dungeon, x, y,name);
 		dungeon.addEntity(emptySpace);
 		return emptySpace;
 	}
