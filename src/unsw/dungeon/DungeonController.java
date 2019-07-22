@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import com.sun.javafx.geom.transform.BaseTransform.Degree;
+
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -233,14 +233,14 @@ public class DungeonController {
 //		if (player.getBagPack().getBagPack().size() != 0) {
 //			System.out.println("player has : " + player.getBagPack().toString());
 //		}
-		for (Entity e : dungeon.getEntities()) {
-			if (e != null) {
-				if (e.getX() == 4 && e.getY() == 8) {
-					System.out.println("(4,8) is "+ e.getName());
-				}
-			}
-			
-		}
+//		for (Entity e : dungeon.getEntities()) {
+//			if (e != null) {
+//				if (e.getX() == 4 && e.getY() == 8) {
+//					System.out.println("(4,8) is "+ e.getName());
+//				}
+//			}
+//			
+//		}
 
 	}
 

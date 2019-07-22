@@ -2,11 +2,11 @@ package unsw.dungeon;
 
 public class playerMoveTowadsPressurePlate implements playerMoveTowardsBehavior {
 	private PressuredPlate pressuredPlate;
-	private Player player;
+	
 	private Dungeon dungeon;
 
 	public playerMoveTowadsPressurePlate(PressuredPlate pressuredPlate) {
-		this.player = pressuredPlate.getDungeon().getPlayer();
+		
 		this.pressuredPlate = pressuredPlate;
 		this.dungeon = pressuredPlate.getDungeon();
 	}
