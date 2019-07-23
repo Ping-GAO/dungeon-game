@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
-
+import javafx.util.Duration;
 
 public class DungeonController {
 
@@ -61,7 +66,7 @@ public class DungeonController {
 
 		imageViewToEntity.get(node).alive().addListener(new ChangeListener<Boolean>() {
 			@Override
-			
+
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(node);
 			}
@@ -95,9 +100,8 @@ public class DungeonController {
 			}
 		});
 
-		
-
 	}
+
 	private void trackPosition(Entity entity, Node node) {
 		GridPane.setColumnIndex(node, entity.getX());
 		GridPane.setRowIndex(node, entity.getY());
@@ -115,60 +119,105 @@ public class DungeonController {
 			}
 		});
 	}
-	private void getOutABombFromBagPack() {
+
+	public void removeNodeByAccessHelp(String help, GridPane gridPane) {
+
+		ObservableList<Node> childrens = gridPane.getChildren();
+		for (Node node : childrens) {
+			if (node != null && node.getAccessibleHelp() != null) {
+				if (node instanceof ImageView && node.getAccessibleHelp().equals(help)) {
+					ImageView imageView = (ImageView) node;
+					gridPane.getChildren().remove(imageView);
+					break;
+				}
+			}
+		}
+
+	}
+
+	private ImageView getOutABombFromBagPack() {
 		int x = this.dungeon.getPlayer().getX();
 		int y = this.dungeon.getPlayer().getY();
 		Bomb bomb = new Bomb(dungeon, x, y, "bomb");
-		
-		
+
 		this.dungeon.addEntity(bomb);
-		
-		
+
 		Image bombImage = new Image("/bomb_unlit.png");
 		ImageView view = new ImageView(bombImage);
-		squares.getChildren().add(view);
+
+		squares.add(view, x, y);
 		trackPosition(bomb, view);
 		imageViewToEntity.put(view, bomb);
 		trackExistence(view);
-		
+
 		Bomb toRemove = null;
-		for(Entity e:this.dungeon.getPlayer().getBagPack().getBagPack()) {
-			if(e.getName().equals("bomb")) {
+		for (Entity e : this.dungeon.getPlayer().getBagPack().getBagPack()) {
+			if (e.getName().equals("bomb")) {
 				toRemove = (Bomb) e;
 			}
 		}
 		this.dungeon.getPlayer().getBagPack().getBagPack().remove(toRemove);
-		
+		return view;
 	}
-	
-	
-	
-	public void LitBomb() {
+
+	public void LitBomb(ImageView bombView) {
 		Bomb bomb = null;
 		int x = this.dungeon.getPlayer().getX();
 		int y = this.dungeon.getPlayer().getY();
 		EmptySpace toRemove = null;
-		for(Entity e:this.dungeon.getEntities()) {
-			if(e.getName().equals("bomb") && e.getX()==x && e.getY()==y) {
+		for (Entity e : this.dungeon.getEntities()) {
+			if (e.getName().equals("bomb") && e.getX() == x && e.getY() == y) {
 				bomb = (Bomb) e;
 			}
-			if(e.getName().equals("emptySpace") && e.getX()==x && e.getY()==y) {
+			if (e.getName().equals("emptySpace") && e.getX() == x && e.getY() == y) {
 				toRemove = (EmptySpace) e;
 			}
 		}
+
 		this.dungeon.getEntities().remove(toRemove);
 		bomb.Lit();
-		for(int i=0;i<4;i++) {
-		
-		}
-		
-		
+		bomb.setLit(true);
+		squares.getChildren().remove(bombView);
+
+		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
+
+			String temp = "/bomb_lit_".concat(Integer.toString(i)).concat(".png");
+			String tempPrev = "/bomb_lit_".concat(Integer.toString(j)).concat(".png");
+			Image bombLitImage = new Image(temp);
+			bombLitView = new ImageView(bombLitImage);
+			bombLitView.setAccessibleHelp(temp);
+
+			removeNodeByAccessHelp(tempPrev, squares);
+			squares.add(bombLitView, x, y);
+
+			i += 1;
+			j += 1;
+
+		}));
+		timeline.setCycleCount(4);
+
+		timeline.setOnFinished(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				// some concurrent bug here
+				removeNodeByAccessHelp("bomb_lit_4.png", squares);
+
+				// System.out.println("done");
+
+			}
+		});
+		timeline.play();
+		// try to destroy eveything in range
+
 	}
-	
-	
-	
+
+	Integer i = 1;
+	Integer j = 0;
+	ImageView bombLitView = null;
+
 	@FXML
-	public void handleKeyPress(KeyEvent event) {
+	public void handleKeyPress(KeyEvent event) throws InterruptedException {
 		switch (event.getCode()) {
 		case UP:
 			player.moveUp();
@@ -183,14 +232,17 @@ public class DungeonController {
 			player.moveRight();
 			break;
 		case L:
-			if(player.checkIfHaveBomb()) {
-				getOutABombFromBagPack();
-				LitBomb();
+			if (player.checkIfHaveBomb()) {
+
+				ImageView bombView = getOutABombFromBagPack();
+				LitBomb(bombView);
+				Bomb bomb = (Bomb) imageViewToEntity.get(bombView);
+				bomb.After();
 			}
 			break;
 		case A:
 			// press A to attack enemy in front of the player
-			
+
 			System.out.println("the user pressed A");
 			break;
 		default:
@@ -199,14 +251,14 @@ public class DungeonController {
 		if (player.getBagPack().getBagPack().size() != 0) {
 			System.out.println("player has : " + player.getBagPack().toString());
 		}
-		for (Entity e : dungeon.getEntities()) {
-			if (e != null) {
-				if (e.getX() == 1 && e.getY() == 3) {
-					System.out.println("(1,3) is " + e.getName());
-				}
-			}
-
-		}
+//		for (Entity e : dungeon.getEntities()) {
+//			if (e != null) {
+//				if (e.getX() == 1 && e.getY() == 3) {
+//					System.out.println("(1,3) is " + e.getName());
+//				}
+//			}
+//
+//		}
 
 	}
 
