@@ -61,9 +61,9 @@ public class DungeonController {
 
 		imageViewToEntity.get(node).alive().addListener(new ChangeListener<Boolean>() {
 			@Override
+			
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(node);
-
 			}
 		});
 
@@ -98,7 +98,49 @@ public class DungeonController {
 		
 
 	}
+	private void trackPosition(Entity entity, Node node) {
+		GridPane.setColumnIndex(node, entity.getX());
+		GridPane.setRowIndex(node, entity.getY());
+		entity.x().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				GridPane.setColumnIndex(node, newValue.intValue());
 
+			}
+		});
+		entity.y().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				GridPane.setRowIndex(node, newValue.intValue());
+			}
+		});
+	}
+	private void getOutABombFromBagPack() {
+		int x = this.dungeon.getPlayer().getX();
+		int y = this.dungeon.getPlayer().getY();
+		Bomb bomb = new Bomb(dungeon, x, y, "bomb");
+		
+		
+		this.dungeon.addEntity(bomb);
+		
+		
+		Image bombImage = new Image("/bomb_unlit.png");
+		ImageView view = new ImageView(bombImage);
+		squares.getChildren().add(view);
+		trackPosition(bomb, view);
+		imageViewToEntity.put(view, bomb);
+		trackExistence(view);
+		
+		Bomb toRemove = null;
+		for(Entity e:this.dungeon.getPlayer().getBagPack().getBagPack()) {
+			if(e.getName().equals("bomb")) {
+				toRemove = (Bomb) e;
+			}
+		}
+		this.dungeon.getPlayer().getBagPack().getBagPack().remove(toRemove);
+		
+	}
+	
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 		switch (event.getCode()) {
@@ -114,16 +156,30 @@ public class DungeonController {
 		case RIGHT:
 			player.moveRight();
 			break;
+		case L:
+			// press L to drop a bomb
+			// make a bomb where player stands
+			if(player.checkIfHaveBomb()) {
+				getOutABombFromBagPack();
+				
+			}
+			System.out.println("the user pressed L");
+			break;
+		case A:
+			// press A to attack enemy in front of the player
+			
+			System.out.println("the user pressed A");
+			break;
 		default:
 			break;
 		}
-//		if (player.getBagPack().getBagPack().size() != 0) {
-//			System.out.println("player has : " + player.getBagPack().toString());
-//		}
+		if (player.getBagPack().getBagPack().size() != 0) {
+			System.out.println("player has : " + player.getBagPack().toString());
+		}
 		for (Entity e : dungeon.getEntities()) {
 			if (e != null) {
-				if (e.getX() == 5 && e.getY() == 2) {
-					System.out.println("(5,2) is " + e.getName());
+				if (e.getX() == 1 && e.getY() == 3) {
+					System.out.println("(1,3) is " + e.getName());
 				}
 			}
 
