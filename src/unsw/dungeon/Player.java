@@ -16,7 +16,6 @@ public class Player extends Entity {
 	public Player(Dungeon dungeon, int x, int y,String name) {
 		super(dungeon, x, y,name);
 		this.bagPack = new BagPack();
-
 	}
 
 	public BagPack getBagPack() {
@@ -54,6 +53,7 @@ public class Player extends Entity {
 			for(Entity e: list) {
 				e.PerformBePickedUp();
 			}
+			//System.out.println("letf is " + next.getName());
 			next.PerformBeMovedTowardsbyPlayer();
 		}
 
@@ -91,7 +91,7 @@ public class Player extends Entity {
 				return found;
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(dungeon, x, y,name);
+		EmptySpace emptySpace = new EmptySpace(dungeon, x, y,"emptySpace");
 		dungeon.addEntity(emptySpace);
 		return emptySpace;
 	}
@@ -108,7 +108,7 @@ public class Player extends Entity {
 		}
 		
 		if(list.isEmpty()) {
-			EmptySpace emptySpace = new EmptySpace(dungeon, x, y,name);
+			EmptySpace emptySpace = new EmptySpace(dungeon, x, y,"emptySpace");
 			dungeon.addEntity(emptySpace);
 			list.add(emptySpace);
 		}

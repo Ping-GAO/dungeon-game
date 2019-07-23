@@ -141,6 +141,32 @@ public class DungeonController {
 		
 	}
 	
+	
+	
+	public void LitBomb() {
+		Bomb bomb = null;
+		int x = this.dungeon.getPlayer().getX();
+		int y = this.dungeon.getPlayer().getY();
+		EmptySpace toRemove = null;
+		for(Entity e:this.dungeon.getEntities()) {
+			if(e.getName().equals("bomb") && e.getX()==x && e.getY()==y) {
+				bomb = (Bomb) e;
+			}
+			if(e.getName().equals("emptySpace") && e.getX()==x && e.getY()==y) {
+				toRemove = (EmptySpace) e;
+			}
+		}
+		this.dungeon.getEntities().remove(toRemove);
+		bomb.Lit();
+		for(int i=0;i<4;i++) {
+		
+		}
+		
+		
+	}
+	
+	
+	
 	@FXML
 	public void handleKeyPress(KeyEvent event) {
 		switch (event.getCode()) {
@@ -157,13 +183,10 @@ public class DungeonController {
 			player.moveRight();
 			break;
 		case L:
-			// press L to drop a bomb
-			// make a bomb where player stands
 			if(player.checkIfHaveBomb()) {
 				getOutABombFromBagPack();
-				
+				LitBomb();
 			}
-			System.out.println("the user pressed L");
 			break;
 		case A:
 			// press A to attack enemy in front of the player
