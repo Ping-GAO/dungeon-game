@@ -110,7 +110,6 @@ public abstract class DungeonLoader {
 			Key key = new Key(dungeon, x, y, "key");
 			id = json.getInt("id");
 			key.setId(id);
-			System.out.println("leu " + id);
 			onLoad(key);
 			entity = key;
 			break;
