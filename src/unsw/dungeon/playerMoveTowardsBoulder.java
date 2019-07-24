@@ -17,13 +17,13 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 			if (player.getX() > boulder.getX()) {
 				// left
 				Entity next = findEntityAt(boulder.getX() - 1, boulder.getY());
-				
+
 				next.PerformBeMovedTowardsbyBoulder(boulder);
 			} else {
 				// right
-				
+
 				Entity next = findEntityAt(boulder.getX() + 1, boulder.getY());
-				 //System.out.println("right  is " + next.getName());
+				// System.out.println("right is " + next.getName());
 				next.PerformBeMovedTowardsbyBoulder(boulder);
 			}
 		} else {
@@ -44,36 +44,33 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 			}
 		}
 	}
-	
+
 	public void checkIfOnSwitch(int x, int y) {
-		FloorSwitch floorSwitch= null;
-		for(Entity e : boulder.getDungeon().getEntities()) {
-			if(e!=null) {
-				if(e.getX()==x && e.getY()==y && e.getName().equals("floorSwitch")) {
+		FloorSwitch floorSwitch = null;
+		for (Entity e : boulder.getDungeon().getEntities()) {
+			if (e != null) {
+				if (e.getX() == x && e.getY() == y && e.getName().equals("floorSwitch")) {
 					floorSwitch = (FloorSwitch) e;
 				}
 			}
 		}
-		if(floorSwitch==null) {
+		if (floorSwitch == null) {
 			;
-		}
-		else {
+		} else {
 			floorSwitch.deactivate();
 		}
 	}
-	
-	
 
 	public Entity findEntityAt(int x, int y) {
 		Entity found = null;
 		for (Entity e : boulder.getDungeon().getEntities()) {
 			if (e.getX() == x && e.getY() == y) {
 				found = e;
-				
+
 				return found;
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y,"emptySpace");
+		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y, "emptySpace");
 		boulder.getDungeon().addEntity(emptySpace);
 		return emptySpace;
 	}

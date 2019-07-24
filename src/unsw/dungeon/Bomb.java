@@ -28,14 +28,6 @@ public class Bomb extends Entity {
 
 	public void After() {
 		this.alive().set(false);
-		Entity toRemove = null;
-		for (Entity e : dungeon.getEntities()) {
-			if (e != null) {
-				if (e.getName().equals("bomb") && e.getX() == this.getX() && this.getY() == e.getY()) {
-					toRemove = e;
-				}
-			}
-		}
-		dungeon.getEntities().remove(toRemove);
+
 	}
 }

@@ -13,9 +13,10 @@ public class Player extends Entity {
 	 * @param x
 	 * @param y
 	 */
-	public Player(Dungeon dungeon, int x, int y,String name) {
-		super(dungeon, x, y,name);
+	public Player(Dungeon dungeon, int x, int y, String name) {
+		super(dungeon, x, y, name);
 		this.bagPack = new BagPack();
+		this.setGetBombedBehavior(new GetDestroyed(this));
 	}
 
 	public BagPack getBagPack() {
@@ -26,7 +27,7 @@ public class Player extends Entity {
 		if (getY() > 0) {
 			Entity next = findEntityAt(getX(), getY() - 1);
 			List<Entity> list = findAllEntityAt(getX(), getY() - 1);
-			for(Entity e: list) {
+			for (Entity e : list) {
 				e.PerformBePickedUp();
 			}
 			next.PerformBeMovedTowardsbyPlayer();
@@ -38,7 +39,7 @@ public class Player extends Entity {
 		if (getY() < dungeon.getHeight() - 1) {
 			Entity next = findEntityAt(getX(), getY() + 1);
 			List<Entity> list = findAllEntityAt(getX(), getY() + 1);
-			for(Entity e: list) {
+			for (Entity e : list) {
 				e.PerformBePickedUp();
 			}
 			next.PerformBeMovedTowardsbyPlayer();
@@ -50,10 +51,10 @@ public class Player extends Entity {
 		if (this.getX() > 0) {
 			Entity next = findEntityAt(getX() - 1, getY());
 			List<Entity> list = findAllEntityAt(getX() - 1, getY());
-			for(Entity e: list) {
+			for (Entity e : list) {
 				e.PerformBePickedUp();
 			}
-			//System.out.println("letf is " + next.getName());
+			// System.out.println("letf is " + next.getName());
 			next.PerformBeMovedTowardsbyPlayer();
 		}
 
@@ -63,52 +64,59 @@ public class Player extends Entity {
 		if (getX() < dungeon.getWidth() - 1) {
 			Entity next = findEntityAt(getX() + 1, getY());
 			List<Entity> list = findAllEntityAt(getX() + 1, getY());
-			for(Entity e: list) {
+			for (Entity e : list) {
 				e.PerformBePickedUp();
 			}
 			next.PerformBeMovedTowardsbyPlayer();
 		}
 
 	}
-	
-	
+
 	public boolean checkIfHaveBomb() {
-		boolean found  = false;
-		for(Entity e: this.bagPack.getBagPack()) {
-			if(e.getName().equals("bomb")) {
+		boolean found = false;
+		for (Entity e : this.bagPack.getBagPack()) {
+			if (e.getName().equals("bomb")) {
 				found = true;
 			}
 		}
 		return found;
 	}
-	
-	
+
 	public Entity findEntityAt(int x, int y) {
 		Entity found = null;
+		Boulder b = null;
+		for (Entity e : dungeon.getEntities()) {
+			if (e.getX() == x && e.getY() == y && e.getName().equals("boulder")) {
+				b = (Boulder) e;
+
+			}
+		}
+		if (b != null) {
+			return b;
+		}
 		for (Entity e : dungeon.getEntities()) {
 			if (e.getX() == x && e.getY() == y) {
 				found = e;
 				return found;
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(dungeon, x, y,"emptySpace");
+		EmptySpace emptySpace = new EmptySpace(dungeon, x, y, "emptySpace");
 		dungeon.addEntity(emptySpace);
 		return emptySpace;
 	}
-	
-	
+
 	public List<Entity> findAllEntityAt(int x, int y) {
-		
-		List<Entity> list = new ArrayList<Entity> ();  
+
+		List<Entity> list = new ArrayList<Entity>();
 		for (Entity e : dungeon.getEntities()) {
 			if (e.getX() == x && e.getY() == y) {
 				list.add(e);
-				
+
 			}
 		}
-		
-		if(list.isEmpty()) {
-			EmptySpace emptySpace = new EmptySpace(dungeon, x, y,"emptySpace");
+
+		if (list.isEmpty()) {
+			EmptySpace emptySpace = new EmptySpace(dungeon, x, y, "emptySpace");
 			dungeon.addEntity(emptySpace);
 			list.add(emptySpace);
 		}
@@ -116,4 +124,3 @@ public class Player extends Entity {
 	}
 
 }
-

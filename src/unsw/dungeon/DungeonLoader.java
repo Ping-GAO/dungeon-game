@@ -7,7 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-
 public abstract class DungeonLoader {
 
 	private JSONObject json;
@@ -39,7 +38,7 @@ public abstract class DungeonLoader {
 		String type = json.getString("type");
 		int x = json.getInt("x");
 		int y = json.getInt("y");
-
+		int id;
 		Entity entity = null;
 		switch (type) {
 		case "player":
@@ -56,6 +55,9 @@ public abstract class DungeonLoader {
 
 		case "floorSwitch":
 			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y, "floorSwitch");
+			id = json.getInt("id");
+
+			floorSwitch.setId(id);
 			onLoad(floorSwitch);
 			entity = floorSwitch;
 			break;
@@ -97,17 +99,24 @@ public abstract class DungeonLoader {
 			break;
 		case "door":
 			Door door = new Door(dungeon, x, y, "door");
+			id = json.getInt("id");
+
+			door.setId(id);
+
 			onLoad(door);
 			entity = door;
 			break;
 		case "key":
 			Key key = new Key(dungeon, x, y, "key");
+			id = json.getInt("id");
+			key.setId(id);
+			System.out.println("leu " + id);
 			onLoad(key);
 			entity = key;
 			break;
-		
+
 		}
-	
+
 		dungeon.addEntity(entity);
 	}
 
@@ -132,6 +141,7 @@ public abstract class DungeonLoader {
 	public abstract void onLoad(Exit exit);
 
 	public abstract void onLoad(Door door);
+
 	public abstract void onLoad(Key key);
-	
+
 }

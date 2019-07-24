@@ -17,6 +17,7 @@ public abstract class Entity {
 	protected BooleanProperty alive;
 	protected playerMoveTowardsBehavior moveTowardsBehavior;
 	protected boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior;
+	protected GetBombedBehavior getBombedBehavior;
 	protected PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
 	protected String name;
@@ -28,7 +29,7 @@ public abstract class Entity {
 	 * @param y
 	 * @param dungeon
 	 */
-	public Entity(Dungeon dungeon, int x, int y,String name) {
+	public Entity(Dungeon dungeon, int x, int y, String name) {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
 		this.dungeon = dungeon;
@@ -68,6 +69,11 @@ public abstract class Entity {
 	public void PerformBeMovedTowardsbyPlayer() {
 		moveTowardsBehavior.moveTowards();
 	}
+
+	public void PerformGetBombed() {
+		getBombedBehavior.getBombed();
+	}
+
 	public void PerformBeMovedTowardsbyBoulder(Boulder b) {
 		boulderMoveTowadsBeheavior.setBoulder(b);
 		boulderMoveTowadsBeheavior.moveTowards();
@@ -87,6 +93,10 @@ public abstract class Entity {
 
 	public void setBoulderMoveTowadsBeheavior(boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior) {
 		this.boulderMoveTowadsBeheavior = boulderMoveTowadsBeheavior;
-		
+
+	}
+
+	public void setGetBombedBehavior(GetBombedBehavior getBombedBehavior) {
+		this.getBombedBehavior = getBombedBehavior;
 	}
 }

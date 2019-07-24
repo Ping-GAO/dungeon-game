@@ -69,6 +69,19 @@ public class DungeonController {
 
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				squares.getChildren().remove(node);
+
+				Entity entity = imageViewToEntity.get(node);
+				Entity toRemove = null;
+				for (Entity e : dungeon.getEntities()) {
+					if (e != null) {
+						if (e.getName().equals(entity.getName()) && e.getX() == entity.getX()
+								&& entity.getY() == e.getY()) {
+							toRemove = e;
+						}
+					}
+				}
+				dungeon.getEntities().remove(toRemove);
+
 			}
 		});
 
@@ -78,13 +91,22 @@ public class DungeonController {
 
 		Image doorImageOpen = new Image("/open_door.png");
 		ImageView view = new ImageView(doorImageOpen);
+		Image doorImageClosed = new Image("/closed_door.png");
+		ImageView closedDoorview = new ImageView(doorImageClosed);
 		int x = imageViewToEntity.get(node).getX();
 		int y = imageViewToEntity.get(node).getY();
 		((Door) imageViewToEntity.get(node)).isOpen().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				squares.getChildren().remove(node);
-				squares.add(view, x, y);
+				if (newValue.booleanValue() == true) {
+					System.out.println("ative in view");
+					squares.getChildren().remove(node);
+					squares.add(view, x, y);
+				} else {
+					System.out.println("decative in view");
+					squares.getChildren().remove(node);
+					squares.add(closedDoorview, x, y);
+				}
 
 			}
 		});
@@ -96,7 +118,12 @@ public class DungeonController {
 		floorswitch.isActive().addListener(new ChangeListener<Boolean>() {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-				floorswitch.acitivate();
+
+				if (newValue.booleanValue() == true) {
+					floorswitch.acitivate();
+				} else {
+					floorswitch.deactivate();
+				}
 			}
 		});
 
@@ -178,7 +205,9 @@ public class DungeonController {
 		bomb.Lit();
 		bomb.setLit(true);
 		squares.getChildren().remove(bombView);
-
+		int bomb_x = bomb.getX();
+		int bomb_y = bomb.getY();
+		i = 1;
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
 
 			String temp = "/bomb_lit_".concat(Integer.toString(i)).concat(".png");
@@ -202,7 +231,17 @@ public class DungeonController {
 			public void handle(ActionEvent event) {
 				// some concurrent bug here
 				removeNodeByAccessHelp("bomb_lit_4.png", squares);
-
+				for (int i = -1; i <= 1; i++) {
+					for (int j = -1; j <= 1; j++) {
+						if (i == 0 && j == 0) {
+							continue;
+						}
+						Entity e = findEntityAt(bomb_x + i, bomb_y + j);
+						if (e != null) {
+							e.PerformGetBombed();
+						}
+					}
+				}
 				// System.out.println("done");
 
 			}
@@ -210,6 +249,18 @@ public class DungeonController {
 		timeline.play();
 		// try to destroy eveything in range
 
+	}
+
+	public Entity findEntityAt(int x, int y) {
+		Entity found = null;
+		for (Entity e : dungeon.getEntities()) {
+			if (e.getX() == x && e.getY() == y) {
+				found = e;
+				return found;
+			}
+		}
+
+		return found;
 	}
 
 	Integer i = 1;
@@ -238,6 +289,7 @@ public class DungeonController {
 				LitBomb(bombView);
 				Bomb bomb = (Bomb) imageViewToEntity.get(bombView);
 				bomb.After();
+
 			}
 			break;
 		case A:
