@@ -99,12 +99,15 @@ public class DungeonController {
 			@Override
 			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 				if (newValue.booleanValue() == true) {
+					System.out.println("old vaue is" + oldValue.booleanValue());
 					System.out.println("ative in view");
 					squares.getChildren().remove(node);
 					squares.add(view, x, y);
+
 				} else {
 					System.out.println("decative in view");
 					squares.getChildren().remove(node);
+
 					squares.add(closedDoorview, x, y);
 				}
 
