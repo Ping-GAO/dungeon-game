@@ -28,6 +28,10 @@ public class DungeonController {
 
 	private Player player;
 
+	public Player getPlayer() {
+		return player;
+	}
+
 	private Dungeon dungeon;
 	private HashMap<ImageView, Entity> imageViewToEntity;
 

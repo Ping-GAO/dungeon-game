@@ -28,7 +28,7 @@ public class FloorSwitch extends Entity {
 	}
 
 	public void acitivate() {
-
+		this.isActive().set(true);
 		// or activate a closed door
 		System.out.println("foor switch activaed");
 		// when activate should have a boulder at same spot
@@ -56,7 +56,8 @@ public class FloorSwitch extends Entity {
 					found = true;
 					break;
 				} else {
-					System.out.println("switch has id " + this.getId() + " door has id " + door.getId());
+					// System.out.println("switch has id " + this.getId() + " door has id " +
+					// door.getId());
 				}
 
 			}
@@ -81,7 +82,8 @@ public class FloorSwitch extends Entity {
 					found = true;
 					break;
 				} else {
-					System.out.println("switch has id " + this.getId() + " door has id " + door.getId());
+					// System.out.println("switch has id " + this.getId() + " door has id " +
+					// door.getId());
 				}
 
 			}
