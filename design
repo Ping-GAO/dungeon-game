@@ -1,0 +1,4 @@
+I don't think i need to include the javafx mvc framework in UML, and my uml put focus on my back end design.
+1. use strategy pattern to model the interaction between entity and entity
+2. state pattern use on some entity will change state
+3. oberserver pattern to update UI (mojority of work is done by javafx)
