@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6d8cefcb-fdfb-4f26-882f-0c0a62383f5d" name="Default Changelist" comment="fix bomb animation">
+      <change afterPath="$PROJECT_DIR$/src/unsw/dungeon/DoorStateTracker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/unsw/dungeon/DungeonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unsw/dungeon/DungeonController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unsw/dungeon/Key.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unsw/dungeon/Key.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unsw/dungeon/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unsw/dungeon/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unsw/dungeon/PlayerMoveTowardsBoulder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unsw/dungeon/PlayerMoveTowardsBoulder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/unsw/dungeon/PlayerMoveTowardsDoor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unsw/dungeon/PlayerMoveTowardsDoor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/unsw/dungeon/FloorSwitch.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/unsw/dungeon/FloorSwitch.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +19,13 @@
     <option name="testRunner" value="GRADLE" />
     <option name="delegatedBuild" value="true" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
@@ -30,6 +35,9 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ObebjTAn59p1DlogSijrGpnXsh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
@@ -139,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1564263859383</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix bomb animation">
+      <created>1564267645850</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1564267645850</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
