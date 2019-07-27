@@ -277,23 +277,23 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 
 Marks will be deducted for poor git and GitLab usage. For example, meaningless commit messages, large commits, issue board out of date, etc.
 
-[player]:        images/human_new.png
-[wall]:          images/brick_brown_0.png
-[exit]:          images/exit.png
-[door_open]:     images/open_door.png
-[door_closed]:   images/closed_door.png
-[key]:           images/key.png
-[boulder]:       images/boulder.png
-[switch]:        images/pressure_plate.png
-[bomb_unlit]:    images/bomb_unlit.png
-[bomb_lit_1]:    images/bomb_lit_1.png
-[bomb_lit_2]:    images/bomb_lit_2.png
-[bomb_lit_3]:    images/bomb_lit_3.png
-[bomb_lit_4]:    images/bomb_lit_4.png
-[enemy]:        images/deep_elf_master_archer.png
-[sword]:         images/greatsword_1_new.png
-[invincibility]: images/brilliant_blue_new.png
-[treasure]:      images/gold_pile.png
+[player]:        src/images/human_new.png
+[wall]:          src/images/brick_brown_0.png
+[exit]:          src/images/exit.png
+[door_open]:     src/images/open_door.png
+[door_closed]:   src/images/closed_door.png
+[key]:           src/images/key.png
+[boulder]:       src/images/boulder.png
+[switch]:        src/images/pressure_plate.png
+[bomb_unlit]:    src/images/bomb_unlit.png
+[bomb_lit_1]:    src/images/bomb_lit_1.png
+[bomb_lit_2]:    src/images/bomb_lit_2.png
+[bomb_lit_3]:    src/images/bomb_lit_3.png
+[bomb_lit_4]:    src/images/bomb_lit_4.png
+[enemy]:        src/images/deep_elf_master_archer.png
+[sword]:         src/images/greatsword_1_new.png
+[invincibility]: src/images/brilliant_blue_new.png
+[treasure]:      src/images/gold_pile.png
 
 [maze]:          examples/maze.png
 [boulders]:      examples/boulders.png

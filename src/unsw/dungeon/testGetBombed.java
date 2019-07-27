@@ -4,8 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.AssertFalse.assertFalse;
+
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class testGetBombed {
 
@@ -21,9 +24,10 @@ class testGetBombed {
 				break;
 			}
 		}
+		assert toFind != null;
 		toFind.PerformGetBombed();
 		// System.out.println(toFind.alive().getValue());
-		assertFalse("after bombed boulder died", toFind.alive().getValue());
+		assertFalse(toFind.alive().getValue(), "after bombed boulder died");
 	}
 
 	@Test
@@ -38,8 +42,9 @@ class testGetBombed {
 				break;
 			}
 		}
+		assert toFind != null;
 		toFind.PerformGetBombed();
 		// System.out.println(toFind.alive().getValue());
-		assertTrue("after bombed wall lived", toFind.alive().getValue());
+		assertTrue(toFind.alive().getValue(), "after bombed wall lived");
 	}
 }

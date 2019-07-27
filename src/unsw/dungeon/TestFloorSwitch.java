@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class TestFloorSwitch {
 
@@ -27,9 +27,10 @@ class TestFloorSwitch {
 				break;
 			}
 		}
+		assert toFind != null;
 		toFind.PerformBeMovedTowardsbyBoulder(toFind2);
 		// System.out.println(toFind.isActive().getValue());
-		assertTrue("switch activate", toFind.isActive().getValue());
+		assertTrue(toFind.isActive().getValue(), "switch activate");
 	}
 
 }

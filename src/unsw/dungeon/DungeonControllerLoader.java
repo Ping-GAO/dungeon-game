@@ -1,7 +1,5 @@
 package unsw.dungeon;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,22 +29,22 @@ public class DungeonControllerLoader extends DungeonLoader {
 
 	private Image keyImage;
 
-	public DungeonControllerLoader(String filename) throws FileNotFoundException {
+	DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
 		entities = new ArrayList<>();
-		playerImage = new Image("/human_new.png");
-		wallImage = new Image("/brick_brown_0.png");
-		boulderImage = new Image("/boulder.png");
-		floorSwitchImage = new Image("/pressure_plate.png");
-		bombImage = new Image("/bomb_unlit.png");
-		treasureImage = new Image("/gold_pile.png");
-		invincibilityImage = new Image("/brilliant_blue_new.png");
-		swordImage = new Image("/greatsword_1_new.png");
-		enemyImage = new Image("/deep_elf_master_archer.png");
-		exitImage = new Image("/exit.png");
-		doorImage = new Image("/closed_door.png");
-		keyImage = new Image("/key.png");
-		imageViewToEntity = new HashMap<ImageView, Entity>();
+		playerImage = new Image("images/human_new.png");
+		wallImage = new Image("images/brick_brown_0.png");
+		boulderImage = new Image("images/boulder.png");
+		floorSwitchImage = new Image("images/pressure_plate.png");
+		bombImage = new Image("images/bomb_unlit.png");
+		treasureImage = new Image("images/gold_pile.png");
+		invincibilityImage = new Image("images/brilliant_blue_new.png");
+		swordImage = new Image("images/greatsword_1_new.png");
+		enemyImage = new Image("images/deep_elf_master_archer.png");
+		exitImage = new Image("images/exit.png");
+		doorImage = new Image("images/closed_door.png");
+		keyImage = new Image("images/key.png");
+		imageViewToEntity = new HashMap<>();
 
 	}
 
@@ -128,43 +126,16 @@ public class DungeonControllerLoader extends DungeonLoader {
 		entities.add(view);
 	}
 
-	/**
-	 * Set a node in a GridPane to have its position track the position of an entity
-	 * in the dungeon.
-	 *
-	 * By connecting the model with the view in this way, the model requires no
-	 * knowledge of the view and changes to the position of entities in the model
-	 * will automatically be reflected in the view.
-	 * 
-	 * @param entity
-	 * @param node
-	 */
+
 	private void trackPosition(Entity entity, Node node) {
 		GridPane.setColumnIndex(node, entity.getX());
 		GridPane.setRowIndex(node, entity.getY());
-		entity.x().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				GridPane.setColumnIndex(node, newValue.intValue());
-
-			}
-		});
-		entity.y().addListener(new ChangeListener<Number>() {
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				GridPane.setRowIndex(node, newValue.intValue());
-			}
-		});
+		entity.x().addListener((observable, oldValue, newValue) -> GridPane.setColumnIndex(node, newValue.intValue()));
+		entity.y().addListener((observable, oldValue, newValue) -> GridPane.setRowIndex(node, newValue.intValue()));
 	}
 
-	/**
-	 * Create a controller that can be attached to the DungeonView with all the
-	 * loaded entities.
-	 * 
-	 * @return
-	 * @throws FileNotFoundException
-	 */
-	public DungeonController loadController() throws FileNotFoundException {
+
+	DungeonController loadController(){
 		return new DungeonController(load(), entities, imageViewToEntity);
 	}
 
