@@ -53,7 +53,7 @@ public class DungeonController {
 
         for (ImageView imageView : initialEntities) {
 
-            squares.add(imageView,(int)imageView.getX(),(int)imageView.getY());
+            squares.add(imageView, (int) imageView.getX(), (int) imageView.getY());
             trackExistence(imageView);
             if (imageViewToEntity.get(imageView).getName().equals("door")) {
                 trackDoorState(imageView);
@@ -124,21 +124,16 @@ public class DungeonController {
 
     }
 
-    private void trackPosition(Entity entity, Node node) {
-        GridPane.setColumnIndex(node, entity.getX());
-        GridPane.setRowIndex(node, entity.getY());
-        entity.x().addListener((observable, oldValue, newValue) -> GridPane.setColumnIndex(node, newValue.intValue()));
-        entity.y().addListener((observable, oldValue, newValue) -> GridPane.setRowIndex(node, newValue.intValue()));
-    }
 
-    private void removeNodeByAccessHelp(String help, GridPane gridPane) {
-
+    private void removeNodeByAccessHelp(String help, int x, int y, GridPane gridPane) {
         ObservableList<Node> childrens = gridPane.getChildren();
         for (Node node : childrens) {
             if (node != null && node.getAccessibleHelp() != null) {
-                if (node instanceof ImageView && node.getAccessibleHelp().equals(help)) {
+                if (node instanceof ImageView && node.getAccessibleHelp().equals(help) && ((ImageView) node).getX() == x
+                        && ((ImageView) node).getY() == y) {
                     ImageView imageView = (ImageView) node;
                     gridPane.getChildren().remove(imageView);
+
                     break;
                 }
             }
@@ -153,11 +148,13 @@ public class DungeonController {
 
         this.dungeon.addEntity(bomb);
 
-        Image bombImage = new Image("images/bomb_unlit.png");
-        ImageView view = new ImageView(bombImage);
+
+        ImageView view = bomb.MakeImageViewFromEntity();
+        view.setX(x);
+        view.setY(y);
 
         squares.add(view, x, y);
-        trackPosition(bomb, view);
+
         imageViewToEntity.put(view, bomb);
         trackExistence(view);
 
@@ -193,32 +190,41 @@ public class DungeonController {
         squares.getChildren().remove(bombView);
         int bomb_x = bomb.getX();
         int bomb_y = bomb.getY();
+
         i = 1;
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), (ActionEvent event1) -> {
+        j = 0;
+
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.3), (ActionEvent event1) -> {
 
             String temp = "images/bomb_lit_".concat(Integer.toString(i)).concat(".png");
             String tempPrev = "images/bomb_lit_".concat(Integer.toString(j)).concat(".png");
+
             Image bombLitImage = new Image(temp);
             bombLitView = new ImageView(bombLitImage);
             bombLitView.setAccessibleHelp(temp);
-
-            removeNodeByAccessHelp(tempPrev, squares);
+            bombLitView.setX(bomb_x);
+            bombLitView.setY(bomb_y);
+            // System.out.println((int)bombView.getX()+"wadawd"+(int)bombView.getY());
+            removeNodeByAccessHelp(tempPrev, bomb_x, bomb_y, squares);
+            //System.out.println("i is "+i);
             squares.add(bombLitView, x, y);
 
             i += 1;
             j += 1;
 
         }));
-        timeline.setCycleCount(4);
+        timeline.setCycleCount(5);
 
         timeline.setOnFinished(event -> {
             // some concurrent bug here
-            removeNodeByAccessHelp("bomb_lit_4.png", squares);
+            removeNodeByAccessHelp("images/bomb_lit_5.png", bomb_x, bomb_y, squares);
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
                     if (i == 0 && j == 0) {
                         continue;
                     }
+                    // TODO bomb everything in that list
                     Entity e = findEntityAt(bomb_x + i, bomb_y + j);
                     if (e != null) {
                         e.PerformGetBombed();
@@ -245,8 +251,8 @@ public class DungeonController {
         return null;
     }
 
-    private Integer i = 1;
-    private Integer j = 0;
+    private Integer i;
+    private Integer j;
     private ImageView bombLitView = null;
 
     @FXML

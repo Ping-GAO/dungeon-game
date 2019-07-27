@@ -40,7 +40,7 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 					List<Entity> list = findAllEntityAt(boulder.getX(), boulder.getY() - 1);
 
 					for (Entity e : list) {
-						System.out.println(e.getClass());
+						// System.out.println(e.getClass());
 						e.PerformBeMovedTowardsbyBoulder(boulder);
 					}
 

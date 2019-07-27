@@ -20,7 +20,7 @@ public class Key extends Entity {
         this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
-        this.name = "name";
+        this.name = "key";
         this.setEntityImage(new Image("images/key.png"));
     }
 }

@@ -16,7 +16,6 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 
 		for (Entity e : bagpack.getBagPack()) {
 			if (e.getName().equals("key")) {
-
 				key = (Key) e;
 				if (key.getId() == door.getId()) {
 					System.out.println("key has id " + key.getId() + " door has id " + door.getId());
@@ -26,16 +25,11 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 				} else {
 					System.out.println("key has id " + key.getId() + " door has id " + door.getId());
 				}
-
 			}
 		}
-
 		if (found) {
 			door.changeToOpenState();
 			bagpack.getBagPack().remove(key);
 		}
-
 	}
-
-
 }

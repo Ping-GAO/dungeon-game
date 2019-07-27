@@ -104,10 +104,7 @@ public class Player extends Entity {
             list.add(emptySpace);
         }
         // when entities stack up sort them with priority
-        list.sort((lhs, rhs) -> {
-            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
-            return Integer.compare(rhs.getPushpriority(), lhs.getPushpriority());
-        });
+        list.sort((lhs, rhs) -> Integer.compare(rhs.getPushpriority(), lhs.getPushpriority()));
 
         return list;
     }
