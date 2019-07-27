@@ -17,9 +17,9 @@ public class FloorSwitch extends Entity {
 
 	public FloorSwitch(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
-		this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
+		this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
 		this.setPickUpBehavior(new PickUpNoWay());
-		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsSwitch(this));
+		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsSwitch(this));
 		this.isActive = new SimpleBooleanProperty(false);
 		this.name = "floorSwitch";
 	}
@@ -42,9 +42,9 @@ public class FloorSwitch extends Entity {
 			}
 		}
 
-		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
 		assert boulder != null;
-		this.setMoveTowardsBehavior(new playerMoveTowardsBoulder(boulder));
+		this.setMoveTowardsBehavior(new PlayerMoveTowardsBoulder(boulder));
 		Door door = null;
 		boolean found = false;
 		for (Entity e : dungeon.getEntities()) {
@@ -71,8 +71,8 @@ public class FloorSwitch extends Entity {
 
 	public void deactivate() {
 		System.out.println("foor switch DEactivaed");
-		this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
-		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsSwitch(this));
+		this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
+		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsSwitch(this));
 		this.isActive().set(false);
 		Door door = null;
 		boolean found = false;

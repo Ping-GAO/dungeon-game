@@ -12,8 +12,8 @@ public abstract class Entity {
 	// externally observed.
 	protected IntegerProperty x, y;
 	private BooleanProperty alive;
-	private playerMoveTowardsBehavior moveTowardsBehavior;
-	private boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior;
+	private PlayerMoveTowardsBehavior moveTowardsBehavior;
+	private BoulderMoveTowardsBehaviour boulderMoveTowadsBeheavior;
 	private GetBombedBehavior getBombedBehavior;
 	private PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
@@ -75,7 +75,7 @@ public abstract class Entity {
 		pickUpBehavior.pickUp();
 	}
 
-	public void setMoveTowardsBehavior(playerMoveTowardsBehavior moveTowardsBehavior) {
+	public void setMoveTowardsBehavior(PlayerMoveTowardsBehavior moveTowardsBehavior) {
 		this.moveTowardsBehavior = moveTowardsBehavior;
 	}
 
@@ -83,7 +83,7 @@ public abstract class Entity {
 		this.pickUpBehavior = pickUpBehavior;
 	}
 
-	public void setBoulderMoveTowadsBeheavior(boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior) {
+	public void setBoulderMoveTowadsBeheavior(BoulderMoveTowardsBehaviour boulderMoveTowadsBeheavior) {
 		this.boulderMoveTowadsBeheavior = boulderMoveTowadsBeheavior;
 
 	}

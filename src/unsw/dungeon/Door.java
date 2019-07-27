@@ -18,9 +18,9 @@ public class Door extends Entity {
 
     public Door(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
-        this.setMoveTowardsBehavior(new playerMoveTowardsDoor(this));
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsDoor(this));
         this.setPickUpBehavior(new PickUpNoWay());
-        this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+        this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.isOpen = new SimpleBooleanProperty(false);
         this.name = "door";
     }
@@ -31,12 +31,12 @@ public class Door extends Entity {
 
     public void changeToOpenState() {
         this.isOpen().set(true);
-        this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
-        this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsPassThrough(this));
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
+        this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsPassThrough(this));
     }
 
     public void changeToClosedState() {
         this.isOpen().set(false);
-        this.setMoveTowardsBehavior(new playerMoveTowardsDoor(this));
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsDoor(this));
     }
 }

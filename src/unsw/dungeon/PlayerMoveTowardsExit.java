@@ -1,9 +1,9 @@
 package unsw.dungeon;
 
-public class playerMoveTowardsExit implements playerMoveTowardsBehavior {
+public class PlayerMoveTowardsExit implements PlayerMoveTowardsBehavior {
 	private Player player;
 
-	public playerMoveTowardsExit(Entity entity) {
+	public PlayerMoveTowardsExit(Entity entity) {
 		this.player = entity.getDungeon().getPlayer();
 	}
 

@@ -4,9 +4,9 @@ public class Wall extends Entity {
 
 	public Wall(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
-		this.setMoveTowardsBehavior(new playerMoveTowardsNoWay());
+		this.setMoveTowardsBehavior(new PlayerMoveTowardsNoWay());
 		this.setPickUpBehavior(new PickUpNoWay());
-		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
 		this.setGetBombedBehavior(new GetBombedNoEffect());
 		this.name="wall";
 	}

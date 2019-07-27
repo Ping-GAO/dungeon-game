@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
-public class boulderMoveTowardsSwitch implements boulderMoveTowadsBeheavior {
+public class BoulderMoveTowardsSwitch implements BoulderMoveTowardsBehaviour {
 	private Boulder boulder;
 	private FloorSwitch floorSwitch;
 
-	public boulderMoveTowardsSwitch(FloorSwitch floorSwitch) {
+	public BoulderMoveTowardsSwitch(FloorSwitch floorSwitch) {
 		this.floorSwitch = floorSwitch;
 	}
 

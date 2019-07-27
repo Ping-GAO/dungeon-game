@@ -5,9 +5,9 @@ public class Bomb extends Entity {
 
     public Bomb(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
-        this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
         this.setPickUpBehavior(new PickUpIntoBag(this));
-        this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+        this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "bomb";
     }
 
@@ -15,7 +15,7 @@ public class Bomb extends Entity {
     public void Lit() {
         // System.out.println("light it up");
 
-        this.setMoveTowardsBehavior(new playerMoveTowardsNoWay());
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsNoWay());
         this.setPickUpBehavior(new PickUpNoWay());
     }
 

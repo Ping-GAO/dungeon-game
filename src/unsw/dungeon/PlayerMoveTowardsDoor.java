@@ -1,10 +1,10 @@
 package unsw.dungeon;
 
-public class playerMoveTowardsDoor implements playerMoveTowardsBehavior {
+public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 	private BagPack bagpack;
 	private Door door;
 
-	public playerMoveTowardsDoor(Door door) {
+	public PlayerMoveTowardsDoor(Door door) {
 		this.bagpack = door.getDungeon().getPlayer().getBagPack();
 		this.door = door;
 	}

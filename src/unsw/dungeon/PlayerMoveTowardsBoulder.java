@@ -1,11 +1,11 @@
 package unsw.dungeon;
 
-public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
+public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 	private Boulder boulder;
 
 	private Player player;
 
-	public playerMoveTowardsBoulder(Boulder boulder) {
+	public PlayerMoveTowardsBoulder(Boulder boulder) {
 		this.player = boulder.getDungeon().getPlayer();
 		this.boulder = boulder;
 	}

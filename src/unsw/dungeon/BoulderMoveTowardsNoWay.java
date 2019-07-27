@@ -1,19 +1,19 @@
 package unsw.dungeon;
 
-public class boulderMoveTowardsNoWay implements boulderMoveTowadsBeheavior {
+public class BoulderMoveTowardsNoWay implements BoulderMoveTowardsBehaviour {
 	
 
 
 
 	@Override
 	public void setBoulder(Boulder boulder) {
-		;
+
 		
 	}
 
 	@Override
 	public void moveTowards() {
-		;
+
 	}
 
 }
