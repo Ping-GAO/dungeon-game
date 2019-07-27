@@ -1,21 +1,21 @@
 package unsw.dungeon;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public abstract class DungeonLoader {
 
 	private JSONObject json;
 
-	public DungeonLoader(String filename) throws FileNotFoundException {
+	DungeonLoader(String filename) throws FileNotFoundException {
 		json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
 	}
 
-	public Dungeon load() {
+	Dungeon load() {
 		int width = json.getInt("width");
 		int height = json.getInt("height");
 
