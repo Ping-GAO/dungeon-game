@@ -87,24 +87,16 @@ public class DungeonController {
 
     private void trackDoorState(Node node) {
 
-        Image doorImageOpen = new Image("images/open_door.png");
-        ImageView view = new ImageView(doorImageOpen);
-        Image doorImageClosed = new Image("images/closed_door.png");
-        ImageView closedDoorview = new ImageView(doorImageClosed);
-        int x = imageViewToEntity.get(node).getX();
-        int y = imageViewToEntity.get(node).getY();
+
+        DoorStateTracker doorStateTracker = new DoorStateTracker((ImageView) node, squares);
         ((Door) imageViewToEntity.get(node)).isOpen().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                System.out.println("old svaue is" + oldValue);
-                System.out.println("ative in view");
-                squares.getChildren().remove(node);
-                squares.add(view, x, y);
+                doorStateTracker.toOpenState();
+
 
             } else {
-                System.out.println("decative in view");
-                squares.getChildren().remove(node);
+                doorStateTracker.toClosedState();
 
-                squares.add(closedDoorview, x, y);
             }
 
         });

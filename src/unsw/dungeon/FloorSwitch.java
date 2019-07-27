@@ -24,6 +24,7 @@ public class FloorSwitch extends Entity {
 		this.isActive = new SimpleBooleanProperty(false);
 		this.name = "floorSwitch";
 		this.setEntityImage(new Image("images/pressure_plate.png"));
+		this.setGetBombedBehavior(new GetBombedNoEffect());
 	}
 
 	public BooleanProperty isActive() {
@@ -33,7 +34,7 @@ public class FloorSwitch extends Entity {
 	public void activate() {
 		this.isActive().set(true);
 		// or activate a closed door
-		System.out.println("foor switch activaed");
+		//System.out.println("foor switch activaed");
 		// when activate should have a boulder at same spot
 		Boulder boulder = null;
 		for (Entity e : dungeon.getEntities()) {
@@ -72,7 +73,7 @@ public class FloorSwitch extends Entity {
 	}
 
 	public void deactivate() {
-		System.out.println("foor switch DEactivaed");
+		//System.out.println("foor switch DEactivaed");
 		this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
 		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsSwitch(this));
 		this.isActive().set(false);
