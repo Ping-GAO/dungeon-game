@@ -22,17 +22,24 @@ public abstract class Entity {
     protected String name;
     protected ImageView imageView;
     private Image EntityImage;
-
+    private int pushpriority;
 
     public Entity(Dungeon dungeon, int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);
         this.dungeon = dungeon;
         this.alive = new SimpleBooleanProperty(true);
-
+        this.pushpriority = 0;
 
     }
 
+    public int getPushpriority() {
+        return pushpriority;
+    }
+
+    public void setPushpriority(int pushpriority) {
+        this.pushpriority = pushpriority;
+    }
 
     public String getName() {
         return name;

@@ -282,9 +282,9 @@ public class DungeonController {
             default:
                 break;
         }
-        if (player.getBagPack().getBagPack().size() != 0) {
-            System.out.println("player has : " + player.getBagPack().toString());
-        }
+//        if (player.getBagPack().getBagPack().size() != 0) {
+//            System.out.println("player has : " + player.getBagPack().toString());
+//        }
 //		for (Entity e : dungeon.getEntities()) {
 //			if (e != null) {
 //				if (e.getX() == 1 && e.getY() == 3) {

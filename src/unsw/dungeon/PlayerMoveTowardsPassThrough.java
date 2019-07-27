@@ -15,7 +15,6 @@ public class PlayerMoveTowardsPassThrough implements PlayerMoveTowardsBehavior {
 		player.y().set(entity.getY());
 		
 	}
-	
-	
+
 
 }

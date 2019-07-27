@@ -14,4 +14,5 @@ public class PlayerMoveTowardsExit implements PlayerMoveTowardsBehavior {
 
 	}
 
+
 }

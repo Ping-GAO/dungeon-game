@@ -12,6 +12,7 @@ public class Boulder extends Entity {
         this.setGetBombedBehavior(new GetDestroyed(this));
         this.name = "boulder";
         this.setEntityImage(new Image("images/boulder.png"));
+        this.setPushpriority(1);
     }
 
 }

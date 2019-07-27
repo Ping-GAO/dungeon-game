@@ -24,49 +24,54 @@ public class Player extends Entity {
 
     public void moveUp() {
         if (getY() > 0) {
-            Entity next = findEntityAt(getX(), getY() - 1);
+            //Entity next = findEntityAt(getX(), getY() - 1);
             List<Entity> list = findAllEntityAt(getX(), getY() - 1);
             for (Entity e : list) {
                 e.PerformBePickedUp();
+                e.PerformBeMovedTowardsbyPlayer();
             }
-            next.PerformBeMovedTowardsbyPlayer();
+            //next.PerformBeMovedTowardsbyPlayer();
         }
 
     }
 
     public void moveDown() {
         if (getY() < dungeon.getHeight() - 1) {
-            Entity next = findEntityAt(getX(), getY() + 1);
+            //Entity next = findEntityAt(getX(), getY() + 1);
             List<Entity> list = findAllEntityAt(getX(), getY() + 1);
             for (Entity e : list) {
                 e.PerformBePickedUp();
+                e.PerformBeMovedTowardsbyPlayer();
             }
-            next.PerformBeMovedTowardsbyPlayer();
+            //next.PerformBeMovedTowardsbyPlayer();
         }
 
     }
 
     public void moveLeft() {
         if (this.getX() > 0) {
-            Entity next = findEntityAt(getX() - 1, getY());
+            //Entity next = findEntityAt(getX() - 1, getY());
             List<Entity> list = findAllEntityAt(getX() - 1, getY());
             for (Entity e : list) {
                 e.PerformBePickedUp();
+                e.PerformBeMovedTowardsbyPlayer();
             }
             // System.out.println("letf is " + next.getName());
-            next.PerformBeMovedTowardsbyPlayer();
+            //next.PerformBeMovedTowardsbyPlayer();
+
         }
 
     }
 
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1) {
-            Entity next = findEntityAt(getX() + 1, getY());
+            //Entity next = findEntityAt(getX() + 1, getY());
             List<Entity> list = findAllEntityAt(getX() + 1, getY());
             for (Entity e : list) {
                 e.PerformBePickedUp();
+                e.PerformBeMovedTowardsbyPlayer();
             }
-            next.PerformBeMovedTowardsbyPlayer();
+            // next.PerformBeMovedTowardsbyPlayer();
         }
 
     }
@@ -82,28 +87,7 @@ public class Player extends Entity {
         return found;
     }
 
-    public Entity findEntityAt(int x, int y) {
-        Boulder b = null;
-        for (Entity e : dungeon.getEntities()) {
-            if (e.getX() == x && e.getY() == y && e.getName().equals("boulder")) {
-                b = (Boulder) e;
 
-            }
-        }
-        if (b != null) {
-            return b;
-        }
-        Entity found;
-        for (Entity e : dungeon.getEntities()) {
-            if (e.getX() == x && e.getY() == y) {
-                found = e;
-                return found;
-            }
-        }
-        EmptySpace emptySpace = new EmptySpace(dungeon, x, y);
-        dungeon.addEntity(emptySpace);
-        return emptySpace;
-    }
 
     public List<Entity> findAllEntityAt(int x, int y) {
 
@@ -111,7 +95,6 @@ public class Player extends Entity {
         for (Entity e : dungeon.getEntities()) {
             if (e.getX() == x && e.getY() == y) {
                 list.add(e);
-
             }
         }
 
@@ -120,6 +103,12 @@ public class Player extends Entity {
             dungeon.addEntity(emptySpace);
             list.add(emptySpace);
         }
+        // when entities stack up sort them with priority
+        list.sort((lhs, rhs) -> {
+            // -1 - less than, 1 - greater than, 0 - equal, all inversed for descending
+            return Integer.compare(rhs.getPushpriority(), lhs.getPushpriority());
+        });
+
         return list;
     }
 

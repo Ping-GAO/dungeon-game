@@ -7,4 +7,5 @@ public class PlayerMoveTowardsNoWay implements PlayerMoveTowardsBehavior {
 	public void moveTowards() {
 
 	}
+
 }

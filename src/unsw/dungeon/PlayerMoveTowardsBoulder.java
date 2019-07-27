@@ -1,13 +1,17 @@
 package unsw.dungeon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 	private Boulder boulder;
-
+	private Dungeon dungeon;
 	private Player player;
 
 	public PlayerMoveTowardsBoulder(Boulder boulder) {
 		this.player = boulder.getDungeon().getPlayer();
 		this.boulder = boulder;
+		this.dungeon = boulder.getDungeon();
 	}
 
 	@Override
@@ -16,29 +20,37 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 		if (player.getX() != boulder.getX()) {
 			if (player.getX() > boulder.getX()) {
 				// left
-				Entity next = findEntityAt(boulder.getX() - 1, boulder.getY());
-
-				next.PerformBeMovedTowardsbyBoulder(boulder);
+				List<Entity> list = findAllEntityAt(boulder.getX() - 1, boulder.getY());
+				for (Entity e : list) {
+					e.PerformBeMovedTowardsbyBoulder(boulder);
+				}
 			} else {
 				// right
 
-				Entity next = findEntityAt(boulder.getX() + 1, boulder.getY());
+				List<Entity> list = findAllEntityAt(boulder.getX() + 1, boulder.getY());
 				// System.out.println("right is " + next.getName());
-				next.PerformBeMovedTowardsbyBoulder(boulder);
+				for (Entity e : list) {
+					e.PerformBeMovedTowardsbyBoulder(boulder);
+				}
 			}
 		} else {
 			if (player.getY() > boulder.getY()) {
 				// up
 				if (boulder.getY() > 0) {
-					Entity next = findEntityAt(boulder.getX(), boulder.getY() - 1);
+					List<Entity> list = findAllEntityAt(boulder.getX(), boulder.getY() - 1);
 
-					next.PerformBeMovedTowardsbyBoulder(boulder);
+					for (Entity e : list) {
+						System.out.println(e.getClass());
+						e.PerformBeMovedTowardsbyBoulder(boulder);
+					}
 
 				}
 			} else {
 				if (boulder.getY() < boulder.getDungeon().getHeight() - 1) {
-					Entity next = findEntityAt(boulder.getX(), boulder.getY() + 1);
-					next.PerformBeMovedTowardsbyBoulder(boulder);
+					List<Entity> list = findAllEntityAt(boulder.getX(), boulder.getY() + 1);
+					for (Entity e : list) {
+						e.PerformBeMovedTowardsbyBoulder(boulder);
+					}
 
 				}
 			}
@@ -59,18 +71,22 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 		}
 	}
 
-	public Entity findEntityAt(int x, int y) {
-		Entity found;
-		for (Entity e : boulder.getDungeon().getEntities()) {
-			if (e.getX() == x && e.getY() == y) {
-				found = e;
 
-				return found;
+	public List<Entity> findAllEntityAt(int x, int y) {
+
+		List<Entity> list = new ArrayList<>();
+		for (Entity e : dungeon.getEntities()) {
+			if (e.getX() == x && e.getY() == y) {
+				list.add(e);
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y);
-		boulder.getDungeon().addEntity(emptySpace);
-		return emptySpace;
+
+		if (list.isEmpty()) {
+			EmptySpace emptySpace = new EmptySpace(dungeon, x, y);
+			dungeon.addEntity(emptySpace);
+			list.add(emptySpace);
+		}
+		return list;
 	}
 
 }
