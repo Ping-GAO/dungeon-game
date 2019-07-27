@@ -15,11 +15,6 @@ public abstract class DungeonLoader {
 		json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
 	}
 
-	/**
-	 * Parses the JSON to create a dungeon.
-	 * 
-	 * @return
-	 */
 	public Dungeon load() {
 		int width = json.getInt("width");
 		int height = json.getInt("height");

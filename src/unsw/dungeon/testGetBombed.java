@@ -1,11 +1,11 @@
 package unsw.dungeon;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.AssertFalse.assertFalse;
 
 class testGetBombed {
 

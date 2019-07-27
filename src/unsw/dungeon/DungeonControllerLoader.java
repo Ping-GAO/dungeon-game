@@ -1,11 +1,5 @@
 package unsw.dungeon;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
@@ -13,13 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
-/**
- * A DungeonLoader that also creates the necessary ImageViews for the UI,
- * connects them via listeners to the model, and creates a controller.
- * 
- * @author Ping GAO
- *
- */
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class DungeonControllerLoader extends DungeonLoader {
 
 	private List<ImageView> entities;
@@ -38,7 +30,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 	private Image doorImage;
 
 	private Image keyImage;
-	
+
 	public DungeonControllerLoader(String filename) throws FileNotFoundException {
 		super(filename);
 		entities = new ArrayList<>();
@@ -51,11 +43,11 @@ public class DungeonControllerLoader extends DungeonLoader {
 		invincibilityImage = new Image("/brilliant_blue_new.png");
 		swordImage = new Image("/greatsword_1_new.png");
 		enemyImage = new Image("/deep_elf_master_archer.png");
-		exitImage  = new Image("/exit.png");
+		exitImage = new Image("/exit.png");
 		doorImage = new Image("/closed_door.png");
 		keyImage = new Image("/key.png");
 		imageViewToEntity = new HashMap<ImageView, Entity>();
-		
+
 	}
 
 	@Override
@@ -93,6 +85,7 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(treasureImage);
 		addEntity(treasure, view);
 	}
+
 	@Override
 	public void onLoad(Exit exit) {
 		ImageView view = new ImageView(exitImage);
@@ -116,27 +109,25 @@ public class DungeonControllerLoader extends DungeonLoader {
 		ImageView view = new ImageView(enemyImage);
 		addEntity(enemy, view);
 	}
+
 	@Override
 	public void onLoad(Door door) {
 		ImageView view = new ImageView(doorImage);
 		addEntity(door, view);
 	}
+
 	@Override
 	public void onLoad(Key key) {
 		ImageView view = new ImageView(keyImage);
 		addEntity(key, view);
 	}
-	
-	
+
 	private void addEntity(Entity entity, ImageView view) {
 		trackPosition(entity, view);
 		imageViewToEntity.put(view, entity);
 		entities.add(view);
 	}
 
-	
-	
-	
 	/**
 	 * Set a node in a GridPane to have its position track the position of an entity
 	 * in the dungeon.
