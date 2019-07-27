@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+
 public class Boulder extends Entity {
 
     public Boulder(Dungeon dungeon, int x, int y) {
@@ -9,6 +11,7 @@ public class Boulder extends Entity {
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.setGetBombedBehavior(new GetDestroyed(this));
         this.name = "boulder";
+        this.setEntityImage(new Image("images/boulder.png"));
     }
 
 }

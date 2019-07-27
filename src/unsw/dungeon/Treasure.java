@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+
 public class Treasure extends Entity {
 
 	public Treasure(Dungeon dungeon, int x, int y) {
@@ -8,6 +10,7 @@ public class Treasure extends Entity {
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "treasure";
+        this.setEntityImage(new Image("images/gold_pile.png"));
 	}
 
 }

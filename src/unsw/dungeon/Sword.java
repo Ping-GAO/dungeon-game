@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+
 public class Sword extends Entity {
 
     public Sword(Dungeon dungeon, int x, int y) {
@@ -8,6 +10,7 @@ public class Sword extends Entity {
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "sword";
+        this.setEntityImage(new Image("images/greatsword_1_new.png"));
     }
 
 }

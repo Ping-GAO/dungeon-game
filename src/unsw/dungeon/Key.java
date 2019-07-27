@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+
 public class Key extends Entity {
 
     private int id;
@@ -19,6 +21,6 @@ public class Key extends Entity {
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "name";
-
+        this.setEntityImage(new Image("images/key.png"));
     }
 }

@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class Player extends Entity {
         this.bagPack = new BagPack();
         this.setGetBombedBehavior(new GetDestroyed(this));
         this.name = "player";
+        this.setEntityImage(new Image("images/human_new.png"));
     }
 
     public BagPack getBagPack() {

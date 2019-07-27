@@ -51,14 +51,14 @@ public class DungeonController {
             }
         }
 
-        for (ImageView entity : initialEntities) {
-            // TODO add(x,y)
-            squares.getChildren().add(entity);
-            trackExistence(entity);
-            if (imageViewToEntity.get(entity).getName().equals("door")) {
-                trackDoorState(entity);
-            } else if (imageViewToEntity.get(entity).getName().equals("floorSwitch")) {
-                trackSwitchState(entity);
+        for (ImageView imageView : initialEntities) {
+
+            squares.add(imageView,(int)imageView.getX(),(int)imageView.getY());
+            trackExistence(imageView);
+            if (imageViewToEntity.get(imageView).getName().equals("door")) {
+                trackDoorState(imageView);
+            } else if (imageViewToEntity.get(imageView).getName().equals("floorSwitch")) {
+                trackSwitchState(imageView);
             }
 
         }

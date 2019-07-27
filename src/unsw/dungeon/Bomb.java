@@ -1,5 +1,7 @@
 package unsw.dungeon;
 
+import javafx.scene.image.Image;
+
 public class Bomb extends Entity {
 
 
@@ -9,6 +11,7 @@ public class Bomb extends Entity {
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "bomb";
+        this.setEntityImage(new Image("images/bomb_unlit.png"));
     }
 
 

@@ -1,7 +1,6 @@
 package unsw.dungeon;
 
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
@@ -14,110 +13,76 @@ public class DungeonControllerLoader extends DungeonLoader {
 
     private List<ImageView> entities;
     private HashMap<ImageView, Entity> imageViewToEntity;
-    // Images
-    private Image playerImage;
-    private Image wallImage;
-    private Image boulderImage;
-    private Image floorSwitchImage;
-    private Image bombImage;
-    private Image treasureImage;
-    private Image invincibilityImage;
-    private Image swordImage;
-    private Image enemyImage;
-    private Image exitImage;
-    private Image doorImage;
 
-    private Image keyImage;
 
     DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
-        playerImage = new Image("images/human_new.png");
-        wallImage = new Image("images/brick_brown_0.png");
-        boulderImage = new Image("images/boulder.png");
-        floorSwitchImage = new Image("images/pressure_plate.png");
-        bombImage = new Image("images/bomb_unlit.png");
-        treasureImage = new Image("images/gold_pile.png");
-        invincibilityImage = new Image("images/brilliant_blue_new.png");
-        swordImage = new Image("images/greatsword_1_new.png");
-        enemyImage = new Image("images/deep_elf_master_archer.png");
-        exitImage = new Image("images/exit.png");
-        doorImage = new Image("images/closed_door.png");
-        keyImage = new Image("images/key.png");
         imageViewToEntity = new HashMap<>();
 
     }
 
     @Override
     public void onLoad(Entity player) {
-        ImageView view = new ImageView(playerImage);
-        addEntity(player, view);
+
+        addEntity(player, player.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Wall wall) {
-        ImageView view = new ImageView(wallImage);
-        addEntity(wall, view);
+
+        addEntity(wall, wall.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Boulder boulder) {
-        ImageView view = new ImageView(boulderImage);
-        addEntity(boulder, view);
+
+        addEntity(boulder, boulder.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(FloorSwitch floorSwitch) {
-        ImageView view = new ImageView(floorSwitchImage);
-        addEntity(floorSwitch, view);
+        addEntity(floorSwitch, floorSwitch.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Bomb bomb) {
-        ImageView view = new ImageView(bombImage);
-        addEntity(bomb, view);
+        addEntity(bomb, bomb.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Treasure treasure) {
-        ImageView view = new ImageView(treasureImage);
-        addEntity(treasure, view);
+        addEntity(treasure, treasure.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Exit exit) {
-        ImageView view = new ImageView(exitImage);
-        addEntity(exit, view);
+        addEntity(exit, exit.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Invincibility invincibility) {
-        ImageView view = new ImageView(invincibilityImage);
-        addEntity(invincibility, view);
+        addEntity(invincibility, invincibility.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Sword sword) {
-        ImageView view = new ImageView(swordImage);
-        addEntity(sword, view);
+        addEntity(sword, sword.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Enemy enemy) {
-        ImageView view = new ImageView(enemyImage);
-        addEntity(enemy, view);
+        addEntity(enemy, enemy.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Door door) {
-        ImageView view = new ImageView(doorImage);
-        addEntity(door, view);
+        addEntity(door, door.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Key key) {
-        ImageView view = new ImageView(keyImage);
-        addEntity(key, view);
+        addEntity(key, key.MakeImageViewFromEntity());
     }
 
     private void addEntity(Entity entity, ImageView view) {

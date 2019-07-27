@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.Image;
 
 public class Door extends Entity {
     private int id;
@@ -23,6 +24,7 @@ public class Door extends Entity {
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.isOpen = new SimpleBooleanProperty(false);
         this.name = "door";
+        this.setEntityImage(new Image("images/closed_door.png"));
     }
 
     public BooleanProperty isOpen() {

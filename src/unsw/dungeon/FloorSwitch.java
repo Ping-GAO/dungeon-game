@@ -2,6 +2,7 @@ package unsw.dungeon;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.image.Image;
 
 public class FloorSwitch extends Entity {
 	private BooleanProperty isActive;
@@ -22,6 +23,7 @@ public class FloorSwitch extends Entity {
 		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsSwitch(this));
 		this.isActive = new SimpleBooleanProperty(false);
 		this.name = "floorSwitch";
+		this.setEntityImage(new Image("images/pressure_plate.png"));
 	}
 
 	public BooleanProperty isActive() {
