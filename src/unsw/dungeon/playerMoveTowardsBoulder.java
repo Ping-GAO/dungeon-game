@@ -54,15 +54,13 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 				}
 			}
 		}
-		if (floorSwitch == null) {
-			;
-		} else {
+		if (floorSwitch != null) {
 			floorSwitch.deactivate();
 		}
 	}
 
 	public Entity findEntityAt(int x, int y) {
-		Entity found = null;
+		Entity found;
 		for (Entity e : boulder.getDungeon().getEntities()) {
 			if (e.getX() == x && e.getY() == y) {
 				found = e;
@@ -70,7 +68,7 @@ public class playerMoveTowardsBoulder implements playerMoveTowardsBehavior {
 				return found;
 			}
 		}
-		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y, "emptySpace");
+		EmptySpace emptySpace = new EmptySpace(boulder.getDungeon(), x, y);
 		boulder.getDungeon().addEntity(emptySpace);
 		return emptySpace;
 	}

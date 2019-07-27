@@ -1,11 +1,11 @@
 package unsw.dungeon;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 public class DungeonLoderForTest {
 
@@ -37,19 +37,18 @@ public class DungeonLoderForTest {
 		Entity entity = null;
 		switch (type) {
 		case "player":
-			Player player = new Player(dungeon, x, y, "player");
+			Player player = new Player(dungeon, x, y);
 			dungeon.setPlayer(player);
 
 			entity = player;
 			break;
 		case "wall":
-			Wall wall = new Wall(dungeon, x, y, "wall");
 
-			entity = wall;
+			entity = new Wall(dungeon, x, y);
 			break;
 
 		case "floorSwitch":
-			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y, "floorSwitch");
+			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y);
 			id = json.getInt("id");
 
 			floorSwitch.setId(id);
@@ -57,42 +56,35 @@ public class DungeonLoderForTest {
 			entity = floorSwitch;
 			break;
 		case "boulder":
-			Boulder boulder = new Boulder(dungeon, x, y, "boulder");
 
-			entity = boulder;
+			entity = new Boulder(dungeon, x, y);
 			break;
 
 		case "bomb":
-			Bomb bomb = new Bomb(dungeon, x, y, "bomb");
 
-			entity = bomb;
+			entity = new Bomb(dungeon, x, y);
 			break;
 		case "treasure":
-			Treasure treasure = new Treasure(dungeon, x, y, "treasure");
 
-			entity = treasure;
+			entity = new Treasure(dungeon, x, y);
 			break;
 		case "invincibility":
-			Invincibility invincibility = new Invincibility(dungeon, x, y, "invincibility");
-			entity = invincibility;
+			entity = new Invincibility(dungeon, x, y);
 			break;
 		case "sword":
-			Sword sword = new Sword(dungeon, x, y, "sword");
 
-			entity = sword;
+			entity = new Sword(dungeon, x, y);
 			break;
 		case "enemy":
-			Enemy enemy = new Enemy(dungeon, x, y, "enemy");
 
-			entity = enemy;
+			entity = new Enemy(dungeon, x, y);
 			break;
 		case "exit":
-			Exit exit = new Exit(dungeon, x, y, "exit");
 
-			entity = exit;
+			entity = new Exit(dungeon, x, y, "exit");
 			break;
 		case "door":
-			Door door = new Door(dungeon, x, y, "door");
+			Door door = new Door(dungeon, x, y);
 			id = json.getInt("id");
 
 			door.setId(id);
@@ -100,7 +92,7 @@ public class DungeonLoderForTest {
 			entity = door;
 			break;
 		case "key":
-			Key key = new Key(dungeon, x, y, "key");
+			Key key = new Key(dungeon, x, y);
 			id = json.getInt("id");
 			key.setId(id);
 

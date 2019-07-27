@@ -2,22 +2,23 @@ package unsw.dungeon;
 
 public class Key extends Entity {
 
-	private int id;
+    private int id;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public Key(Dungeon dungeon, int x, int y, String name) {
+    public Key(Dungeon dungeon, int x, int y) {
 
-		super(dungeon, x, y, name);
-		this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
-		this.setPickUpBehavior(new PickUpIntoBag(this));
-		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+        super(dungeon, x, y);
+        this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
+        this.setPickUpBehavior(new PickUpIntoBag(this));
+        this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+        this.name = "name";
 
-	}
+    }
 }

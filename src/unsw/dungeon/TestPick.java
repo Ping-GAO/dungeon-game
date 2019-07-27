@@ -1,17 +1,17 @@
 package unsw.dungeon;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TestPick {
 
 	@Test
 	void testPickUpWall() {
-		Wall wall = new Wall(null, 0, 0, "wall");
+		Wall wall = new Wall(null, 0, 0);
 
 		wall.PerformBePickedUp();
 		assertNotNull(wall);
@@ -30,6 +30,7 @@ class TestPick {
 				break;
 			}
 		}
+		assert toFind != null;
 		toFind.PerformBePickedUp();
 		// System.out.println(dungeon.getPlayer().getBagPack().toString());
 		assertEquals("key", dungeon.getPlayer().getBagPack().toString(), "player has key");
@@ -48,6 +49,7 @@ class TestPick {
 				break;
 			}
 		}
+		assert toFind != null;
 		toFind.PerformBePickedUp();
 		// System.out.println(dungeon.getPlayer().getBagPack().toString());
 		assertEquals("sword", dungeon.getPlayer().getBagPack().toString(), "player has key");

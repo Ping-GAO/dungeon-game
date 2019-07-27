@@ -18,7 +18,7 @@ public class boulderMoveTowardsSwitch implements boulderMoveTowadsBeheavior {
 	public void moveTowards() {
 		boulder.x().set(floorSwitch.getX());
 		boulder.y().set(floorSwitch.getY());
-		floorSwitch.acitivate();
+		floorSwitch.activate();
 
 	}
 

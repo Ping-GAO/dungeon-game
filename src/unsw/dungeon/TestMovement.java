@@ -1,17 +1,17 @@
 package unsw.dungeon;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestMovement {
 
 	@Test
 	void testMoveToWall() {
-		Wall wall = new Wall(null, 0, 0, "wall");
-		Player player = new Player(null, 0, 1, "player");
+		Wall wall = new Wall(null, 0, 0);
+		Player player = new Player(null, 0, 1);
 		wall.PerformBeMovedTowardsbyPlayer();
 		assertEquals(0, player.getX(), "player can't move through wall");
 		assertEquals(1, player.getY(), "player can't move through wall");
@@ -29,6 +29,7 @@ class TestMovement {
 			}
 		}
 
+		assert toFind != null;
 		toFind.PerformBeMovedTowardsbyPlayer();
 
 		assertEquals(1, toFind.getX(), "Boulder can't move becuase there are other om the way");

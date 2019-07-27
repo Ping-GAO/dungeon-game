@@ -52,6 +52,7 @@ public class DungeonController {
         }
 
         for (ImageView entity : initialEntities) {
+            // TODO add(x,y)
             squares.getChildren().add(entity);
             trackExistence(entity);
             if (imageViewToEntity.get(entity).getName().equals("door")) {
@@ -94,7 +95,7 @@ public class DungeonController {
         int y = imageViewToEntity.get(node).getY();
         ((Door) imageViewToEntity.get(node)).isOpen().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
-                System.out.println("old vaue is" + oldValue);
+                System.out.println("old svaue is" + oldValue);
                 System.out.println("ative in view");
                 squares.getChildren().remove(node);
                 squares.add(view, x, y);
@@ -115,7 +116,7 @@ public class DungeonController {
         floorswitch.isActive().addListener((observable, oldValue, newValue) -> {
 
             if (newValue) {
-                floorswitch.acitivate();
+                floorswitch.activate();
             } else {
                 floorswitch.deactivate();
             }
@@ -148,7 +149,7 @@ public class DungeonController {
     private ImageView getOutABombFromBagPack() {
         int x = this.dungeon.getPlayer().getX();
         int y = this.dungeon.getPlayer().getY();
-        Bomb bomb = new Bomb(dungeon, x, y, "bomb");
+        Bomb bomb = new Bomb(dungeon, x, y);
 
         this.dungeon.addEntity(bomb);
 
@@ -188,7 +189,7 @@ public class DungeonController {
         this.dungeon.getEntities().remove(toRemove);
         assert bomb != null;
         bomb.Lit();
-        bomb.setLit(true);
+
         squares.getChildren().remove(bombView);
         int bomb_x = bomb.getX();
         int bomb_y = bomb.getY();

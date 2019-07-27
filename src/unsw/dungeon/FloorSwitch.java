@@ -15,19 +15,20 @@ public class FloorSwitch extends Entity {
 		this.id = id;
 	}
 
-	public FloorSwitch(Dungeon dungeon, int x, int y, String name) {
-		super(dungeon, x, y, name);
+	public FloorSwitch(Dungeon dungeon, int x, int y) {
+		super(dungeon, x, y);
 		this.setMoveTowardsBehavior(new playerMoveTowardsPassThrough(this));
 		this.setPickUpBehavior(new PickUpNoWay());
 		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsSwitch(this));
 		this.isActive = new SimpleBooleanProperty(false);
+		this.name = "floorSwitch";
 	}
 
 	public BooleanProperty isActive() {
 		return isActive;
 	}
 
-	public void acitivate() {
+	public void activate() {
 		this.isActive().set(true);
 		// or activate a closed door
 		System.out.println("foor switch activaed");
@@ -42,6 +43,7 @@ public class FloorSwitch extends Entity {
 		}
 
 		this.setBoulderMoveTowadsBeheavior(new boulderMoveTowardsNoWay());
+		assert boulder != null;
 		this.setMoveTowardsBehavior(new playerMoveTowardsBoulder(boulder));
 		Door door = null;
 		boolean found = false;
@@ -55,10 +57,9 @@ public class FloorSwitch extends Entity {
 					// System.out.println("matched!");
 					found = true;
 					break;
-				} else {
-					// System.out.println("switch has id " + this.getId() + " door has id " +
-					// door.getId());
-				}
+				}  // System.out.println("switch has id " + this.getId() + " door has id " +
+				// door.getId());
+
 
 			}
 		}
@@ -81,10 +82,9 @@ public class FloorSwitch extends Entity {
 				if (this.getId() == door.getId()) {
 					found = true;
 					break;
-				} else {
-					// System.out.println("switch has id " + this.getId() + " door has id " +
-					// door.getId());
-				}
+				}  // System.out.println("switch has id " + this.getId() + " door has id " +
+				// door.getId());
+
 
 			}
 		}

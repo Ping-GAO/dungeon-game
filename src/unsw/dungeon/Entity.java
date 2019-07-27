@@ -5,36 +5,28 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-/**
- * @author pinggao
- *
- */
+
 public abstract class Entity {
 
 	// IntegerProperty is used so that changes to the entities position can be
 	// externally observed.
 	protected IntegerProperty x, y;
-	protected BooleanProperty alive;
-	protected playerMoveTowardsBehavior moveTowardsBehavior;
-	protected boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior;
-	protected GetBombedBehavior getBombedBehavior;
-	protected PickUpBehavior pickUpBehavior;
+	private BooleanProperty alive;
+	private playerMoveTowardsBehavior moveTowardsBehavior;
+	private boulderMoveTowadsBeheavior boulderMoveTowadsBeheavior;
+	private GetBombedBehavior getBombedBehavior;
+	private PickUpBehavior pickUpBehavior;
 	protected Dungeon dungeon;
 	protected String name;
 
-	/**
-	 * Create an entity positioned in square (x,y)
-	 * 
-	 * @param x
-	 * @param y
-	 * @param dungeon
-	 */
-	public Entity(Dungeon dungeon, int x, int y, String name) {
+
+
+	public Entity(Dungeon dungeon, int x, int y) {
 		this.x = new SimpleIntegerProperty(x);
 		this.y = new SimpleIntegerProperty(y);
 		this.dungeon = dungeon;
 		this.alive = new SimpleBooleanProperty(true);
-		this.name = name;
+
 
 	}
 
@@ -42,7 +34,7 @@ public abstract class Entity {
 		return name;
 	}
 
-	public BooleanProperty alive() {
+	BooleanProperty alive() {
 		return alive;
 	}
 
@@ -66,20 +58,20 @@ public abstract class Entity {
 		return dungeon;
 	}
 
-	public void PerformBeMovedTowardsbyPlayer() {
+	void PerformBeMovedTowardsbyPlayer() {
 		moveTowardsBehavior.moveTowards();
 	}
 
-	public void PerformGetBombed() {
+	void PerformGetBombed() {
 		getBombedBehavior.getBombed();
 	}
 
-	public void PerformBeMovedTowardsbyBoulder(Boulder b) {
+	void PerformBeMovedTowardsbyBoulder(Boulder b) {
 		boulderMoveTowadsBeheavior.setBoulder(b);
 		boulderMoveTowadsBeheavior.moveTowards();
 	}
 
-	public void PerformBePickedUp() {
+	void PerformBePickedUp() {
 		pickUpBehavior.pickUp();
 	}
 
@@ -96,7 +88,7 @@ public abstract class Entity {
 
 	}
 
-	public void setGetBombedBehavior(GetBombedBehavior getBombedBehavior) {
+	void setGetBombedBehavior(GetBombedBehavior getBombedBehavior) {
 		this.getBombedBehavior = getBombedBehavior;
 	}
 }
