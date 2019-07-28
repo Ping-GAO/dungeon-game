@@ -8,6 +8,20 @@ import java.util.List;
 public class Player extends Entity {
 
     private BagPack bagPack;
+    private String message;
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void clearMessage() {
+        message = "";
+    }
 
 
     public Player(Dungeon dungeon, int x, int y) {
@@ -16,6 +30,7 @@ public class Player extends Entity {
         this.setGetBombedBehavior(new GetDestroyed(this));
         this.name = "player";
         this.setEntityImage(new Image("images/human_new.png"));
+        this.message = "";
     }
 
     public BagPack getBagPack() {
@@ -32,7 +47,6 @@ public class Player extends Entity {
             }
             //next.PerformBeMovedTowardsbyPlayer();
         }
-
     }
 
     public void moveDown() {
@@ -43,7 +57,6 @@ public class Player extends Entity {
                 e.PerformBePickedUp();
                 e.PerformBeMovedTowardsbyPlayer();
             }
-            //next.PerformBeMovedTowardsbyPlayer();
         }
 
     }
@@ -56,9 +69,6 @@ public class Player extends Entity {
                 e.PerformBePickedUp();
                 e.PerformBeMovedTowardsbyPlayer();
             }
-            // System.out.println("letf is " + next.getName());
-            //next.PerformBeMovedTowardsbyPlayer();
-
         }
 
     }
@@ -88,9 +98,7 @@ public class Player extends Entity {
     }
 
 
-
     public List<Entity> findAllEntityAt(int x, int y) {
-
         List<Entity> list = new ArrayList<>();
         for (Entity e : dungeon.getEntities()) {
             if (e.getX() == x && e.getY() == y) {
@@ -105,7 +113,6 @@ public class Player extends Entity {
         }
         // when entities stack up sort them with priority
         list.sort((lhs, rhs) -> Integer.compare(rhs.getPushpriority(), lhs.getPushpriority()));
-
         return list;
     }
 

@@ -39,14 +39,11 @@ public class DungeonLoderForTest {
 		case "player":
 			Player player = new Player(dungeon, x, y);
 			dungeon.setPlayer(player);
-
 			entity = player;
 			break;
 		case "wall":
-
 			entity = new Wall(dungeon, x, y);
 			break;
-
 		case "floorSwitch":
 			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y);
 			id = json.getInt("id");

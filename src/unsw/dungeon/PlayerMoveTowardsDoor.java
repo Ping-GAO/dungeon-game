@@ -18,11 +18,13 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 				key = (Key) e;
 				if (key.getId() == door.getId()) {
 					//System.out.println("key has id " + key.getId() + " door has id " + door.getId());
-					System.out.println("matched!");
+					//System.out.println("matched!");
+					door.getDungeon().getPlayer().setMessage("Key matched the door.\n");
 					found = true;
 					break;
 				} else {
-					System.out.println("key has id " + key.getId() + " door has id " + door.getId());
+					//System.out.println("key has id " + key.getId() + " door has id " + door.getId());
+					door.getDungeon().getPlayer().setMessage("Key didn't match the door");
 				}
 			}
 		}

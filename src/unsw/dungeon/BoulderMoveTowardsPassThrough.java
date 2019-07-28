@@ -26,5 +26,5 @@ public class BoulderMoveTowardsPassThrough implements BoulderMoveTowardsBehaviou
 		}
 		entity.getDungeon().getEntities().remove(toRemove);
 	}
-	
+
 }

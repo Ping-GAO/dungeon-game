@@ -121,7 +121,6 @@ public class DungeonController {
                         && ((ImageView) node).getY() == y) {
                     ImageView imageView = (ImageView) node;
                     gridPane.getChildren().remove(imageView);
-
                     break;
                 }
             }
@@ -135,8 +134,6 @@ public class DungeonController {
         Bomb bomb = new Bomb(dungeon, x, y);
 
         this.dungeon.addEntity(bomb);
-
-
         ImageView view = bomb.MakeImageViewFromEntity();
         view.setX(x);
         view.setY(y);
@@ -281,6 +278,15 @@ public class DungeonController {
         } else {
             bagpack.setText("");
         }
+
+        if (!player.getMessage().isEmpty()) {
+            message.setText(player.getMessage());
+            player.clearMessage();
+        } else {
+            message.setText("");
+        }
+
+
 //		for (Entity e : dungeon.getEntities()) {
 //			if (e != null) {
 //				if (e.getX() == 1 && e.getY() == 3) {

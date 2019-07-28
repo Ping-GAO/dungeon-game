@@ -10,8 +10,6 @@ import javafx.scene.image.ImageView;
 
 public abstract class Entity {
 
-    // IntegerProperty is used so that changes to the entities position can be
-    // externally observed.
     protected IntegerProperty x, y;
     private BooleanProperty alive;
     private PlayerMoveTowardsBehavior moveTowardsBehavior;
@@ -102,7 +100,6 @@ public abstract class Entity {
     void setGetBombedBehavior(GetBombedBehavior getBombedBehavior) {
         this.getBombedBehavior = getBombedBehavior;
     }
-
     public void setEntityImage(Image entityImage) {
         EntityImage = entityImage;
     }
@@ -113,6 +110,5 @@ public abstract class Entity {
         imageView.setY(getY());
         return imageView;
     }
-
 
 }
