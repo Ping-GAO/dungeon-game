@@ -25,6 +25,7 @@ public class Door extends Entity {
         this.isOpen = new SimpleBooleanProperty(false);
         this.name = "door";
         this.setEntityImage(new Image("images/closed_door.png"));
+
     }
 
     public BooleanProperty isOpen() {

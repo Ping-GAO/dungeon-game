@@ -22,5 +22,6 @@ public class Key extends Entity {
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "key";
         this.setEntityImage(new Image("images/key.png"));
+
     }
 }

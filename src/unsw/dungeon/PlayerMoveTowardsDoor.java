@@ -13,12 +13,11 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 	public void moveTowards() {
 		boolean found = false;
 		Key key = null;
-
 		for (Entity e : bagpack.getBagPack()) {
 			if (e.getName().equals("key")) {
 				key = (Key) e;
 				if (key.getId() == door.getId()) {
-					System.out.println("key has id " + key.getId() + " door has id " + door.getId());
+					//System.out.println("key has id " + key.getId() + " door has id " + door.getId());
 					System.out.println("matched!");
 					found = true;
 					break;

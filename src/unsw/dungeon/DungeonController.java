@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -20,6 +21,12 @@ public class DungeonController {
 
     @FXML
     private GridPane squares;
+
+    @FXML
+    private Label message;
+
+    @FXML
+    private Label bagpack;
 
     private List<ImageView> initialEntities;
 
@@ -65,10 +72,8 @@ public class DungeonController {
     }
 
     private void trackExistence(Node node) {
-
         imageViewToEntity.get(node).alive().addListener((observable, oldValue, newValue) -> {
             squares.getChildren().remove(node);
-
             Entity entity = imageViewToEntity.get(node);
             Entity toRemove = null;
             for (Entity e : dungeon.getEntities()) {
@@ -80,25 +85,17 @@ public class DungeonController {
                 }
             }
             dungeon.getEntities().remove(toRemove);
-
         });
-
     }
 
     private void trackDoorState(Node node) {
-
-
         DoorStateTracker doorStateTracker = new DoorStateTracker((ImageView) node, squares);
         ((Door) imageViewToEntity.get(node)).isOpen().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 doorStateTracker.toOpenState();
-
-
             } else {
                 doorStateTracker.toClosedState();
-
             }
-
         });
 
     }
@@ -106,7 +103,6 @@ public class DungeonController {
     private void trackSwitchState(Node node) {
         FloorSwitch floorswitch = (FloorSwitch) imageViewToEntity.get(node);
         floorswitch.isActive().addListener((observable, oldValue, newValue) -> {
-
             if (newValue) {
                 floorswitch.activate();
             } else {
@@ -216,7 +212,8 @@ public class DungeonController {
                     if (i == 0 && j == 0) {
                         continue;
                     }
-                    // TODO bomb everything in that list
+                    //  bomb everything in that list
+                    // this may or may not get implemented
                     Entity e = findEntityAt(bomb_x + i, bomb_y + j);
                     if (e != null) {
                         e.PerformGetBombed();
@@ -227,7 +224,7 @@ public class DungeonController {
 
         });
         timeline.play();
-        // try to destroy eveything in range
+
 
     }
 
@@ -264,25 +261,26 @@ public class DungeonController {
                 break;
             case L:
                 if (player.checkIfHaveBomb()) {
-
                     ImageView bombView = getOutABombFromBagPack();
                     LitBomb(bombView);
                     Bomb bomb = (Bomb) imageViewToEntity.get(bombView);
                     bomb.After();
-
                 }
                 break;
             case A:
                 // press A to attack enemy in front of the player
-
                 System.out.println("the user pressed A");
                 break;
             default:
                 break;
         }
-//        if (player.getBagPack().getBagPack().size() != 0) {
-//            System.out.println("player has : " + player.getBagPack().toString());
-//        }
+        // update the bagpack information
+        if (player.getBagPack().getBagPack().size() != 0) {
+            // System.out.println("player has : " + player.getBagPack().toString());
+            bagpack.setText(player.getBagPack().toString());
+        } else {
+            bagpack.setText("");
+        }
 //		for (Entity e : dungeon.getEntities()) {
 //			if (e != null) {
 //				if (e.getX() == 1 && e.getY() == 3) {
@@ -293,5 +291,6 @@ public class DungeonController {
 //		}
 
     }
+
 
 }

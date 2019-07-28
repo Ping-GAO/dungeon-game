@@ -14,29 +14,24 @@ public class DungeonControllerLoader extends DungeonLoader {
     private List<ImageView> entities;
     private HashMap<ImageView, Entity> imageViewToEntity;
 
-
     DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();
         imageViewToEntity = new HashMap<>();
-
     }
 
     @Override
     public void onLoad(Entity player) {
-
         addEntity(player, player.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Wall wall) {
-
         addEntity(wall, wall.MakeImageViewFromEntity());
     }
 
     @Override
     public void onLoad(Boulder boulder) {
-
         addEntity(boulder, boulder.MakeImageViewFromEntity());
     }
 
@@ -91,14 +86,12 @@ public class DungeonControllerLoader extends DungeonLoader {
         entities.add(view);
     }
 
-
     private void trackPosition(Entity entity, Node node) {
         GridPane.setColumnIndex(node, entity.getX());
         GridPane.setRowIndex(node, entity.getY());
         entity.x().addListener((observable, oldValue, newValue) -> GridPane.setColumnIndex(node, newValue.intValue()));
         entity.y().addListener((observable, oldValue, newValue) -> GridPane.setRowIndex(node, newValue.intValue()));
     }
-
 
     DungeonController loadController() {
         return new DungeonController(load(), entities, imageViewToEntity);
