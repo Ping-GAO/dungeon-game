@@ -50,52 +50,40 @@ public class DungeonLoderForTest {
 		case "floorSwitch":
 			FloorSwitch floorSwitch = new FloorSwitch(dungeon, x, y);
 			id = json.getInt("id");
-
 			floorSwitch.setId(id);
-
 			entity = floorSwitch;
 			break;
 		case "boulder":
-
 			entity = new Boulder(dungeon, x, y);
 			break;
-
 		case "bomb":
-
 			entity = new Bomb(dungeon, x, y);
 			break;
 		case "treasure":
-
 			entity = new Treasure(dungeon, x, y);
 			break;
 		case "invincibility":
 			entity = new Invincibility(dungeon, x, y);
 			break;
 		case "sword":
-
 			entity = new Sword(dungeon, x, y);
 			break;
 		case "enemy":
-
 			entity = new Enemy(dungeon, x, y);
 			break;
 		case "exit":
-
 			entity = new Exit(dungeon, x, y, "exit");
 			break;
 		case "door":
 			Door door = new Door(dungeon, x, y);
 			id = json.getInt("id");
-
 			door.setId(id);
-
 			entity = door;
 			break;
 		case "key":
 			Key key = new Key(dungeon, x, y);
 			id = json.getInt("id");
 			key.setId(id);
-
 			entity = key;
 			break;
 
