@@ -97,14 +97,18 @@ public class DungeonController {
             initializeMatrix(canPassThrough);
             checkPassbility(canPassThrough);
             //System.out.println("ok2");
-            System.out.println(player.getX() + "---" + player.getY());
+            //System.out.println(player.getX() + "---" + player.getY());
             Pair pair = findEnemyNextMoveViaSP(canPassThrough, new Pair(player.getY(),
                     player.getX()), new Pair(enemy.getY(), enemy.getX()));
 
-            assert pair != null;
+
             //System.out.println("pair x: " + pair.x + "y: " + pair.y);
             //System.out.println("enemy x: " + enemy.getY() + "y: " + enemy.getX());
-            updateEnemy(enemy, pair);
+
+            if (pair != null) {
+                updateEnemy(enemy, pair);
+            }
+
 
 
         }));
