@@ -34,11 +34,13 @@ public class Enemy extends Entity {
     }
 
     public void checkIfPlayer(Pair pair) {
-        if (pair.x == dungeon.getPlayer().getY()) {
-            if (pair.y == dungeon.getPlayer().getX()) {
-                dungeon.getPlayer().alive().setValue(false);
-                dungeon.getPlayer().setMessage("You died.");
-                //System.out.println("died");
+        if (this.alive().getValue()) {
+            if (pair.x == dungeon.getPlayer().getY()) {
+                if (pair.y == dungeon.getPlayer().getX()) {
+                    dungeon.getPlayer().alive().setValue(false);
+                    dungeon.getPlayer().setMessage("You died.");
+                    //System.out.println("died");
+                }
             }
         }
     }

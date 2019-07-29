@@ -56,7 +56,6 @@ public class DungeonController {
     @FXML
     public void initialize() {
         Image ground = new Image("images/dirt_0_new.png");
-
         // Add the ground first so it is below all other entities
         for (int x = 0; x < dungeon.getWidth(); x++) {
             for (int y = 0; y < dungeon.getHeight(); y++) {
@@ -362,36 +361,7 @@ public class DungeonController {
         return null;
     }
 
-    @FXML
-    public void handleKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
-            case UP:
-                player.moveUp();
-                break;
-            case DOWN:
-                player.moveDown();
-                break;
-            case LEFT:
-                player.moveLeft();
-                break;
-            case RIGHT:
-                player.moveRight();
-                break;
-            case L:
-                if (player.checkIfHaveBomb()) {
-                    ImageView bombView = getOutABombFromBagPack();
-                    LitBomb(bombView);
-                    Bomb bomb = (Bomb) imageViewToEntity.get(bombView);
-                    bomb.After();
-                }
-                break;
-            case A:
-                // press A to attack enemy in front of the player
-                System.out.println("the user pressed A");
-                break;
-            default:
-                break;
-        }
+    private void updateMessage() {
         // update the bagpack information
         if (player.getBagPack().getBagPack().size() != 0) {
             // System.out.println("player has : " + player.getBagPack().toString());
@@ -410,7 +380,91 @@ public class DungeonController {
         } else {
             message.setText("");
         }
+    }
 
+
+    private void handlePlayerDropBomb() {
+        if (player.checkIfHaveBomb()) {
+            ImageView bombView = getOutABombFromBagPack();
+            LitBomb(bombView);
+            Bomb bomb = (Bomb) imageViewToEntity.get(bombView);
+            bomb.After();
+        }
+    }
+
+    private void handlePlayerSwingSword() {
+        int x = player.getX();
+        int y = player.getY();
+
+        Sword sword = null;
+        for (Entity e : dungeon.getPlayer().getBagPack().getBagPack()) {
+            if (e != null) {
+                if (e.getName().equals("sword")) {
+                    sword = (Sword) e;
+                    break;
+                }
+            }
+        }
+        if (sword != null) {
+
+            for (int i = -2; i <= 2; i++) {
+                for (int j = -2; j <= 2; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+                    Enemy enemy = findEnemy(x + i, y + j);
+                    if (enemy != null) {
+                        enemy.alive().setValue(false);
+                        sword.decreaseDurability();
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    private Enemy findEnemy(int x, int y) {
+        Enemy entity = null;
+        for (Entity e : dungeon.getEntities()) {
+            if (e != null) {
+                if (e.getName().equals("enemy") && e.getX() == x && e.getY() == y) {
+                    entity = (Enemy) e;
+                    break;
+                }
+            }
+        }
+        return entity;
+    }
+
+    @FXML
+    public void handleKeyPress(KeyEvent event) {
+        switch (event.getCode()) {
+            case UP:
+                player.moveUp();
+                break;
+            case DOWN:
+                player.moveDown();
+                break;
+            case LEFT:
+                player.moveLeft();
+                break;
+            case RIGHT:
+                player.moveRight();
+                break;
+            case L:
+                handlePlayerDropBomb();
+                break;
+            case A:
+                // press A to attack enemy in 2*2
+                handlePlayerSwingSword();
+
+                break;
+            default:
+                break;
+        }
+
+        updateMessage();
 
 //		for (Entity e : dungeon.getEntities()) {
 //			if (e != null) {
