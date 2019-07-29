@@ -38,7 +38,7 @@ public class Enemy extends Entity {
             if (pair.y == dungeon.getPlayer().getX()) {
                 dungeon.getPlayer().alive().setValue(false);
                 dungeon.getPlayer().setMessage("You died.");
-                System.out.println("died");
+                //System.out.println("died");
             }
         }
     }

@@ -87,9 +87,7 @@ public class DungeonController {
 
 
     private void startEnemyTimeLine(Enemy enemy) {
-
         boolean[][] canPassThrough = new boolean[dungeon.getHeight()][dungeon.getWidth()];
-
         //System.out.println("ok1");
         enemyTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), (ActionEvent event1) -> {
             // how to break from inside
@@ -101,16 +99,9 @@ public class DungeonController {
             Pair pair = findEnemyNextMoveViaSP(canPassThrough, new Pair(player.getY(),
                     player.getX()), new Pair(enemy.getY(), enemy.getX()));
 
-
-            //System.out.println("pair x: " + pair.x + "y: " + pair.y);
-            //System.out.println("enemy x: " + enemy.getY() + "y: " + enemy.getX());
-
             if (pair != null) {
                 updateEnemy(enemy, pair);
             }
-
-
-
         }));
 
         enemyTimeline.setCycleCount(Animation.INDEFINITE);
@@ -202,6 +193,7 @@ public class DungeonController {
         }
     }
 
+
     private void trackExistence(Node node) {
         imageViewToEntity.get(node).alive().addListener((observable, oldValue, newValue) -> {
             squares.getChildren().remove(node);
@@ -213,6 +205,7 @@ public class DungeonController {
                             && entity.getY() == e.getY()) {
                         toRemove = e;
                     }
+
                 }
             }
             dungeon.getEntities().remove(toRemove);
@@ -408,8 +401,12 @@ public class DungeonController {
         }
 
         if (!player.getMessage().isEmpty()) {
-            message.setText(player.getMessage());
-            player.clearMessage();
+            if ((!"You died.".equals(player.getMessage()))) {
+                message.setText(player.getMessage());
+                player.clearMessage();
+            } else {
+                message.setText(player.getMessage());
+            }
         } else {
             message.setText("");
         }
