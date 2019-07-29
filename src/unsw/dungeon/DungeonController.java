@@ -112,6 +112,7 @@ public class DungeonController {
     private void updateEnemy(Enemy enemy, Pair pair) {
         enemy.checkIfPlayer(pair);
         if (!player.alive().getValue()) {
+            // System.out.println("palyer diedawdawd");
             enemyTimeline.stop();
         }
         if (pair.x != enemy.getY()) {
@@ -131,7 +132,6 @@ public class DungeonController {
     }
 
     private Pair findEnemyNextMoveViaSP(boolean[][] canPassThrough, Pair start, Pair des) {
-        //System.out.println("ok3");
         Queue<Pair> queue = new LinkedList<>();
         queue.add(start);
         while (!queue.isEmpty()) {
@@ -342,11 +342,8 @@ public class DungeonController {
                 }
             }
             // System.out.println("done");
-
         });
         timeline.play();
-
-
     }
 
     private Entity findEntityAt(int x, int y) {

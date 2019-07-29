@@ -4,13 +4,16 @@ import javafx.scene.image.Image;
 
 public class Invincibility extends Entity {
 
+
     public Invincibility(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
-        this.name = "treasure";
+        this.name = "invincibility";
         this.setEntityImage(new Image("images/brilliant_blue_new.png"));
+
     }
+
 
 }

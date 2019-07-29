@@ -4,11 +4,14 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Player extends Entity {
 
     private BagPack bagPack;
     private String message;
+    private boolean isOP;
 
     public void setMessage(String message) {
         this.message = message;
@@ -31,10 +34,15 @@ public class Player extends Entity {
         this.name = "player";
         this.setEntityImage(new Image("images/human_new.png"));
         this.message = "";
+        this.isOP = false;
     }
 
     public BagPack getBagPack() {
         return bagPack;
+    }
+
+    public void setOP(boolean OP) {
+        isOP = OP;
     }
 
     public void moveUp() {
@@ -47,6 +55,7 @@ public class Player extends Entity {
             }
             //next.PerformBeMovedTowardsbyPlayer();
         }
+        checkIfOP();
     }
 
     public void moveDown() {
@@ -58,7 +67,7 @@ public class Player extends Entity {
                 e.PerformBeMovedTowardsbyPlayer();
             }
         }
-
+        checkIfOP();
     }
 
     public void moveLeft() {
@@ -70,7 +79,11 @@ public class Player extends Entity {
                 e.PerformBeMovedTowardsbyPlayer();
             }
         }
+        checkIfOP();
+    }
 
+    public boolean isOP() {
+        return isOP;
     }
 
     public void moveRight() {
@@ -83,7 +96,7 @@ public class Player extends Entity {
             }
             // next.PerformBeMovedTowardsbyPlayer();
         }
-
+        checkIfOP();
     }
 
     public boolean checkIfHaveBomb() {
@@ -97,6 +110,24 @@ public class Player extends Entity {
         return found;
     }
 
+
+    public void checkIfOP() {
+        for (Entity e : getBagPack().getBagPack()) {
+            if (e.getName().equals("invincibility")) {
+                isOP = true;
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        // trigger after 5 sec pick up the potion
+                        // System.out.println("get trigger");
+                        dungeon.getPlayer().getBagPack().getBagPack().remove(e);
+                        dungeon.getPlayer().setOP(false);
+                    }
+                }, 5 * 1000);
+            }
+        }
+    }
 
     public List<Entity> findAllEntityAt(int x, int y) {
         List<Entity> list = new ArrayList<>();

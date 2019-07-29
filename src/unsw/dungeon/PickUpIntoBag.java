@@ -4,8 +4,8 @@ public class PickUpIntoBag implements PickUpBehavior {
 	private BagPack bagPack;
 	private Entity entity;
 
-	public PickUpIntoBag(Entity enity) {
-		this.entity = enity;
+    public PickUpIntoBag(Entity entity) {
+        this.entity = entity;
 		this.bagPack = entity.getDungeon().getPlayer().getBagPack();
 
 	}
