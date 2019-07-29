@@ -104,11 +104,13 @@ public abstract class Entity {
         EntityImage = entityImage;
     }
 
+
     public ImageView MakeImageViewFromEntity() {
         this.imageView = new ImageView(EntityImage);
         imageView.setX(getX());
         imageView.setY(getY());
         return imageView;
     }
+
 
 }

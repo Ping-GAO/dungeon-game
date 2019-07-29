@@ -1,5 +1,6 @@
 package unsw.dungeon;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.collections.ObservableList;
@@ -13,9 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class DungeonController {
 
@@ -38,6 +37,13 @@ public class DungeonController {
 
     private Dungeon dungeon;
     private HashMap<ImageView, Entity> imageViewToEntity;
+
+
+    private Integer i;
+    private Integer j;
+    private ImageView bombLitView = null;
+    private Timeline enemyTimeline;
+
 
     DungeonController(Dungeon dungeon, List<ImageView> initialEntities,
                       HashMap<ImageView, Entity> imageViewToEntity) {
@@ -69,6 +75,127 @@ public class DungeonController {
             }
 
         }
+        // should start enemy here
+        for (Entity e : dungeon.getEntities()) {
+            if (e.getName().equals("enemy")) {
+                startEnemyTimeLine((Enemy) e);
+            }
+        }
+
+
+    }
+
+
+    private void startEnemyTimeLine(Enemy enemy) {
+
+        boolean[][] canPassThrough = new boolean[dungeon.getHeight()][dungeon.getWidth()];
+
+        //System.out.println("ok1");
+        enemyTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), (ActionEvent event1) -> {
+            // how to break from inside
+
+            initializeMatrix(canPassThrough);
+            checkPassbility(canPassThrough);
+            //System.out.println("ok2");
+            System.out.println(player.getX() + "---" + player.getY());
+            Pair pair = findEnemyNextMoveViaSP(canPassThrough, new Pair(player.getY(),
+                    player.getX()), new Pair(enemy.getY(), enemy.getX()));
+
+            assert pair != null;
+            //System.out.println("pair x: " + pair.x + "y: " + pair.y);
+            //System.out.println("enemy x: " + enemy.getY() + "y: " + enemy.getX());
+            updateEnemy(enemy, pair);
+
+
+        }));
+
+        enemyTimeline.setCycleCount(Animation.INDEFINITE);
+        enemyTimeline.play();
+
+    }
+
+
+    private void updateEnemy(Enemy enemy, Pair pair) {
+        enemy.checkIfPlayer(pair);
+        if (!player.alive().getValue()) {
+            enemyTimeline.stop();
+        }
+        if (pair.x != enemy.getY()) {
+            if (pair.x > enemy.getY()) {
+                enemy.moveDown();
+            } else {
+                enemy.moveUp();
+            }
+        } else {
+            //System.out.println(pair.x +"------"+ enemy.getY());
+            if (pair.y > enemy.getX()) {
+                enemy.moveRight();
+            } else {
+                enemy.moveLeft();
+            }
+        }
+    }
+
+    private Pair findEnemyNextMoveViaSP(boolean[][] canPassThrough, Pair start, Pair des) {
+        //System.out.println("ok3");
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(start);
+        while (!queue.isEmpty()) {
+            Pair pair = queue.poll();
+            canPassThrough[pair.x][pair.y] = false;
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
+                    if (i == 0 && j == 0) {
+                        continue;
+                    }
+                    if (i * j != 0) {
+                        continue;
+                    }
+                    if (checkIfOutOfB(pair.x + i, pair.y + j)) {
+                        if (pair.x + i == des.x && pair.y + j == des.y) {
+                            return pair;
+                        } else if (canPassThrough[pair.x + i][pair.y + j]) {
+                            queue.add(new Pair(pair.x + i, pair.y + j));
+                            //System.out.println("x is"+(pair.x + i)+"y is "+(pair.y + j));
+                        }
+
+                    }
+                }
+            }
+        }
+
+
+        return null;
+    }
+
+    private boolean checkIfOutOfB(int x1, int y1) {
+        if (x1 < 0 || x1 > dungeon.getHeight() - 1) {
+            return false;
+        }
+        return y1 >= 0 && y1 <= dungeon.getWidth() - 1;
+    }
+
+    private void checkPassbility(boolean[][] canPassThrough) {
+        for (Entity e : dungeon.getEntities()) {
+            if (e != null) {
+                // pass all can get through scenarios
+                if (e.getName().equals("emptySpace")) {
+                    continue;
+                }
+                if (e.getName().equals("door") && ((Door) e).isOpen().getValue()) {
+                    continue;
+                }
+                canPassThrough[e.getY()][e.getX()] = false;
+            }
+        }
+    }
+
+    private void initializeMatrix(boolean[][] canPassThrough) {
+        for (int i = 0; i < dungeon.getHeight(); i++) {
+            for (int j = 0; j < dungeon.getWidth(); j++) {
+                canPassThrough[i][j] = true;
+            }
+        }
     }
 
     private void trackExistence(Node node) {
@@ -85,6 +212,7 @@ public class DungeonController {
                 }
             }
             dungeon.getEntities().remove(toRemove);
+
         });
     }
 
@@ -236,10 +364,6 @@ public class DungeonController {
 
         return null;
     }
-
-    private Integer i;
-    private Integer j;
-    private ImageView bombLitView = null;
 
     @FXML
     public void handleKeyPress(KeyEvent event) {
