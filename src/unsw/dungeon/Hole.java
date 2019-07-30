@@ -20,6 +20,7 @@ public class Hole extends Entity {
         this.setPickUpBehavior(new PickUpNoWay());
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.setGetBombedBehavior(new GetBombedNoEffect());
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsHole(this));
         this.setEntityImage(new Image("images/hole.png"));
     }
 }
