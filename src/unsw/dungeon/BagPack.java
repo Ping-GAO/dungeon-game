@@ -26,9 +26,19 @@ public class BagPack {
         for (int i = 0; i < bagPack.size(); i++) {
             result.append(bagPack.get(i).getName());
             if (i != bagPack.size() - 1) {
-                result.append(" ");
+                result.append("\n");
             }
         }
         return result.toString();
+    }
+
+    public Sword getSword() {
+        Sword sword = null;
+        for (Entity e : bagPack) {
+            if (e.getName().equals("sword")) {
+                sword = (Sword) e;
+            }
+        }
+        return sword;
     }
 }

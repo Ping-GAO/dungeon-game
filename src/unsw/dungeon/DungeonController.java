@@ -208,7 +208,16 @@ public class DungeonController {
                 }
             }
             dungeon.getEntities().remove(toRemove);
+            assert toRemove != null;
+            if (toRemove.getName().equals("enemy")) {
+                dungeon.getPlayer().getBagPack().addToBagPack(new EnemyBodyPart(dungeon,
+                        toRemove.getX(), toRemove.getY()));
+                Sword s = dungeon.getPlayer().getBagPack().getSword();
+                if (s != null) {
+                    s.decreaseDurability();
+                }
 
+            }
         });
     }
 
@@ -412,7 +421,7 @@ public class DungeonController {
                     Enemy enemy = findEnemy(x + i, y + j);
                     if (enemy != null) {
                         enemy.alive().setValue(false);
-                        sword.decreaseDurability();
+
                     }
                 }
             }

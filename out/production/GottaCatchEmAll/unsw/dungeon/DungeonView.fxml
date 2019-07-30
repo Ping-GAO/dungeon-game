@@ -2,23 +2,18 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            onKeyPressed="#handleKeyPress" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <GridPane fx:id="squares" BorderPane.alignment="CENTER">
             <columnConstraints>
-                <ColumnConstraints />
+                <ColumnConstraints/>
             </columnConstraints>
             <rowConstraints>
-                <RowConstraints />
+                <RowConstraints/>
             </rowConstraints>
         </GridPane>
     </center>
@@ -29,33 +24,33 @@
                     <children>
                         <Label text="Message Panel">
                             <font>
-                                <Font size="23.0" />
+                                <Font size="23.0"/>
                             </font>
                             <VBox.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                             </VBox.margin>
                         </Label>
                         <Label fx:id="message">
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                             </padding>
                         </Label>
                     </children>
                 </VBox>
-                <Line endY="100.0" startY="-100.0" />
+                <Line endY="100.0" startY="-100.0"/>
                 <VBox prefHeight="200.0" prefWidth="280.0">
                     <children>
                         <Label prefHeight="37.0" prefWidth="200.0" text="BagPack">
                             <font>
-                                <Font size="23.0" />
+                                <Font size="23.0"/>
                             </font>
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                             </padding>
                         </Label>
                         <Label fx:id="bagpack">
                             <padding>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
                             </padding>
                         </Label>
                     </children>

@@ -9,7 +9,8 @@ public class Gnome extends Entity {
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.name = "gnome";
         this.setEntityImage(new Image("images/gnome.png"));
-        this.setMoveTowardsBehavior(new PlayerMoveTowardsGnome());
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsGnome(this));
         this.setPickUpBehavior(new PickUpNoWay());
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsGnome(this));
     }
 }
