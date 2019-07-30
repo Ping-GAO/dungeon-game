@@ -46,6 +46,16 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
+    public void onLoad(Hole hole) {
+        addEntity(hole, hole.MakeImageViewFromEntity());
+    }
+
+    @Override
+    public void onLoad(Gnome gnome) {
+        addEntity(gnome, gnome.MakeImageViewFromEntity());
+    }
+
+    @Override
     public void onLoad(Treasure treasure) {
         addEntity(treasure, treasure.MakeImageViewFromEntity());
     }

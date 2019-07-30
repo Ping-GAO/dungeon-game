@@ -69,7 +69,7 @@ public class DungeonLoderForTest {
 			entity = new Enemy(dungeon, x, y);
 			break;
 		case "exit":
-			entity = new Exit(dungeon, x, y, "exit");
+			entity = new Exit(dungeon, x, y);
 			break;
 		case "door":
 			Door door = new Door(dungeon, x, y);

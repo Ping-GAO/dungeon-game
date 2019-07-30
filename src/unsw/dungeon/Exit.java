@@ -3,7 +3,7 @@ package unsw.dungeon;
 import javafx.scene.image.Image;
 
 public class Exit extends Entity {
-	public Exit(Dungeon dungeon, int x, int y, String name) {
+	public Exit(Dungeon dungeon, int x, int y) {
 		super(dungeon, x, y);
 		this.setMoveTowardsBehavior(new PlayerMoveTowardsExit(this));
 		this.setPickUpBehavior(new PickUpNoWay());

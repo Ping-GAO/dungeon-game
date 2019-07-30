@@ -88,16 +88,14 @@ public abstract class DungeonLoader {
                 entity = enemy;
                 break;
             case "exit":
-                Exit exit = new Exit(dungeon, x, y, "exit");
+                Exit exit = new Exit(dungeon, x, y);
                 onLoad(exit);
                 entity = exit;
                 break;
             case "door":
                 Door door = new Door(dungeon, x, y);
                 id = json.getInt("id");
-
                 door.setId(id);
-
                 onLoad(door);
                 entity = door;
                 break;
@@ -107,6 +105,18 @@ public abstract class DungeonLoader {
                 key.setId(id);
                 onLoad(key);
                 entity = key;
+                break;
+            case "hole":
+                Hole hole = new Hole(dungeon, x, y);
+                id = json.getInt("id");
+                hole.setId(id);
+                onLoad(hole);
+                entity = hole;
+                break;
+            case "gnome":
+                Gnome gnome = new Gnome(dungeon, x, y);
+                onLoad(gnome);
+                entity = gnome;
                 break;
 
         }
@@ -137,5 +147,9 @@ public abstract class DungeonLoader {
     public abstract void onLoad(Door door);
 
     public abstract void onLoad(Key key);
+
+    public abstract void onLoad(Hole hole);
+
+    public abstract void onLoad(Gnome gnome);
 
 }
