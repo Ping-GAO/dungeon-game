@@ -14,6 +14,10 @@ public class DungeonControllerLoader extends DungeonLoader {
     private List<ImageView> entities;
     private HashMap<ImageView, Entity> imageViewToEntity;
 
+    /**
+     * @param filename a json file contains the info about the maze
+     * @throws FileNotFoundException when file is not in right format
+     */
     DungeonControllerLoader(String filename) throws FileNotFoundException {
         super(filename);
         entities = new ArrayList<>();

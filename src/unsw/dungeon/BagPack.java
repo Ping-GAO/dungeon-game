@@ -4,6 +4,7 @@ package unsw.dungeon;
 import java.util.ArrayList;
 
 public class BagPack {
+
     private ArrayList<Entity> bagPack;
 
     public BagPack() {
@@ -18,6 +19,9 @@ public class BagPack {
         bagPack.add(entity);
     }
 
+    /**
+     * @return the description of bagpack
+     */
     @Override
     public String toString() {
         StringBuilder result = new StringBuilder();
@@ -32,6 +36,9 @@ public class BagPack {
         return result.toString();
     }
 
+    /**
+     * @return the sword player has in bagpack
+     */
     public Sword getSword() {
         Sword sword = null;
         for (Entity e : bagPack) {

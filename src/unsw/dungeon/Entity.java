@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 
+/**
+ *
+ */
 public abstract class Entity {
 
     protected IntegerProperty x, y;
@@ -100,11 +103,15 @@ public abstract class Entity {
     void setGetBombedBehavior(GetBombedBehavior getBombedBehavior) {
         this.getBombedBehavior = getBombedBehavior;
     }
+
     public void setEntityImage(Image entityImage) {
         EntityImage = entityImage;
     }
 
 
+    /**
+     * @return the image view of this entity
+     */
     public ImageView MakeImageViewFromEntity() {
         this.imageView = new ImageView(EntityImage);
         imageView.setX(getX());

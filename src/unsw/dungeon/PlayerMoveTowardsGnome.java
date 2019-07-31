@@ -5,12 +5,14 @@ public class PlayerMoveTowardsGnome implements PlayerMoveTowardsBehavior {
     private Gnome gnome;
     private Player player;
 
+
     public PlayerMoveTowardsGnome(Gnome gnome) {
         this.gnome = gnome;
         this.player = gnome.getDungeon().getPlayer();
 
 
     }
+
 
     @Override
     public void moveTowards() {
