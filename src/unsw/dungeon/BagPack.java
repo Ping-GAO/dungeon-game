@@ -12,11 +12,14 @@ public class BagPack {
 
     public BagPack() {
         bagPack = new ArrayList<>();
+
+
     }
 
     public ArrayList<Entity> getBagPack() {
         return bagPack;
     }
+
 
     public void addToBagPack(Entity entity) {
         bagPack.add(entity);
@@ -31,7 +34,11 @@ public class BagPack {
 
 
         for (int i = 0; i < bagPack.size(); i++) {
+            if (bagPack.get(i).getName().equals("treasure")) {
+                continue;
+            }
             result.append(bagPack.get(i).getName());
+
             if (bagPack.get(i).getName().equals("sword")) {
                 result.append(" (").append(((Sword) bagPack.get(i)).getDurability()).append(")");
             }
@@ -53,5 +60,16 @@ public class BagPack {
             }
         }
         return sword;
+    }
+
+    public int gettreasureNum() {
+        int cnt = 0;
+        for (Entity entity : bagPack) {
+            if (entity.getName().equals("treasure")) {
+                cnt++;
+            }
+
+        }
+        return cnt;
     }
 }

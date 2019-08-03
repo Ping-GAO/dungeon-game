@@ -140,13 +140,15 @@ public class DungeonController {
             assert toRemove != null;
             if (toRemove.getName().equals("enemy")) {
                 ((Enemy) toRemove).stopTimeLine();
+
                 dungeon.getPlayer().getBagPack().addToBagPack(new EnemyBodyPart(dungeon,
                         toRemove.getX(), toRemove.getY()));
                 Sword s = dungeon.getPlayer().getBagPack().getSword();
                 if (s != null) {
                     s.decreaseDurability();
                 }
-
+                player.setMessage("You killed an enemy.");
+                enemyKill.setText(String.valueOf(Integer.parseInt(enemyKill.getText()) + 1));
             }
 
             if (toRemove.getName().equals("player")) {
@@ -229,7 +231,7 @@ public class DungeonController {
             message.setText("");
         }
 
-
+        treasureFound.setText(String.valueOf(player.getBagPack().gettreasureNum()));
     }
 
 

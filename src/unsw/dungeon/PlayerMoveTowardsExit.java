@@ -13,7 +13,7 @@ public class PlayerMoveTowardsExit implements PlayerMoveTowardsBehavior {
 	@Override
 	public void moveTowards() {
 		// System.out.println("You beat the game");
-		player.alive().set(false);
+		// player.alive().set(false);
 		player.setMessage("You beat the game");
 
 	}
