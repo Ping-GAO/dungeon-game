@@ -269,6 +269,7 @@ public class DungeonController {
                     }
                     Enemy enemy = findEnemy(x + i, y + j);
                     if (enemy != null) {
+                        player.setEnemyKilled(player.getEnemyKilled() + 1);
                         enemy.alive().setValue(false);
 
                     }

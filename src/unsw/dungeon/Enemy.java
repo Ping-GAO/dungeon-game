@@ -49,9 +49,7 @@ public class Enemy extends Entity {
     }
 
 
-    public void setEnemyDied() {
-        this.enemyTimeline.stop();
-    }
+
 
     public void checkIfPlayer(Pair pair) {
         //System.out.println("player is " + dungeon.getPlayer().isOP());
@@ -63,6 +61,7 @@ public class Enemy extends Entity {
                     if (pair.y == dungeon.getPlayer().getX()) {
                         dungeon.getPlayer().alive().setValue(false);
                         dungeon.getPlayer().setMessage("You died.");
+                        player.setEnemyKilled(player.getEnemyKilled() + 1);
                         //System.out.println("died");
                     }
                 }

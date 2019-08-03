@@ -29,6 +29,32 @@ public class Player extends Entity {
         message = "";
     }
 
+    private int enemyKilled;
+
+    private boolean atExit;
+
+    public int getEnemyKilled() {
+        return enemyKilled;
+    }
+
+    public void setEnemyKilled(int enemyKilled) {
+        this.enemyKilled = enemyKilled;
+    }
+
+
+    public boolean isAtExit() {
+        return atExit;
+    }
+
+    public void setAtExit(boolean atExit) {
+        this.atExit = atExit;
+    }
+
+    private SubGoal subGoal;
+
+    public SubGoal getSubGoal() {
+        return subGoal;
+    }
 
     public Player(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
@@ -39,6 +65,15 @@ public class Player extends Entity {
         this.message = "";
         this.isOP = false;
         this.setGetBombedBehavior(new GetDestroyed(this));
+        this.enemyKilled = 0;
+        this.atExit = false;
+
+        ExitGoal exitGoal = new ExitGoal(this);
+        EnemyGoal enemyGoal = new EnemyGoal(this);
+        TreasureGoal treasureGoal = new TreasureGoal(this);
+        SubGoal subGoal1 = new SubGoal(enemyGoal, treasureGoal, "AND");
+        subGoal = new SubGoal(subGoal1, exitGoal, "AND");
+
     }
 
     public BagPack getBagPack() {
