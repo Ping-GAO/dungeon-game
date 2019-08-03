@@ -77,6 +77,9 @@ public class Enemy extends Entity {
         }
     }
 
+    public void stopTimeLine() {
+        enemyTimeline.stop();
+    }
     public void startTimeLine() {
 
         enemyTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), (ActionEvent event1) -> {
@@ -159,7 +162,6 @@ public class Enemy extends Entity {
     private void updateEnemy(Enemy enemy, Pair pair) {
         enemy.checkIfPlayer(pair);
         if (!player.alive().getValue()) {
-            // System.out.println("palyer diedawdawd");
             enemyTimeline.stop();
         }
         if (pair.x != enemy.getY()) {
@@ -169,7 +171,6 @@ public class Enemy extends Entity {
                 enemy.moveUp();
             }
         } else {
-            //System.out.println(pair.x +"------"+ enemy.getY());
             if (pair.y > enemy.getX()) {
                 enemy.moveRight();
             } else {

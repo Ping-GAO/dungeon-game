@@ -7,11 +7,13 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 	private BagPack bagpack;
 	private Door door;
 	private Dungeon dungeon;
+    private Player player;
 
 	public PlayerMoveTowardsDoor(Door door) {
 		this.dungeon = door.getDungeon();
-		this.bagpack = dungeon.getPlayer().getBagPack();
 		this.door = door;
+        this.player = dungeon.getPlayer();
+        this.bagpack = player.getBagPack();
 
 
 	}
@@ -25,12 +27,12 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 			if (e.getName().equals("key")) {
 				key = (Key) e;
 				if (key.getId() == door.getId()) {
-					dungeon.getPlayer().setMessage("Key matched the door.\n");
+
+                    door.getDungeon().getPlayer().setMessage("Key matched the door.\n");
 					found = true;
 					break;
 				} else {
-
-					dungeon.getPlayer().setMessage("Key didn't match the door");
+                    door.getDungeon().getPlayer().setMessage("Key didn't match the door");
 				}
 			}
 		}

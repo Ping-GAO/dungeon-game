@@ -34,6 +34,7 @@ public class PlayerMoveTowardsGnome implements PlayerMoveTowardsBehavior {
             player.getBagPack().getBagPack().add(new Treasure(gnome.getDungeon(), gnome.getX(), gnome.getY()));
             cnt--;
         }
+        player.setMessage("Trade monster part to treasure.");
     }
 
 }

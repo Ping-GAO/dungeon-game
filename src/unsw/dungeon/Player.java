@@ -113,17 +113,21 @@ public class Player extends Entity {
         for (Entity e : getBagPack().getBagPack()) {
             if (e.getName().equals("invincibility")) {
                 isOP = true;
+
+                setMessage("Get 5 secs of invincibility.");
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        // trigger after 5 sec pick up the potion
-                        // System.out.println("get trigger");
+
                         dungeon.getPlayer().getBagPack().getBagPack().remove(e);
                         dungeon.getPlayer().setOP(false);
+                        setMessage("Invincibility effect end.");
                     }
                 }, 5 * 1000);
+
             }
+
         }
     }
 

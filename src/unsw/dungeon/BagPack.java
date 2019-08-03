@@ -32,6 +32,9 @@ public class BagPack {
 
         for (int i = 0; i < bagPack.size(); i++) {
             result.append(bagPack.get(i).getName());
+            if (bagPack.get(i).getName().equals("sword")) {
+                result.append(" (").append(((Sword) bagPack.get(i)).getDurability()).append(")");
+            }
             if (i != bagPack.size() - 1) {
                 result.append("\n");
             }

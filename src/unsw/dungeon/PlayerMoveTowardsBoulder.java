@@ -66,6 +66,7 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 		}
 		if (floorSwitch != null) {
 			floorSwitch.deactivate();
+            player.setMessage("Floor switch deactivate.");
 		}
 	}
 

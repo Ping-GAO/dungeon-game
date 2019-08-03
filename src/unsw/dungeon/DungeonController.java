@@ -48,9 +48,10 @@ public class DungeonController {
     }
 
 
+    private boolean willConsume;
+
     private Dungeon dungeon;
     private HashMap<ImageView, Entity> imageViewToEntity;
-
 
 
     /**
@@ -64,8 +65,7 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         this.imageViewToEntity = imageViewToEntity;
-
-
+        willConsume = false;
     }
 
 
@@ -107,7 +107,6 @@ public class DungeonController {
     public void setUpRestartButton(Stage primaryStage) {
         restart.setOnAction(__ ->
         {
-            System.out.println("Restarting app!");
             primaryStage.close();
             Platform.runLater(() -> {
                 try {
@@ -137,14 +136,22 @@ public class DungeonController {
 
             dungeon.getEntities().remove(toRemove);
 
+
             assert toRemove != null;
             if (toRemove.getName().equals("enemy")) {
+                ((Enemy) toRemove).stopTimeLine();
                 dungeon.getPlayer().getBagPack().addToBagPack(new EnemyBodyPart(dungeon,
                         toRemove.getX(), toRemove.getY()));
                 Sword s = dungeon.getPlayer().getBagPack().getSword();
                 if (s != null) {
                     s.decreaseDurability();
                 }
+
+            }
+
+            if (toRemove.getName().equals("player")) {
+                player.setMessage("You died.");
+                willConsume = true;
 
             }
         });
@@ -167,8 +174,10 @@ public class DungeonController {
         floorswitch.isActive().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 floorswitch.activate();
+                player.setMessage("Floor switch activate.");
             } else {
                 floorswitch.deactivate();
+                player.setMessage("Floor switch deactivate.");
             }
         });
 
@@ -202,7 +211,7 @@ public class DungeonController {
 
 
     private void updateMessage() {
-        // update the bagpack information
+        //update the bagpack information
         if (player.getBagPack().getBagPack().size() != 0) {
             bagpack.setText(player.getBagPack().toString());
         } else {
@@ -219,6 +228,8 @@ public class DungeonController {
         } else {
             message.setText("");
         }
+
+
     }
 
 
@@ -283,28 +294,33 @@ public class DungeonController {
      */
     @FXML
     public void handleKeyPress(KeyEvent event) {
-        switch (event.getCode()) {
-            case UP:
-                player.moveUp();
-                break;
-            case DOWN:
-                player.moveDown();
-                break;
-            case LEFT:
-                player.moveLeft();
-                break;
-            case RIGHT:
-                player.moveRight();
-                break;
-            case L:
-                handlePlayerDropBomb();
-                break;
-            case A:
-                // press A to attack enemy in 2*2
-                handlePlayerSwingSword();
-                break;
-            default:
-                break;
+        if (willConsume) {
+            event.consume();
+        } else {
+            switch (event.getCode()) {
+                case UP:
+                    player.moveUp();
+                    break;
+                case DOWN:
+                    player.moveDown();
+                    break;
+                case LEFT:
+                    player.moveLeft();
+                    break;
+                case RIGHT:
+                    player.moveRight();
+                    break;
+                case L:
+                    handlePlayerDropBomb();
+                    break;
+                case A:
+                    // press A to attack enemy in 2*2
+                    handlePlayerSwingSword();
+                    break;
+                default:
+                    break;
+            }
+
         }
         updateMessage();
     }
