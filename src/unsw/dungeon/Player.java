@@ -38,6 +38,7 @@ public class Player extends Entity {
         this.setEntityImage(new Image("images/human_new.png"));
         this.message = "";
         this.isOP = false;
+        this.setGetBombedBehavior(new GetDestroyed(this));
     }
 
     public BagPack getBagPack() {

@@ -511,7 +511,6 @@ public class DungeonController {
             case A:
                 // press A to attack enemy in 2*2
                 handlePlayerSwingSword();
-
                 break;
             default:
                 break;
