@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class PlayerMoveTowardsGnome implements PlayerMoveTowardsBehavior {
 
     private Gnome gnome;
@@ -12,7 +15,6 @@ public class PlayerMoveTowardsGnome implements PlayerMoveTowardsBehavior {
 
 
     }
-
 
     @Override
     public void moveTowards() {

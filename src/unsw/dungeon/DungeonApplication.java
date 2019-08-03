@@ -8,8 +8,16 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * @author Ping GAO
+ */
 public class DungeonApplication extends Application {
 
+    /**
+     * @param primaryStage primaryStage
+     * @throws IOException IOException
+     *                     some javafx code to set up the gui
+     */
     @Override
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");

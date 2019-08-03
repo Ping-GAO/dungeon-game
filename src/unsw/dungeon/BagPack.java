@@ -3,6 +3,9 @@ package unsw.dungeon;
 
 import java.util.ArrayList;
 
+/**
+ * @author Ping GAO
+ */
 public class BagPack {
 
     private ArrayList<Entity> bagPack;

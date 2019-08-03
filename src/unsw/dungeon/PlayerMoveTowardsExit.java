@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class PlayerMoveTowardsExit implements PlayerMoveTowardsBehavior {
 	private Player player;
 

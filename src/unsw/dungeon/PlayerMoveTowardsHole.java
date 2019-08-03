@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class PlayerMoveTowardsHole implements PlayerMoveTowardsBehavior {
     private Dungeon dungeon;
     private Hole hole;

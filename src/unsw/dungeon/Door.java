@@ -4,6 +4,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class Door extends Entity {
     private int id;
 

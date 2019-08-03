@@ -2,8 +2,10 @@ package unsw.dungeon;
 
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class Gnome extends Entity {
-
     public Gnome(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
@@ -11,6 +13,5 @@ public class Gnome extends Entity {
         this.setEntityImage(new Image("images/gnome.png"));
         this.setMoveTowardsBehavior(new PlayerMoveTowardsGnome(this));
         this.setPickUpBehavior(new PickUpNoWay());
-        this.setMoveTowardsBehavior(new PlayerMoveTowardsGnome(this));
     }
 }

@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class Sword extends Entity {
     private int durability;
 

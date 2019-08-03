@@ -1,9 +1,11 @@
 package unsw.dungeon;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 
+/**
+ * @author Ping GAO
+ */
 public class DoorStateTracker {
     private ImageView currentView;
     private ImageView closedDoorview;
@@ -11,6 +13,11 @@ public class DoorStateTracker {
     private GridPane squares;
     int x, y;
 
+    /**
+     * @param imageView imageView
+     * @param squares   squares
+     *                  this only change the imageView
+     */
     public DoorStateTracker(ImageView imageView, GridPane squares) {
         this.currentView = imageView;
         this.x = (int) imageView.getX();

@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public interface GetBombedBehavior {
-	public void getBombed();
+	void getBombed();
 }

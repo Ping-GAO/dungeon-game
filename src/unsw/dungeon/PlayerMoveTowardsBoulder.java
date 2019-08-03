@@ -3,6 +3,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Ping GAO
+ */
 public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 	private Boulder boulder;
 	private Dungeon dungeon;
@@ -26,9 +29,7 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 				}
 			} else {
 				// right
-
 				List<Entity> list = findAllEntityAt(boulder.getX() + 1, boulder.getY());
-				// System.out.println("right is " + next.getName());
 				for (Entity e : list) {
 					e.PerformBeMovedTowardsbyBoulder(boulder);
 				}
@@ -38,12 +39,9 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 				// up
 				if (boulder.getY() > 0) {
 					List<Entity> list = findAllEntityAt(boulder.getX(), boulder.getY() - 1);
-
 					for (Entity e : list) {
-						// System.out.println(e.getClass());
 						e.PerformBeMovedTowardsbyBoulder(boulder);
 					}
-
 				}
 			} else {
 				if (boulder.getY() < boulder.getDungeon().getHeight() - 1) {

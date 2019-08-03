@@ -1,10 +1,13 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class GetDestroyed implements GetBombedBehavior {
 	private Entity entity;
 
-	public GetDestroyed(Entity enity) {
-		this.entity = enity;
+	public GetDestroyed(Entity entity) {
+		this.entity = entity;
 	}
 
 	@Override

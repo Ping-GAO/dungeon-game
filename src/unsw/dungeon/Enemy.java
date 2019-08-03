@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class Enemy extends Entity {
 
     public Enemy(Dungeon dungeon, int x, int y) {

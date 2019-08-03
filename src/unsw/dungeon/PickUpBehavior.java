@@ -1,6 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public interface PickUpBehavior {
-	
-	public void pickUp();
+	void pickUp();
 }

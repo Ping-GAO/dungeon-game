@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * @author Ping GAO
+ */
 public class Player extends Entity {
 
     private BagPack bagPack;
@@ -47,20 +50,17 @@ public class Player extends Entity {
 
     public void moveUp() {
         if (getY() > 0) {
-            //Entity next = findEntityAt(getX(), getY() - 1);
             List<Entity> list = findAllEntityAt(getX(), getY() - 1);
             for (Entity e : list) {
                 e.PerformBePickedUp();
                 e.PerformBeMovedTowardsbyPlayer();
             }
-            //next.PerformBeMovedTowardsbyPlayer();
         }
         checkIfOP();
     }
 
     public void moveDown() {
         if (getY() < dungeon.getHeight() - 1) {
-            //Entity next = findEntityAt(getX(), getY() + 1);
             List<Entity> list = findAllEntityAt(getX(), getY() + 1);
             for (Entity e : list) {
                 e.PerformBePickedUp();
@@ -72,7 +72,6 @@ public class Player extends Entity {
 
     public void moveLeft() {
         if (this.getX() > 0) {
-            //Entity next = findEntityAt(getX() - 1, getY());
             List<Entity> list = findAllEntityAt(getX() - 1, getY());
             for (Entity e : list) {
                 e.PerformBePickedUp();
@@ -88,13 +87,11 @@ public class Player extends Entity {
 
     public void moveRight() {
         if (getX() < dungeon.getWidth() - 1) {
-            //Entity next = findEntityAt(getX() + 1, getY());
             List<Entity> list = findAllEntityAt(getX() + 1, getY());
             for (Entity e : list) {
                 e.PerformBePickedUp();
                 e.PerformBeMovedTowardsbyPlayer();
             }
-            // next.PerformBeMovedTowardsbyPlayer();
         }
         checkIfOP();
     }

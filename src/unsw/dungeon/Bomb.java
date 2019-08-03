@@ -2,9 +2,17 @@ package unsw.dungeon;
 
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class Bomb extends Entity {
 
 
+    /**
+     * @param dungeon dungeon
+     * @param x       x
+     * @param y       y
+     */
     public Bomb(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
@@ -15,9 +23,10 @@ public class Bomb extends Entity {
     }
 
 
+    /**
+     * lit the bomb
+     */
     public void Lit() {
-        // System.out.println("light it up");
-
         this.setMoveTowardsBehavior(new PlayerMoveTowardsNoWay());
         this.setPickUpBehavior(new PickUpNoWay());
     }

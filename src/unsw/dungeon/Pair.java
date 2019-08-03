@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class Pair {
     int x, y;
 

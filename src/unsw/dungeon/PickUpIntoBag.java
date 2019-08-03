@@ -1,11 +1,14 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class PickUpIntoBag implements PickUpBehavior {
 	private BagPack bagPack;
 	private Entity entity;
 
-    public PickUpIntoBag(Entity entity) {
-        this.entity = entity;
+	public PickUpIntoBag(Entity entity) {
+		this.entity = entity;
 		this.bagPack = entity.getDungeon().getPlayer().getBagPack();
 
 	}

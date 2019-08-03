@@ -16,6 +16,9 @@ import javafx.util.Duration;
 
 import java.util.*;
 
+/**
+ * @author Ping GAO
+ */
 public class DungeonController {
 
     @FXML
@@ -45,6 +48,11 @@ public class DungeonController {
     private Timeline enemyTimeline;
 
 
+    /**
+     * @param dungeon           the dungeon class
+     * @param initialEntities   all the image Views
+     * @param imageViewToEntity a hashmap
+     */
     DungeonController(Dungeon dungeon, List<ImageView> initialEntities,
                       HashMap<ImageView, Entity> imageViewToEntity) {
         this.dungeon = dungeon;
@@ -52,6 +60,7 @@ public class DungeonController {
         this.initialEntities = new ArrayList<>(initialEntities);
         this.imageViewToEntity = imageViewToEntity;
     }
+
 
     @FXML
     public void initialize() {
@@ -443,6 +452,9 @@ public class DungeonController {
         return entity;
     }
 
+    /**
+     * @param event player keyboard input
+     */
     @FXML
     public void handleKeyPress(KeyEvent event) {
         switch (event.getCode()) {

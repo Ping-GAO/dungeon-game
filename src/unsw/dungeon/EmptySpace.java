@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class EmptySpace extends Entity {
 
 	public EmptySpace(Dungeon dungeon, int x, int y) {

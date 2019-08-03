@@ -4,6 +4,9 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class FloorSwitch extends Entity {
 	private BooleanProperty isActive;
 	private int id;
@@ -31,12 +34,13 @@ public class FloorSwitch extends Entity {
 		return isActive;
 	}
 
+	/**
+	 * activate the floorswitch
+	 */
 	public void activate() {
 		this.isActive().set(true);
-		// or activate a closed door
-		//System.out.println("foor switch activaed");
-		// when activate should have a boulder at same spot
 		Boulder boulder = null;
+		// find the boulder on top of the switch
 		for (Entity e : dungeon.getEntities()) {
 			if (e != null) {
 				if (e.getX() == this.getX() && e.getY() == this.getY() && e.getName().equals("boulder")) {
@@ -44,7 +48,6 @@ public class FloorSwitch extends Entity {
 				}
 			}
 		}
-
 		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
 		assert boulder != null;
 		this.setMoveTowardsBehavior(new PlayerMoveTowardsBoulder(boulder));
@@ -52,28 +55,23 @@ public class FloorSwitch extends Entity {
 		boolean found = false;
 		for (Entity e : dungeon.getEntities()) {
 			if (e.getName().equals("door")) {
-
 				door = (Door) e;
 				if (this.getId() == door.getId()) {
-					// System.out.println("switch has id " + this.getId() + " door has id " +
-					// door.getId());
-					// System.out.println("matched!");
 					found = true;
 					break;
-				}  // System.out.println("switch has id " + this.getId() + " door has id " +
-				// door.getId());
-
-
+				}
 			}
 		}
 		if (found) {
+			// open the door
 			door.changeToOpenState();
 		}
-
 	}
 
+	/**
+	 * deactivate the door with same id
+	 */
 	public void deactivate() {
-		//System.out.println("foor switch DEactivaed");
 		this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
 		this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsSwitch(this));
 		this.isActive().set(false);
@@ -85,10 +83,7 @@ public class FloorSwitch extends Entity {
 				if (this.getId() == door.getId()) {
 					found = true;
 					break;
-				}  // System.out.println("switch has id " + this.getId() + " door has id " +
-				// door.getId());
-
-
+				}
 			}
 		}
 		if (found) {

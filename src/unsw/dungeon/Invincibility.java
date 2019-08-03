@@ -2,6 +2,9 @@ package unsw.dungeon;
 
 import javafx.scene.image.Image;
 
+/**
+ * @author Ping GAO
+ */
 public class Invincibility extends Entity {
 
 

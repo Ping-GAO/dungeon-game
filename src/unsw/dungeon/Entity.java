@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 
 
 /**
- *
+ * @author Ping GAO
  */
 public abstract class Entity {
 
@@ -25,6 +25,13 @@ public abstract class Entity {
     private Image EntityImage;
     private int pushpriority;
 
+    /**
+     * @param dungeon dungeon
+     * @param x       x
+     * @param y       y
+     *                everything in a maze is an entity
+     *                model how one entity interact with another entity use strategy pattern
+     */
     public Entity(Dungeon dungeon, int x, int y) {
         this.x = new SimpleIntegerProperty(x);
         this.y = new SimpleIntegerProperty(y);

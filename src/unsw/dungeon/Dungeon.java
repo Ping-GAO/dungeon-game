@@ -3,7 +3,9 @@ package unsw.dungeon;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * @author Ping GAO
+ */
 public class Dungeon {
 
 	private int width, height;
@@ -12,12 +14,16 @@ public class Dungeon {
 	
 	private Player player;
 
+	/**
+	 * @param width  width
+	 * @param height height
+	 */
 	public Dungeon(int width, int height) {
 		this.width = width;
 		this.height = height;
 		this.entities = new ArrayList<>();
 		this.player = null;
-		
+
 	}
 
 	public int getWidth() {

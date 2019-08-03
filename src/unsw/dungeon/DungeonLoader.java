@@ -1,5 +1,4 @@
 package unsw.dungeon;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONTokener;
@@ -7,6 +6,9 @@ import org.json.JSONTokener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+/**
+ * @author Ping GAO
+ */
 public abstract class DungeonLoader {
 
     private JSONObject json;
@@ -18,17 +20,18 @@ public abstract class DungeonLoader {
     Dungeon load() {
         int width = json.getInt("width");
         int height = json.getInt("height");
-
         Dungeon dungeon = new Dungeon(width, height);
-
         JSONArray jsonEntities = json.getJSONArray("entities");
-
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
         return dungeon;
     }
 
+    /**
+     * @param dungeon dungeon
+     * @param json    a json file
+     */
     private void loadEntity(Dungeon dungeon, JSONObject json) {
         String type = json.getString("type");
         int x = json.getInt("x");

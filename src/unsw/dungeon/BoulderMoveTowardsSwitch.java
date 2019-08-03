@@ -1,5 +1,8 @@
 package unsw.dungeon;
 
+/**
+ * @author Ping GAO
+ */
 public class BoulderMoveTowardsSwitch implements BoulderMoveTowardsBehaviour {
 	private Boulder boulder;
 	private FloorSwitch floorSwitch;
@@ -19,7 +22,6 @@ public class BoulderMoveTowardsSwitch implements BoulderMoveTowardsBehaviour {
 		boulder.x().set(floorSwitch.getX());
 		boulder.y().set(floorSwitch.getY());
 		floorSwitch.activate();
-
 	}
 
 }

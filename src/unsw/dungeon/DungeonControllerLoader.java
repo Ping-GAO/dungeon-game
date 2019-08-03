@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author Ping GAO
+ */
 public class DungeonControllerLoader extends DungeonLoader {
 
     private List<ImageView> entities;
@@ -70,11 +73,6 @@ public class DungeonControllerLoader extends DungeonLoader {
     }
 
     @Override
-    public void onLoad(Invincibility invincibility) {
-        addEntity(invincibility, invincibility.MakeImageViewFromEntity());
-    }
-
-    @Override
     public void onLoad(Sword sword) {
         addEntity(sword, sword.MakeImageViewFromEntity());
     }
@@ -92,6 +90,11 @@ public class DungeonControllerLoader extends DungeonLoader {
     @Override
     public void onLoad(Key key) {
         addEntity(key, key.MakeImageViewFromEntity());
+    }
+
+    @Override
+    public void onLoad(Invincibility invincibility) {
+        addEntity(invincibility, invincibility.MakeImageViewFromEntity());
     }
 
     private void addEntity(Entity entity, ImageView view) {
