@@ -6,11 +6,16 @@ package unsw.dungeon;
 public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 	private BagPack bagpack;
 	private Door door;
+	private Dungeon dungeon;
 
 	public PlayerMoveTowardsDoor(Door door) {
-		this.bagpack = door.getDungeon().getPlayer().getBagPack();
+		this.dungeon = door.getDungeon();
+		this.bagpack = dungeon.getPlayer().getBagPack();
 		this.door = door;
+
+
 	}
+
 
 	@Override
 	public void moveTowards() {
@@ -20,11 +25,12 @@ public class PlayerMoveTowardsDoor implements PlayerMoveTowardsBehavior {
 			if (e.getName().equals("key")) {
 				key = (Key) e;
 				if (key.getId() == door.getId()) {
-					door.getDungeon().getPlayer().setMessage("Key matched the door.\n");
+					dungeon.getPlayer().setMessage("Key matched the door.\n");
 					found = true;
 					break;
 				} else {
-					door.getDungeon().getPlayer().setMessage("Key didn't match the door");
+
+					dungeon.getPlayer().setMessage("Key didn't match the door");
 				}
 			}
 		}

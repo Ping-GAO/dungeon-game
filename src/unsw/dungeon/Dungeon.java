@@ -10,7 +10,7 @@ public class Dungeon {
 
 	private int width, height;
 	private List<Entity> entities;
-	
+
 	
 	private Player player;
 
@@ -24,7 +24,11 @@ public class Dungeon {
 		this.entities = new ArrayList<>();
 		this.player = null;
 
+
 	}
+
+
+
 
 	public int getWidth() {
 		return width;

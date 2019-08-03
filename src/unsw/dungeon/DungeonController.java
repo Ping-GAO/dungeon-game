@@ -47,10 +47,9 @@ public class DungeonController {
         return player;
     }
 
+
     private Dungeon dungeon;
     private HashMap<ImageView, Entity> imageViewToEntity;
-
-
 
 
 
@@ -65,6 +64,8 @@ public class DungeonController {
         this.player = dungeon.getPlayer();
         this.initialEntities = new ArrayList<>(initialEntities);
         this.imageViewToEntity = imageViewToEntity;
+
+
     }
 
 
@@ -98,6 +99,7 @@ public class DungeonController {
 
         treasureFound.setText(String.valueOf(0));
         enemyKill.setText(String.valueOf(0));
+
 
     }
 
@@ -173,7 +175,6 @@ public class DungeonController {
     }
 
 
-
     private ImageView getOutABombFromBagPack() {
         int x = this.dungeon.getPlayer().getX();
         int y = this.dungeon.getPlayer().getY();
@@ -200,14 +201,9 @@ public class DungeonController {
     }
 
 
-
-
-
-
     private void updateMessage() {
         // update the bagpack information
         if (player.getBagPack().getBagPack().size() != 0) {
-            // System.out.println("player has : " + player.getBagPack().toString());
             bagpack.setText(player.getBagPack().toString());
         } else {
             bagpack.setText("");
@@ -235,6 +231,9 @@ public class DungeonController {
         }
     }
 
+    /**
+     * simulate player swing sword
+     */
     private void handlePlayerSwingSword() {
         int x = player.getX();
         int y = player.getY();
@@ -307,7 +306,6 @@ public class DungeonController {
             default:
                 break;
         }
-
         updateMessage();
     }
 
