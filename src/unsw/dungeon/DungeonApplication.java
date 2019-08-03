@@ -29,6 +29,7 @@ public class DungeonApplication extends Application {
         Scene scene = new Scene(root);
         root.requestFocus();
         primaryStage.setScene(scene);
+        controller.setUpRestartButton(primaryStage);
         primaryStage.show();
     }
 

@@ -50,5 +50,9 @@ public class Dungeon {
 		return entities;
 	}
 
+	public void killPlayer() {
+		this.player = null;
+	}
+
 
 }

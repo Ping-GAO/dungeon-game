@@ -3,17 +3,21 @@ package unsw.dungeon;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -29,6 +33,15 @@ public class DungeonController {
 
     @FXML
     private Label bagpack;
+
+    @FXML
+    private Label enemyKill;
+
+    @FXML
+    private Label treasureFound;
+
+    @FXML
+    private Button restart;
 
     private List<ImageView> initialEntities;
 
@@ -90,9 +103,26 @@ public class DungeonController {
             }
         }
 
+        treasureFound.setText(String.valueOf(0));
+        enemyKill.setText(String.valueOf(0));
 
     }
 
+
+    public void setUpRestartButton(Stage primaryStage) {
+        restart.setOnAction(__ ->
+        {
+            System.out.println("Restarting app!");
+            primaryStage.close();
+            Platform.runLater(() -> {
+                try {
+                    new DungeonApplication().start(new Stage());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+        });
+    }
 
     private void startEnemyTimeLine(Enemy enemy) {
         boolean[][] canPassThrough = new boolean[dungeon.getHeight()][dungeon.getWidth()];
@@ -216,7 +246,9 @@ public class DungeonController {
 
                 }
             }
+            //TODO
             dungeon.getEntities().remove(toRemove);
+
             assert toRemove != null;
             if (toRemove.getName().equals("enemy")) {
                 dungeon.getPlayer().getBagPack().addToBagPack(new EnemyBodyPart(dungeon,
@@ -227,6 +259,9 @@ public class DungeonController {
                 }
 
             }
+//            if(toRemove.getName().equals("player")){
+//                dungeon.killPlayer();
+//            }
         });
     }
 
@@ -483,16 +518,6 @@ public class DungeonController {
         }
 
         updateMessage();
-
-//		for (Entity e : dungeon.getEntities()) {
-//			if (e != null) {
-//				if (e.getX() == 1 && e.getY() == 3) {
-//					System.out.println("(1,3) is " + e.getName());
-//				}
-//			}
-//
-//		}
-
     }
 
 
