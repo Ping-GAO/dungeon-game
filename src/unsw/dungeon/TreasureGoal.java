@@ -15,6 +15,12 @@ public class TreasureGoal implements Goal {
 
     @Override
     public boolean evaluate() {
-        return player.getBagPack().gettreasureNum() == 7;
+
+        if (player.getBagPack().gettreasureNum() != 7) {
+            player.setMessage("TreasureGoal is not meet.");
+            return false;
+        } else {
+            return true;
+        }
     }
 }

@@ -14,6 +14,13 @@ public class EnemyGoal implements Goal {
 
     @Override
     public boolean evaluate() {
-        return player.getEnemyKilled() == 3;
+
+        if (player.getEnemyKilled() != 3) {
+            player.setMessage("EnemyGoal is not meet.");
+            return false;
+        } else {
+            return true;
+        }
+
     }
 }
