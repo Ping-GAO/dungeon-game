@@ -95,9 +95,7 @@ public class Bomb extends Entity {
             removeNodeByAccessHelp("images/bomb_lit_5.png", bomb_x, bomb_y, squares);
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
-                    if (i == 0 && j == 0) {
-                        continue;
-                    }
+
                     //  bomb everything in that list
                     // this may or may not get implemented
                     Entity e = findEntityAt(bomb_x + i, bomb_y + j);
