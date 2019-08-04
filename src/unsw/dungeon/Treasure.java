@@ -12,6 +12,7 @@ public class Treasure extends Entity {
         this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));
         this.setPickUpBehavior(new PickUpIntoBag(this));
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
+        this.setGetBombedBehavior(new GetBombedNoEffect());
         this.name = "treasure";
         this.setEntityImage(new Image("images/gold_pile.png"));
     }

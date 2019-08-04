@@ -17,11 +17,13 @@ public class Enemy extends Entity {
     private Timeline enemyTimeline;
     boolean[][] canPassThrough;
     private Player player;
+
     public Enemy(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
-        this.setMoveTowardsBehavior(new PlayerMoveTowardsNoWay());
+        this.setMoveTowardsBehavior(new PlayerMoveTowardsEnemy(this));
         this.setPickUpBehavior(new PickUpNoWay());
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
+        this.setGetBombedBehavior(new GetDestroyed(this));
         this.name = "enemy";
         this.setEntityImage(new Image("images/deep_elf_master_archer.png"));
         canPassThrough = new boolean[dungeon.getHeight()][dungeon.getWidth()];
@@ -49,12 +51,8 @@ public class Enemy extends Entity {
     }
 
 
-
-
     public void checkIfPlayer(Pair pair) {
         //System.out.println("player is " + dungeon.getPlayer().isOP());
-
-
         if (!dungeon.getPlayer().isOP()) {
             if (this.alive().getValue()) {
                 if (pair.x == dungeon.getPlayer().getY()) {
@@ -80,10 +78,10 @@ public class Enemy extends Entity {
     public void stopTimeLine() {
         enemyTimeline.stop();
     }
+
     public void startTimeLine() {
 
         enemyTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), (ActionEvent event1) -> {
-            // how to break from inside
 
             initializeMatrix(canPassThrough);
             checkPassbility(canPassThrough);
@@ -91,8 +89,17 @@ public class Enemy extends Entity {
                     player.getX()), new Pair(this.getY(), this.getX()));
 
             if (pair != null) {
-                updateEnemy(this, pair);
+
+                if (!dungeon.getPlayer().isOP()) {
+                    updateEnemy(this, pair);
+                } else {
+                    // try all possible move find one increase the distance
+                    enemyFlee();
+                }
+
             }
+
+
         }));
         enemyTimeline.setCycleCount(Animation.INDEFINITE);
         enemyTimeline.play();
@@ -177,6 +184,43 @@ public class Enemy extends Entity {
                 enemy.moveLeft();
             }
         }
+    }
+
+    private void enemyFlee() {
+        double dis = calculateDis(player.getX(), player.getY(), this.getX(), this.getY());
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if (i * j != 0) {
+                    continue;
+                }
+                if (checkIfOutOfB(this.getY() + j, this.getX() + i)) {
+
+                    if (canPassThrough[this.getY() + j][this.getX() + i]) {
+                        double disNext = calculateDis(player.getX(), player.getY(), this.getX() + i, this.getY() + j);
+                        //System.out.println("i and j"+i+" "+j);
+                        //System.out.println(dis+"   "+disNext);
+                        if (disNext > dis) {
+                            if (i == -1) {
+
+                                this.moveLeft();
+                            } else if (i == 1) {
+                                this.moveRight();
+                            } else if (j == 1) {
+                                this.moveDown();
+                            } else {
+                                this.moveUp();
+                            }
+                        }
+                        return;
+                    }
+                }
+            }
+        }
+
+    }
+
+    private double calculateDis(int x1, int y1, int x2, int y2) {
+        return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y1 - y2), 2));
     }
 
 }
