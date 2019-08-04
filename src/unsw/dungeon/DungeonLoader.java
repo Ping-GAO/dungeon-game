@@ -17,7 +17,7 @@ public abstract class DungeonLoader {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
     }
 
-    Dungeon load() {
+    Dungeon load() throws FileNotFoundException {
         int width = json.getInt("width");
         int height = json.getInt("height");
         Dungeon dungeon = new Dungeon(width, height);
@@ -32,7 +32,7 @@ public abstract class DungeonLoader {
      * @param dungeon dungeon
      * @param json    a json file
      */
-    private void loadEntity(Dungeon dungeon, JSONObject json) {
+    private void loadEntity(Dungeon dungeon, JSONObject json) throws FileNotFoundException {
         String type = json.getString("type");
         int x = json.getInt("x");
         int y = json.getInt("y");

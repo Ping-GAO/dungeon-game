@@ -1,7 +1,12 @@
 package unsw.dungeon;
 
 import javafx.scene.image.Image;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -50,13 +55,13 @@ public class Player extends Entity {
         this.atExit = atExit;
     }
 
-    private SubGoal subGoal;
+    private Goal subGoal;
 
-    public SubGoal getSubGoal() {
+    public Goal getSubGoal() {
         return subGoal;
     }
 
-    public Player(Dungeon dungeon, int x, int y) {
+    public Player(Dungeon dungeon, int x, int y) throws FileNotFoundException {
         super(dungeon, x, y);
         this.bagPack = new BagPack();
         this.setGetBombedBehavior(new GetDestroyed(this));
@@ -68,13 +73,35 @@ public class Player extends Entity {
         this.enemyKilled = 0;
         this.atExit = false;
 
-        ExitGoal exitGoal = new ExitGoal(this);
-        EnemyGoal enemyGoal = new EnemyGoal(this);
-        TreasureGoal treasureGoal = new TreasureGoal(this);
-        SubGoal subGoal1 = new SubGoal(enemyGoal, treasureGoal, "AND");
-        subGoal = new SubGoal(subGoal1, exitGoal, "AND");
 
+        JSONObject json = new JSONObject(new JSONTokener(new FileReader("dungeons/advanced.json")));
+        JSONObject GoalCondition = json.getJSONObject("goal-condition");
+        subGoal = generateGoalFromJSON(GoalCondition);
     }
+
+
+    private Goal generateGoalFromJSON(JSONObject jsonObject) {
+        GoalFactory goalFactory = new GoalFactory(this);
+        Goal GoalResult;
+        String Operator = jsonObject.getString("goal");
+        if (!Operator.equals("AND")) {
+            if (!Operator.equals("OR")) {
+                GoalResult = goalFactory.getGoal(Operator);
+                return GoalResult;
+            }
+        }
+
+        JSONArray jsonEntities = jsonObject.getJSONArray("subgoals");
+
+        Goal SubRight;
+        Goal SubLeft;
+
+        SubRight = generateGoalFromJSON(jsonEntities.getJSONObject(0));
+        SubLeft = generateGoalFromJSON(jsonEntities.getJSONObject(1));
+        GoalResult = new SubGoal(SubLeft, SubRight, Operator);
+        return GoalResult;
+    }
+
 
     public BagPack getBagPack() {
         return bagPack;

@@ -110,7 +110,7 @@ public class DungeonControllerLoader extends DungeonLoader {
         entity.y().addListener((observable, oldValue, newValue) -> GridPane.setRowIndex(node, newValue.intValue()));
     }
 
-    DungeonController loadController() {
+    DungeonController loadController() throws FileNotFoundException {
         return new DungeonController(load(), entities, imageViewToEntity);
     }
 
