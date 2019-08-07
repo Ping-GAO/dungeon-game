@@ -175,7 +175,7 @@ public class Player extends Entity {
         for (Entity e : getBagPack().getBagPack()) {
             if (e.getName().equals("invincibility")) {
                 isOP = true;
-
+                this.setGetBombedBehavior(new GetBombedNoEffect());
                 setMessage("Get 5 secs of invincibility.");
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
@@ -184,9 +184,11 @@ public class Player extends Entity {
 
                         dungeon.getPlayer().getBagPack().getBagPack().remove(e);
                         dungeon.getPlayer().setOP(false);
+                        dungeon.getPlayer().setGetBombedBehavior(new GetDestroyed(dungeon.getPlayer()));
                         setMessage("Invincibility effect end.");
                     }
                 }, 5 * 1000);
+
 
             }
 

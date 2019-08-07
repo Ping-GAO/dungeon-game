@@ -27,6 +27,7 @@ public class Door extends Entity {
         this.setBoulderMoveTowadsBeheavior(new BoulderMoveTowardsNoWay());
         this.isOpen = new SimpleBooleanProperty(false);
         this.name = "door";
+        this.setGetBombedBehavior(new GetBombedNoEffect());
         this.setEntityImage(new Image("images/closed_door.png"));
 
     }
