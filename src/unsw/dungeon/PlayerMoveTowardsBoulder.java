@@ -44,12 +44,12 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 					}
 				}
 			} else {
+				// down
 				if (boulder.getY() < boulder.getDungeon().getHeight() - 1) {
 					List<Entity> list = findAllEntityAt(boulder.getX(), boulder.getY() + 1);
 					for (Entity e : list) {
 						e.PerformBeMovedTowardsbyBoulder(boulder);
 					}
-
 				}
 			}
 		}
@@ -86,6 +86,7 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 			dungeon.addEntity(emptySpace);
 			list.add(emptySpace);
 		}
+		list.sort((lhs, rhs) -> Integer.compare(rhs.getPushpriority(), lhs.getPushpriority()));
 		return list;
 	}
 

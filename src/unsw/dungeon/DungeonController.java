@@ -294,6 +294,25 @@ public class DungeonController {
         return entity;
     }
 
+
+    /**
+     * pause the enemy timeline whe  player beat the game
+     */
+    private void stopEnemyWhenBeatTheGame() {
+        if (player.isAtExit() && player.getSubGoal().evaluate()) {
+            for (Entity e : dungeon.getEntities()) {
+                if (e != null) {
+                    if (e.getName().equals("enemy")) {
+                        ((Enemy) e).pauseTimeLine();
+                    }
+                }
+            }
+            willConsume = true;
+        }
+
+    }
+
+
     /**
      * @param event player keyboard input
      */
@@ -330,18 +349,5 @@ public class DungeonController {
         stopEnemyWhenBeatTheGame();
     }
 
-    private void stopEnemyWhenBeatTheGame() {
-        if (player.isAtExit() && player.getSubGoal().evaluate()) {
-            for (Entity e : dungeon.getEntities()) {
-                if (e != null) {
-                    if (e.getName().equals("enemy")) {
-                        ((Enemy) e).pauseTimeLine();
-                    }
-                }
-            }
-            willConsume = true;
-        }
-
-    }
 
 }
