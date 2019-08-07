@@ -15,6 +15,9 @@ public class PlayerMoveTowardsHole implements PlayerMoveTowardsBehavior {
     }
 
 
+    /**
+     * teleportation
+     */
     @Override
     public void moveTowards() {
         // update the player coordinate into the other hole

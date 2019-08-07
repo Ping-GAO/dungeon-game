@@ -1,0 +1,658 @@
+@startuml
+
+title __DUNGEON's Class Diagram__\n
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.BagPack {
+        - bagPack : ArrayList<Entity>
+        + BagPack()
+        + addToBagPack()
+        + getBagPack()
+        + getSword()
+        + gettreasureNum()
+        + toString()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Bomb {
+        - bombLitView : ImageView
+        - i : Integer
+        - j : Integer
+        + AfterBlowUp()
+        + Bomb()
+        + Lit()
+        + LitBomb()
+        - findEntityAt()
+        - removeNodeByAccessHelp()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Boulder {
+        + Boulder()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.BoulderGoal {
+        + evaluate()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    interface unsw.dungeon.BoulderMoveTowardsBehaviour {
+        {abstract} + moveTowards()
+        {abstract} + setBoulder()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.BoulderMoveTowardsNoWay {
+        + moveTowards()
+        + setBoulder()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.BoulderMoveTowardsPassThrough {
+        + BoulderMoveTowardsPassThrough()
+        + moveTowards()
+        + setBoulder()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.BoulderMoveTowardsSwitch {
+        + BoulderMoveTowardsSwitch()
+        + moveTowards()
+        + setBoulder()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Door {
+        - id : int
+        - isOpen : BooleanProperty
+        + Door()
+        + changeToClosedState()
+        + changeToOpenState()
+        + getId()
+        + isOpen()
+        + setId()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.DoorStateTracker {
+        ~ x : int
+        ~ y : int
+        - closedDoorview : ImageView
+        - currentView : ImageView
+        - openDoorview : ImageView
+        - squares : GridPane
+        + DoorStateTracker()
+        + setCurrentView()
+        + toClosedState()
+        + toOpenState()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Dungeon {
+        - entities : List<Entity>
+        - filePath : String
+        - height : int
+        - width : int
+        + Dungeon()
+        + addEntity()
+        + getEntities()
+        + getFilePath()
+        + getHeight()
+        + getPlayer()
+        + getWidth()
+        + killPlayer()
+        + setFilePath()
+        + setPlayer()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.DungeonApplication {
+        {static} + main()
+        + start()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.DungeonController {
+        - bagpack : Label
+        - enemyKill : Label
+        - imageViewToEntity : HashMap<ImageView, Entity>
+        - initialEntities : List<ImageView>
+        - message : Label
+        - restart : Button
+        - squares : GridPane
+        - treasureFound : Label
+        - willConsume : boolean
+        + getPlayer()
+        + handleKeyPress()
+        + initialize()
+        + setUpRestartButton()
+        ~ DungeonController()
+        - findEnemy()
+        - getOutABombFromBagPack()
+        - handlePlayerDropBomb()
+        - handlePlayerSwingSword()
+        - stopEnemyWhenBeatTheGame()
+        - trackDoorState()
+        - trackExistence()
+        - trackSwitchState()
+        - updateMessage()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.DungeonControllerLoader {
+        - entities : List<ImageView>
+        - imageViewToEntity : HashMap<ImageView, Entity>
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        + onLoad()
+        ~ DungeonControllerLoader()
+        ~ loadController()
+        - addEntity()
+        - trackPosition()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    abstract class unsw.dungeon.DungeonLoader {
+        - json : JSONObject
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        {abstract} + onLoad()
+        ~ DungeonLoader()
+        ~ load()
+        - loadEntity()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.EmptySpace {
+        + EmptySpace()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Enemy {
+        ~ canPassThrough : boolean[][]
+        - enemyTimeline : Timeline
+        + Enemy()
+        + checkIfPlayer()
+        + moveDown()
+        + moveLeft()
+        + moveRight()
+        + moveUp()
+        + pauseTimeLine()
+        + startTimeLine()
+        + stopTimeLine()
+        - calculateDis()
+        - checkIfOutOfB()
+        - checkPassbility()
+        - enemyFlee()
+        - findEnemyNextMoveViaSP()
+        - initializeMatrix()
+        - updateEnemy()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.EnemyBodyPart {
+        + EnemyBodyPart()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.EnemyGoal {
+        + EnemyGoal()
+        + evaluate()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    abstract class unsw.dungeon.Entity {
+        # imageView : ImageView
+        # name : String
+        # x : IntegerProperty
+        # y : IntegerProperty
+        - EntityImage : Image
+        - alive : BooleanProperty
+        - pushpriority : int
+        + Entity()
+        + MakeImageViewFromEntity()
+        + getDungeon()
+        + getName()
+        + getPushpriority()
+        + getX()
+        + getY()
+        + setBoulderMoveTowadsBeheavior()
+        + setEntityImage()
+        + setMoveTowardsBehavior()
+        + setPickUpBehavior()
+        + setPushpriority()
+        + x()
+        + y()
+        ~ PerformBeMovedTowardsbyBoulder()
+        ~ PerformBeMovedTowardsbyPlayer()
+        ~ PerformBePickedUp()
+        ~ PerformGetBombed()
+        ~ alive()
+        ~ setGetBombedBehavior()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Exit {
+        + Exit()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.ExitGoal {
+        + ExitGoal()
+        + evaluate()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.FloorSwitch {
+        - id : int
+        - isActive : BooleanProperty
+        + FloorSwitch()
+        + activate()
+        + deactivate()
+        + getId()
+        + isActive()
+        + setId()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    interface unsw.dungeon.GetBombedBehavior {
+        {abstract} + getBombed()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.GetBombedNoEffect {
+        + getBombed()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.GetDestroyed {
+        + GetDestroyed()
+        + getBombed()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Gnome {
+        + Gnome()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    interface unsw.dungeon.Goal {
+        {abstract} + evaluate()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.GoalFactory {
+        + GoalFactory()
+        + getGoal()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Hole {
+        - id : int
+        + Hole()
+        + getId()
+        + setId()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Invincibility {
+        + Invincibility()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Key {
+        - id : int
+        + Key()
+        + getId()
+        + setId()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Pair {
+        ~ x : int
+        ~ y : int
+        + Pair()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    interface unsw.dungeon.PickUpBehavior {
+        {abstract} + pickUp()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PickUpIntoBag {
+        + PickUpIntoBag()
+        + pickUp()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PickUpNoWay {
+        + pickUp()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Player {
+        - atExit : boolean
+        - enemyKilled : int
+        - isOP : boolean
+        - message : String
+        + Player()
+        + checkIfHaveBomb()
+        + checkIfOP()
+        + clearMessage()
+        + findAllEntityAt()
+        + getBagPack()
+        + getEnemyKilled()
+        + getMessage()
+        + getSubGoal()
+        + isAtExit()
+        + isOP()
+        + moveDown()
+        + moveLeft()
+        + moveRight()
+        + moveUp()
+        + setAtExit()
+        + setEnemyKilled()
+        + setMessage()
+        + setOP()
+        - generateGoalFromJSON()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    interface unsw.dungeon.PlayerMoveTowardsBehavior {
+        {abstract} + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsBoulder {
+        + PlayerMoveTowardsBoulder()
+        + checkIfOnSwitch()
+        + findAllEntityAt()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsDoor {
+        + PlayerMoveTowardsDoor()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsEnemy {
+        + PlayerMoveTowardsEnemy()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsExit {
+        + PlayerMoveTowardsExit()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsGnome {
+        + PlayerMoveTowardsGnome()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsHole {
+        + PlayerMoveTowardsHole()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsNoWay {
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.PlayerMoveTowardsPassThrough {
+        + PlayerMoveTowardsPassThrough()
+        + moveTowards()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.SubGoal {
+        - Operator : String
+        + SubGoal()
+        + evaluate()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Sword {
+        - durability : int
+        + Sword()
+        + decreaseDurability()
+        + getDurability()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Treasure {
+        + Treasure()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.TreasureGoal {
+        + TreasureGoal()
+        + evaluate()
+    }
+  }
+  
+
+  namespace unsw.dungeon {
+    class unsw.dungeon.Wall {
+        + Wall()
+    }
+  }
+  
+
+  unsw.dungeon.Bomb -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Boulder -up-|> unsw.dungeon.Entity
+  unsw.dungeon.BoulderGoal .up.|> unsw.dungeon.Goal
+  unsw.dungeon.BoulderMoveTowardsNoWay .up.|> unsw.dungeon.BoulderMoveTowardsBehaviour
+  unsw.dungeon.BoulderMoveTowardsPassThrough .up.|> unsw.dungeon.BoulderMoveTowardsBehaviour
+  unsw.dungeon.BoulderMoveTowardsPassThrough o-- unsw.dungeon.Boulder : boulder
+  unsw.dungeon.BoulderMoveTowardsPassThrough o-- unsw.dungeon.Entity : entity
+  unsw.dungeon.BoulderMoveTowardsSwitch .up.|> unsw.dungeon.BoulderMoveTowardsBehaviour
+  unsw.dungeon.BoulderMoveTowardsSwitch o-- unsw.dungeon.Boulder : boulder
+  unsw.dungeon.BoulderMoveTowardsSwitch o-- unsw.dungeon.FloorSwitch : floorSwitch
+  unsw.dungeon.Door -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Dungeon o-- unsw.dungeon.Player : player
+  unsw.dungeon.DungeonApplication -up-|> javafx.application.Application
+  unsw.dungeon.DungeonController o-- unsw.dungeon.Dungeon : dungeon
+  unsw.dungeon.DungeonController o-- unsw.dungeon.Player : player
+  unsw.dungeon.DungeonControllerLoader -up-|> unsw.dungeon.DungeonLoader
+  unsw.dungeon.DungeonLoader o-- unsw.dungeon.Dungeon : dungeon
+  unsw.dungeon.EmptySpace -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Enemy -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Enemy o-- unsw.dungeon.Player : player
+  unsw.dungeon.EnemyBodyPart -up-|> unsw.dungeon.Entity
+  unsw.dungeon.EnemyGoal .up.|> unsw.dungeon.Goal
+  unsw.dungeon.EnemyGoal o-- unsw.dungeon.Player : player
+  unsw.dungeon.Entity o-- unsw.dungeon.Dungeon : dungeon
+  unsw.dungeon.Entity o-- unsw.dungeon.BoulderMoveTowardsBehaviour : boulderMoveTowadsBeheavior
+  unsw.dungeon.Entity o-- unsw.dungeon.GetBombedBehavior : getBombedBehavior
+  unsw.dungeon.Entity o-- unsw.dungeon.PlayerMoveTowardsBehavior : moveTowardsBehavior
+  unsw.dungeon.Entity o-- unsw.dungeon.PickUpBehavior : pickUpBehavior
+  unsw.dungeon.Exit -up-|> unsw.dungeon.Entity
+  unsw.dungeon.ExitGoal .up.|> unsw.dungeon.Goal
+  unsw.dungeon.ExitGoal o-- unsw.dungeon.Player : player
+  unsw.dungeon.FloorSwitch -up-|> unsw.dungeon.Entity
+  unsw.dungeon.GetBombedNoEffect .up.|> unsw.dungeon.GetBombedBehavior
+  unsw.dungeon.GetDestroyed .up.|> unsw.dungeon.GetBombedBehavior
+  unsw.dungeon.GetDestroyed o-- unsw.dungeon.Entity : entity
+  unsw.dungeon.Gnome -up-|> unsw.dungeon.Entity
+  unsw.dungeon.GoalFactory o-- unsw.dungeon.Player : player
+  unsw.dungeon.Hole -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Invincibility -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Key -up-|> unsw.dungeon.Entity
+  unsw.dungeon.PickUpIntoBag .up.|> unsw.dungeon.PickUpBehavior
+  unsw.dungeon.PickUpIntoBag o-- unsw.dungeon.BagPack : bagPack
+  unsw.dungeon.PickUpIntoBag o-- unsw.dungeon.Entity : entity
+  unsw.dungeon.PickUpNoWay .up.|> unsw.dungeon.PickUpBehavior
+  unsw.dungeon.Player -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Player o-- unsw.dungeon.BagPack : bagPack
+  unsw.dungeon.Player o-- unsw.dungeon.Goal : subGoal
+  unsw.dungeon.PlayerMoveTowardsBoulder .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsBoulder o-- unsw.dungeon.Boulder : boulder
+  unsw.dungeon.PlayerMoveTowardsBoulder o-- unsw.dungeon.Dungeon : dungeon
+  unsw.dungeon.PlayerMoveTowardsBoulder o-- unsw.dungeon.Player : player
+  unsw.dungeon.PlayerMoveTowardsDoor .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsDoor o-- unsw.dungeon.BagPack : bagpack
+  unsw.dungeon.PlayerMoveTowardsDoor o-- unsw.dungeon.Door : door
+  unsw.dungeon.PlayerMoveTowardsEnemy .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsEnemy o-- unsw.dungeon.Enemy : enemy
+  unsw.dungeon.PlayerMoveTowardsEnemy o-- unsw.dungeon.Player : player
+  unsw.dungeon.PlayerMoveTowardsExit .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsExit o-- unsw.dungeon.Player : player
+  unsw.dungeon.PlayerMoveTowardsGnome .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsGnome o-- unsw.dungeon.Gnome : gnome
+  unsw.dungeon.PlayerMoveTowardsGnome o-- unsw.dungeon.Player : player
+  unsw.dungeon.PlayerMoveTowardsHole .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsHole o-- unsw.dungeon.Dungeon : dungeon
+  unsw.dungeon.PlayerMoveTowardsHole o-- unsw.dungeon.Hole : hole
+  unsw.dungeon.PlayerMoveTowardsHole o-- unsw.dungeon.Player : player
+  unsw.dungeon.PlayerMoveTowardsNoWay .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsPassThrough .up.|> unsw.dungeon.PlayerMoveTowardsBehavior
+  unsw.dungeon.PlayerMoveTowardsPassThrough o-- unsw.dungeon.Entity : entity
+  unsw.dungeon.PlayerMoveTowardsPassThrough o-- unsw.dungeon.Player : player
+  unsw.dungeon.SubGoal .up.|> unsw.dungeon.Goal
+  unsw.dungeon.SubGoal o-- unsw.dungeon.Goal : Left
+  unsw.dungeon.SubGoal o-- unsw.dungeon.Goal : Right
+  unsw.dungeon.Sword -up-|> unsw.dungeon.Entity
+  unsw.dungeon.Treasure -up-|> unsw.dungeon.Entity
+  unsw.dungeon.TreasureGoal .up.|> unsw.dungeon.Goal
+  unsw.dungeon.TreasureGoal o-- unsw.dungeon.Player : player
+  unsw.dungeon.Wall -up-|> unsw.dungeon.Entity
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

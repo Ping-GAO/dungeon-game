@@ -8,6 +8,12 @@ import javafx.scene.image.Image;
 public class Invincibility extends Entity {
 
 
+    /**
+     * @param dungeon dungeon
+     * @param x       x
+     * @param y       y
+     *                magic potion
+     */
     public Invincibility(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         this.setMoveTowardsBehavior(new PlayerMoveTowardsPassThrough(this));

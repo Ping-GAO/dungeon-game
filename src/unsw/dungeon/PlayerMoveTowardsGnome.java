@@ -16,6 +16,9 @@ public class PlayerMoveTowardsGnome implements PlayerMoveTowardsBehavior {
 
     }
 
+    /**
+     * trade with the gnome
+     */
     @Override
     public void moveTowards() {
         int cnt = 0;

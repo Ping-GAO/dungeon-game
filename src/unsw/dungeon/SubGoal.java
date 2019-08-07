@@ -14,9 +14,11 @@ public class SubGoal implements Goal {
         this.Operator = Operator;
     }
 
+    /**
+     * @return evaluate the goal recursively
+     */
     @Override
     public boolean evaluate() {
-        //System.out.println(Operator);
         if (Operator.equals("AND")) {
             return Left.evaluate() && Right.evaluate();
         } else {

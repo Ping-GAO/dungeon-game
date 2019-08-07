@@ -8,25 +8,22 @@ public class PlayerMoveTowardsExit implements PlayerMoveTowardsBehavior {
 
 	public PlayerMoveTowardsExit(Entity entity) {
 		this.player = entity.getDungeon().getPlayer();
-
-
 	}
 
-	@Override
-	public void moveTowards() {
-		// System.out.println("You beat the game");
-		// player.alive().set(false);
+    /**
+     * almost beat the game
+     */
+    @Override
+    public void moveTowards() {
+        this.player.setAtExit(true);
+        if (player.getSubGoal().evaluate()) {
+            player.setMessage("You beat the game");
+        } else {
+            // the output message is set by the specific goal class
+            this.player.setAtExit(false);
+        }
 
-		this.player.setAtExit(true);
-		if (player.getSubGoal().evaluate()) {
-			player.setMessage("You beat the game");
-		} else {
-			// player.setMessage("Didn't meet subgoal");
-			// the output message is set by the specific goal class
-			this.player.setAtExit(false);
-		}
-
-	}
+    }
 
 
 }
