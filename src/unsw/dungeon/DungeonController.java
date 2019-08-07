@@ -339,7 +339,9 @@ public class DungeonController {
                     }
                 }
             }
+            willConsume = true;
         }
+
     }
 
 }
