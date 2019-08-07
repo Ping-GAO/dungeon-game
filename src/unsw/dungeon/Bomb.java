@@ -55,10 +55,10 @@ public class Bomb extends Entity {
         int y = this.dungeon.getPlayer().getY();
         EmptySpace toRemove = null;
         for (Entity e : this.dungeon.getEntities()) {
-            if (e.getName().equals("bomb") && e.getX() == x && e.getY() == y) {
+            if (e != null && e.getName().equals("bomb") && e.getX() == x && e.getY() == y) {
                 bomb = (Bomb) e;
             }
-            if (e.getName().equals("emptySpace") && e.getX() == x && e.getY() == y) {
+            if (e != null && e.getName().equals("emptySpace") && e.getX() == x && e.getY() == y) {
                 assert e instanceof EmptySpace;
                 toRemove = (EmptySpace) e;
             }

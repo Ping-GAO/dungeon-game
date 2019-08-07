@@ -92,8 +92,10 @@ public class DungeonController {
         }
         // should start enemy here
         for (Entity e : dungeon.getEntities()) {
-            if (e.getName().equals("enemy")) {
-                ((Enemy) e).startTimeLine();
+            if (e != null) {
+                if (e.getName().equals("enemy")) {
+                    ((Enemy) e).startTimeLine();
+                }
             }
         }
 
@@ -323,7 +325,6 @@ public class DungeonController {
                 default:
                     break;
             }
-
         }
         updateMessage();
     }

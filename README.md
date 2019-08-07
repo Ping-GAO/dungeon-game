@@ -295,6 +295,6 @@ Marks will be deducted for poor git and GitLab usage. For example, meaningless c
 [invincibility]: src/images/brilliant_blue_new.png
 [treasure]:      src/images/gold_pile.png
 
-[maze]:          examples/maze.png
-[boulders]:      examples/boulders.png
-[advanced]:      examples/advanced.png
+[maze]:          dungeon jsons/maze.png
+[boulders]:      dungeon jsons/boulders.png
+[advanced]:      dungeon jsons/advanced.png

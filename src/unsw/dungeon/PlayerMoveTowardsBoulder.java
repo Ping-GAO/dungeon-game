@@ -75,7 +75,8 @@ public class PlayerMoveTowardsBoulder implements PlayerMoveTowardsBehavior {
 
 		List<Entity> list = new ArrayList<>();
 		for (Entity e : dungeon.getEntities()) {
-			if (e.getX() == x && e.getY() == y) {
+
+            if (e != null && e.getX() == x && e.getY() == y) {
 				list.add(e);
 			}
 		}

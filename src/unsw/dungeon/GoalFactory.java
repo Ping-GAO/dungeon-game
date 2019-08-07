@@ -22,6 +22,8 @@ public class GoalFactory {
 
         } else if (goalType.equalsIgnoreCase("treasure")) {
             return new TreasureGoal(player);
+        } else if (goalType.equalsIgnoreCase("boulders")) {
+            return new BoulderGoal();
         }
 
         return null;
