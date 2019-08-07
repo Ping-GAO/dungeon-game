@@ -7,6 +7,11 @@ import javafx.scene.image.Image;
  */
 public class Boulder extends Entity {
 
+    /**
+     * @param dungeon dungeon
+     * @param x       x
+     * @param y       y
+     */
     public Boulder(Dungeon dungeon, int x, int y) {
         super(dungeon, x, y);
         this.setMoveTowardsBehavior(new PlayerMoveTowardsBoulder(this));

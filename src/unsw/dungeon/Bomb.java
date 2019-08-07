@@ -49,6 +49,11 @@ public class Bomb extends Entity {
 
     }
 
+    /**
+     * @param bombView image view of the bomb
+     * @param squares  the grid pane
+     *                 light the bomb
+     */
     public void LitBomb(ImageView bombView, GridPane squares) {
         Bomb bomb = null;
         int x = this.dungeon.getPlayer().getX();

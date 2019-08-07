@@ -10,6 +10,9 @@ public class BagPack {
 
     private ArrayList<Entity> bagPack;
 
+    /**
+     * constructor
+     */
     public BagPack() {
         bagPack = new ArrayList<>();
 
