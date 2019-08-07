@@ -30,6 +30,10 @@ public class Enemy extends Entity {
         this.player = dungeon.getPlayer();
     }
 
+    public void pauseTimeLine() {
+        enemyTimeline.pause();
+    }
+
     public void moveUp() {
         if (getY() > 0)
             y().set(getY() - 1);

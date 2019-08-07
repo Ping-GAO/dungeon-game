@@ -327,7 +327,19 @@ public class DungeonController {
             }
         }
         updateMessage();
+        stopEnemyWhenBeatTheGame();
     }
 
+    private void stopEnemyWhenBeatTheGame() {
+        if (player.isAtExit() && player.getSubGoal().evaluate()) {
+            for (Entity e : dungeon.getEntities()) {
+                if (e != null) {
+                    if (e.getName().equals("enemy")) {
+                        ((Enemy) e).pauseTimeLine();
+                    }
+                }
+            }
+        }
+    }
 
 }
