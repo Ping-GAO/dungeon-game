@@ -1,6 +1,7 @@
 package unsw.dungeon;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +23,7 @@ public class DungeonApplication extends Application {
     public void start(Stage primaryStage) throws IOException {
         primaryStage.setTitle("Dungeon");
         DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("mydungeon.json");
-        //DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
+        // DungeonControllerLoader dungeonLoader = new DungeonControllerLoader("advanced.json");
         DungeonController controller = dungeonLoader.loadController();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("DungeonView.fxml"));
         loader.setController(controller);
@@ -32,6 +33,10 @@ public class DungeonApplication extends Application {
         primaryStage.setScene(scene);
         controller.setUpRestartButton(primaryStage);
         primaryStage.show();
+        primaryStage.setOnCloseRequest((ae) -> {
+            Platform.exit();
+            System.exit(0);
+        });
     }
 
     public static void main(String[] args) {

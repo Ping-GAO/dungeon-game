@@ -10,7 +10,7 @@ public class Dungeon {
 
 	private int width, height;
 	private List<Entity> entities;
-
+    private String filePath;
 	
 	private Player player;
 
@@ -27,8 +27,13 @@ public class Dungeon {
 
 	}
 
+    public String getFilePath() {
+        return filePath;
+    }
 
-
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
 	public int getWidth() {
 		return width;

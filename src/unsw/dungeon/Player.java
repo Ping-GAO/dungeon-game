@@ -73,8 +73,8 @@ public class Player extends Entity {
         this.enemyKilled = 0;
         this.atExit = false;
 
-
-        JSONObject json = new JSONObject(new JSONTokener(new FileReader("dungeons/advanced.json")));
+        //System.out.println(dungeon.getFilePath());
+        JSONObject json = new JSONObject(new JSONTokener(new FileReader(dungeon.getFilePath())));
         JSONObject GoalCondition = json.getJSONObject("goal-condition");
         subGoal = generateGoalFromJSON(GoalCondition);
     }
@@ -200,7 +200,9 @@ public class Player extends Entity {
                 list.add(e);
             }
         }
-
+        if (list.size() >= 2) {
+            list.removeIf(s -> s.getName().equals("emptySpace"));
+        }
         if (list.isEmpty()) {
             EmptySpace emptySpace = new EmptySpace(dungeon, x, y);
             dungeon.addEntity(emptySpace);

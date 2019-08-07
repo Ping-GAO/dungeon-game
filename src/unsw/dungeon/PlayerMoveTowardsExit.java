@@ -21,7 +21,8 @@ public class PlayerMoveTowardsExit implements PlayerMoveTowardsBehavior {
 		if (player.getSubGoal().evaluate()) {
 			player.setMessage("You beat the game");
 		} else {
-			player.setMessage("Didn't meet subgoal");
+			// player.setMessage("Didn't meet subgoal");
+			// the output message is set by the specific goal class
 			this.player.setAtExit(false);
 		}
 

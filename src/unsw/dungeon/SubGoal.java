@@ -16,6 +16,7 @@ public class SubGoal implements Goal {
 
     @Override
     public boolean evaluate() {
+        //System.out.println(Operator);
         if (Operator.equals("AND")) {
             return Left.evaluate() && Right.evaluate();
         } else {

@@ -12,19 +12,23 @@ import java.io.FileReader;
 public abstract class DungeonLoader {
 
     private JSONObject json;
+    private Dungeon dungeon;
 
     DungeonLoader(String filename) throws FileNotFoundException {
         json = new JSONObject(new JSONTokener(new FileReader("dungeons/" + filename)));
+        int width = json.getInt("width");
+        int height = json.getInt("height");
+        dungeon = new Dungeon(width, height);
+        dungeon.setFilePath("dungeons/" + filename);
     }
 
     Dungeon load() throws FileNotFoundException {
-        int width = json.getInt("width");
-        int height = json.getInt("height");
-        Dungeon dungeon = new Dungeon(width, height);
         JSONArray jsonEntities = json.getJSONArray("entities");
         for (int i = 0; i < jsonEntities.length(); i++) {
             loadEntity(dungeon, jsonEntities.getJSONObject(i));
         }
+
+        //System.out.println(dungeon.getFilePath());
         return dungeon;
     }
 
