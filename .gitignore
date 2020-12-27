@@ -2,3 +2,8 @@
 *.log
 hs_err_pid*
 /bin/
+
+.project
+.idea
+.settings
+.classpath
